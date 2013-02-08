@@ -7,7 +7,7 @@ package com.burninghead.birf.errors
 	{
 		function AbstractMethodError(message:* = "", id:* = 0)
 		{
-			super("[AbstractMethod] " + message, id);
+			super("Abstract method must be implemented in subclass.", id);
 		}
 	}
 }
