@@ -1,8 +1,8 @@
 package com.burninghead.birf.view.stage2d.states
 {
+	import com.burninghead.birf.states.BaseState;
+	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.IView;
-	import com.burninghead.birf.view.states.BaseViewState;
-	import com.burninghead.birf.view.states.IViewState;
 
 	import flash.display.Sprite;
 
@@ -10,7 +10,7 @@ package com.burninghead.birf.view.stage2d.states
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class Stage2DViewState extends BaseViewState implements IViewState
+	public class Stage2DViewState extends BaseState implements IState, IStage2DViewState
 	{
 		[Inject] public var view:IView;
 		
@@ -23,21 +23,19 @@ package com.burninghead.birf.view.stage2d.states
 			_container = new Sprite();
 		}
 		
+		[PostConstruct]
+		public function postConstruct():void
+		{
+			init();
+		}
+		
+		protected function init():void
+		{
+		}
+		
 		public function get container():Sprite
 		{
 			return _container;
-		}
-		
-		public function enter(params:Object):void
-		{
-			view.console.println("ENTER > " + this, "viewstate", 0xffaaee);
-		}
-		
-		override public function exit():void
-		{
-			super.exit();
-			
-			view.console.println("EXIT > " + this, "viewstate", 0xffaaee);
 		}
 	}
 }

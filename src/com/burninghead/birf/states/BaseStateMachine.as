@@ -1,18 +1,23 @@
 package com.burninghead.birf.states
 {
+	import org.osflash.signals.Signal;
+	import org.osflash.signals.ISignal;
 	import flash.utils.Dictionary;
 	/**
 	 * @author tomas.augustinovic
 	 */
 	public class BaseStateMachine implements IStateMachine
 	{
-		private var _states:Dictionary;
 		protected var _transitions:Dictionary;
+		
+		private var _states:Dictionary;
 		private var _currentState:IState;
+		private var _stateChanged:Signal;
 		
 		public function BaseStateMachine()
 		{
 			_states = new Dictionary();
+			_stateChanged = new Signal();
 			_transitions = new Dictionary();
 			_currentState = null;
 		}
@@ -25,6 +30,8 @@ package com.burninghead.birf.states
 				_currentState.exit();
 			}
 			
+			var oldState:IState = _currentState;
+			
 			//	Set the new state.
 			_currentState = _states[id] as IState;
 			
@@ -32,6 +39,8 @@ package com.burninghead.birf.states
 			if (_currentState)
 			{
 				_currentState.enter();
+				
+				_stateChanged.dispatch(oldState, _currentState);
 			}
 			else
 			{
@@ -82,6 +91,11 @@ package com.burninghead.birf.states
 			{
 				state.update();
 			}
+		}
+
+		public function get stateChanged():ISignal
+		{
+			return _stateChanged;
 		}
 	}
 }

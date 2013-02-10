@@ -21,7 +21,7 @@ package com.burninghead.birf.controller.cmds
 				params.color = 0xffff00;
 			}
 			
-			view.console.println(params.msg, params.category, params.color);
+			//view.console.println(params.msg, params.category, params.color);
 		}
 	}
 }

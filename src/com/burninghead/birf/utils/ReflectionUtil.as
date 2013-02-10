@@ -1,8 +1,10 @@
 package com.burninghead.birf.utils
 {
-	import flash.utils.getQualifiedClassName;
+	import com.burninghead.birf.utils.misc.KeyValuePair;
+
 	import flash.system.ApplicationDomain;
 	import flash.utils.describeType;
+	import flash.utils.getQualifiedClassName;
 	
 	/**
 	 * Collection of reflection related utility functions.

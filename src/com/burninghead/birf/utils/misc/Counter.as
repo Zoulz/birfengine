@@ -1,5 +1,6 @@
-package com.burninghead.birf.utils
+package com.burninghead.birf.utils.misc
 {
+	import com.burninghead.birf.utils.IDisposable;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Linear;
 

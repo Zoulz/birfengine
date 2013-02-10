@@ -44,7 +44,7 @@ package com.burninghead.birf.controller
 			}
 			else
 			{
-				_view.console.println("CONTROLLER> Command is missing. Have you registered it?", "error", 0xff0000);
+				//_view.console.println("CONTROLLER> Command is missing. Have you registered it?", "error", 0xff0000);
 			}
 		}
 		

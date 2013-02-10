@@ -1,10 +1,5 @@
 package com.burninghead.birf.view
 {
-	import com.burninghead.birf.utils.console.IConsole;
-	import com.burninghead.birf.view.layers.ILayerHandler;
-	import com.burninghead.birf.view.states.IViewStateHandler;
-	import com.burninghead.birf.view.states.ViewStateDefinition;
-
 	import org.osflash.signals.ISignal;
 
 	import flash.display.DisplayObject;
@@ -50,25 +45,8 @@ package com.burninghead.birf.view
 		 */
 		function get initialized():ISignal;
 		/**
-		 * Create a view state definition that can be registered with the view state
-		 * handler.
-		 * @param viewStateIndex Index position of the view state inside the handler
-		 * @param viewState Class used for the view state (must implement IViewState)
-		 * @return ViewStateDefinition
-		 */
-		function createViewStateDefinition(viewStateIndex:uint, viewState:Class):ViewStateDefinition;
-		/**
-		 * Get instance of the view state handler used.
-		 * @return IViewStateHandler
-		 */
-		function get stateHandler():IViewStateHandler;
-		/**
 		 * Get the actual game root stage display object.
 		 */
 		function get stageObject():DisplayObject;
-		
-		function get layerHandler():ILayerHandler;
-		
-		function get console():IConsole;
 	}
 }

@@ -3,13 +3,15 @@ package com.burninghead.birf.utils.security
 	import com.burninghead.birf.utils.MathUtil;
 	/**
 	 * This class is used to counter memory sniff cheating. It's not perfect, but it makes it
-	 * a bit harder. Should only be used for critical numbers since it added a bit of memory and
+	 * a bit harder. Should only be used for critical numbers since it adds a bit of memory and
 	 * processing overhead.
 	 * 
 	 * @author BigZoulz
 	 */
 	public class AntiCheatNumber
 	{
+		private static var SALT:uint = 526;
+		
 		private var _offset:Number;
 		private var _num:Vector.<Number>;
 		
@@ -21,11 +23,12 @@ package com.burninghead.birf.utils.security
 		public function AntiCheatNumber(num:Number, multiInstance:Boolean = true)
 		{
 			_offset = MathUtil.randomNumber(-1000, 1000, true);
+			
 			_num = new Vector.<Number>();
 			var instances:uint = multiInstance ? 1 : MathUtil.randomNumber(2, 6);
 			for (var i:int = 0; i < instances; i++)
 			{
-				_num.push(num + _offset + 43);	//	Magic (salt) number = 43 ;)
+				_num.push(num + _offset + SALT);
 			}
 		}
 		
@@ -36,6 +39,7 @@ package com.burninghead.birf.utils.security
 		public function set value(value:Number):void
 		{
 			var ref:Number = _num[Math.floor(_num.length / 2)];
+			
 			for (var i:int = 0; i < _num.length; i++)
 			{
 				if (_num[i] != ref)
@@ -44,7 +48,7 @@ package com.burninghead.birf.utils.security
 					trace("CHEATER!");
 				}
 				
-				_num[i] = value + _offset + 43;
+				_num[i] = value + _offset + SALT;
 			}
 		}
 		
@@ -54,7 +58,7 @@ package com.burninghead.birf.utils.security
 		 */
 		public function get value():Number
 		{
-			return _num[Math.floor(_num.length / 2)] - _offset - 43;
+			return _num[Math.floor(_num.length / 2)] - _offset - SALT;
 		}
 	}
 }

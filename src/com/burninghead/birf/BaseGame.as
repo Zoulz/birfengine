@@ -89,14 +89,6 @@ package com.burninghead.birf
 		}
 		
 		/**
-		 * Register view state definitions with the view state handler.
-		 */
-		protected function registerViewStates():void
-		{
-			//	No-op
-		}
-		
-		/**
 		 * Registers all the game commands.
 		 */
 		protected function registerCommands():void
@@ -125,7 +117,6 @@ package com.burninghead.birf
 		 */
 		protected function onViewInitialized():void
 		{
-			registerViewStates();
 		}
 		
 		/**

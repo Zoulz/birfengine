@@ -1,6 +1,6 @@
 package com.burninghead.birf.view.stage2d.states
 {
-	import com.burninghead.birf.view.states.IViewState;
+	import com.burninghead.birf.states.IState;
 
 	import flash.display.Sprite;
 
@@ -8,7 +8,7 @@ package com.burninghead.birf.view.stage2d.states
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public interface IStage2DViewState extends IViewState
+	public interface IStage2DViewState extends IState
 	{
 		/**
 		 * Return the display object container for the view state.

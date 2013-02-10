@@ -1,4 +1,5 @@
-package com.burninghead.birf.view {
+package com.burninghead.birf.view
+{
 	import com.burninghead.birf.audio.BaseSoundManager;
 	import com.burninghead.birf.audio.ISoundManager;
 	import com.burninghead.birf.errors.AbstractMethodError;
@@ -6,12 +7,8 @@ package com.burninghead.birf.view {
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.net.assets.BaseAssetLoader;
 	import com.burninghead.birf.net.assets.IAssetLoader;
+	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.utils.ReflectionUtil;
-	import com.burninghead.birf.utils.console.IConsole;
-	import com.burninghead.birf.view.layers.ILayerHandler;
-	import com.burninghead.birf.view.states.BaseViewStateHandler;
-	import com.burninghead.birf.view.states.IViewState;
-	import com.burninghead.birf.view.states.IViewStateHandler;
 	import com.burninghead.birf.view.states.ViewStateDefinition;
 
 	import org.osflash.signals.ISignal;
@@ -29,8 +26,6 @@ package com.burninghead.birf.view {
 		protected var _initialized:Signal;
 		protected var _isInit:Boolean = false;
 		protected var _injector:Injector;
-		protected var _stateHandler:IViewStateHandler;
-		protected var _layerHandler:ILayerHandler;
 		
 		[Inject] public var model:IModel;
 		[Inject] public var messageHandler:IMessageHandler;
@@ -41,13 +36,18 @@ package com.burninghead.birf.view {
 		[PostConstruct]
 		public function postConstruct():void
 		{
+			initInjection();
+			
+			injectDependencies();
+		}
+
+		protected function initInjection():void
+		{
 			_initialized = new Signal();
 			_injector = new Injector();
 			_injector.mapValue(IView, this);
 			_injector.mapValue(IModel, model);
 			_injector.mapValue(IMessageHandler, messageHandler);
-			
-			injectDependencies();
 		}
 		
 		/**
@@ -85,19 +85,9 @@ package com.burninghead.birf.view {
 		/**
 		 * Handles when a view state change has occured.
 		 */
-		protected function onStateChanged(newState:IViewState):void
+		protected function onStateChanged(oldState:IState, newState:IState):void
 		{
 			//	No-op
-		}
-		
-		/**
-		 * Creates the view state handler.
-		 */
-		protected function createViewStateHandler():void
-		{
-			//	View state handler.
-			_stateHandler = new BaseViewStateHandler();
-			_stateHandler.stateChanged.add(onStateChanged);
 		}
 		
 		/**
@@ -124,22 +114,6 @@ package com.burninghead.birf.view {
 			
 			_injector.unmap(mediator);
 		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function createViewStateDefinition(viewStateIndex:uint, viewState:Class):ViewStateDefinition
-		{
-			return new ViewStateDefinition(viewStateIndex, viewState, _injector);
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function get stateHandler():IViewStateHandler
-		{
-			return _stateHandler;
-		}
 
 		/**
 		 * @inheritDoc
@@ -160,16 +134,6 @@ package com.burninghead.birf.view {
 		public function get stageObject():DisplayObject
 		{
 			return null;
-		}
-
-		public function get console():IConsole
-		{
-			return null;
-		}
-
-		public function get layerHandler():ILayerHandler
-		{
-			return _layerHandler;
 		}
 	}
 }

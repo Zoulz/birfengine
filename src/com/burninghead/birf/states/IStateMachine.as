@@ -1,5 +1,6 @@
 package com.burninghead.birf.states
 {
+	import org.osflash.signals.ISignal;
 	/**
 	 * @author tomas.augustinovic
 	 */
@@ -11,5 +12,7 @@ package com.burninghead.birf.states
 		function unregisterState(id:String):void;
 		function registerTransition(id:String, transition:IStateTransition):void;
 		function unregisterTransition(id:String):void;
+		
+		function get stateChanged():ISignal;
 	}
 }

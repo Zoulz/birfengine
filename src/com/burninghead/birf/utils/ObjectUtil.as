@@ -1,5 +1,6 @@
 package com.burninghead.birf.utils
 {
+	import flash.utils.Dictionary;
 	import flash.utils.ByteArray;
 	
 	/**
@@ -41,9 +42,13 @@ package com.burninghead.birf.utils
 		public static function toArray(iterable:*):Array
 		{
 			var ret:Array = [];
-			for each (var elem:* in iterable)
+			
+			if (iterable is Object || iterable is Array || iterable is Vector || iterable is Dictionary)
 			{
-				ret.push(elem);
+				for each (var elem:* in iterable)
+				{
+					ret.push(elem);
+				}
 			}
 			
 			return ret;
@@ -58,18 +63,21 @@ package com.burninghead.birf.utils
  		 */
 		public static function getRandomIndex(iterable:*, exceptions:Vector.<uint>):uint
 		{
-			var rnd:uint;
+			var rnd:uint = 0;
 			
-			do
+			if (iterable is Array || iterable is Vector)
 			{
-				rnd = MathUtil.randomNumber(0, iterable.length - 1);
-				
-				if (exceptions.indexOf(rnd) == -1)
+				do
 				{
-					break;
+					rnd = MathUtil.randomNumber(0, Object(iterable).length - 1);
+					
+					if (exceptions.indexOf(rnd) == -1)
+					{
+						break;
+					}
 				}
+				while(true);
 			}
-			while(true);
 			
 			return rnd;
 		}

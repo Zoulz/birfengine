@@ -2,7 +2,7 @@ package com.burninghead.birf.model.statcollector {
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.model.BaseModelMessageType;
 	import com.burninghead.birf.model.BaseModelPart;
-	import com.burninghead.birf.utils.KeyValuePair;
+	import com.burninghead.birf.utils.misc.KeyValuePair;
 	import com.burninghead.birf.utils.security.AntiCheatNumber;
 
 	import flash.utils.Dictionary;

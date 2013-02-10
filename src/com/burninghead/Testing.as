@@ -1,32 +1,41 @@
 package com.burninghead
 {
-	import com.burninghead.birf.utils.Counter;
-	import com.greensock.easing.Quad;
+	import com.burninghead.birf.utils.misc.TimedFunction;
+	import com.burninghead.birf.utils.security.AntiCheatNumber;
 
 	import flash.display.Sprite;
-	import flash.text.TextField;
 	/**
 	 * @author BigZoulz
 	 */
 	public class Testing extends Sprite
 	{
-		public var tfText:TextField;
-		private var _counter:Counter;
-		
 		public function Testing()
 		{
-			tfText = new TextField();
-			addChild(tfText);
+			var test1:TimedFunction = new TimedFunction(function():void {
+				var i:int;
+				var j:int;
+				var num:AntiCheatNumber = new AntiCheatNumber(44);
+				
+				for (i = 0; i < 10000000; i++)
+				{
+					num.value = 523;
+					j = num.value;
+				}
+			});
+			trace("[AntiCheatNumber] assign/access: " + test1.result);
 			
-			_counter = new Counter(0);
-			_counter.update.add(onCount);
-			
-			_counter.countTo(16820, 2, Quad.easeIn);
-		}
-		
-		private function onCount():void
-		{
-			tfText.text = Math.round(_counter.value).toString();
+			var test2:TimedFunction = new TimedFunction(function():void {
+				var i:int;
+				var j:int;
+				var g:int;
+				
+				for (i = 0; i < 10000000; i++)
+				{
+					j = 523;
+					g = j;
+				}
+			});
+			trace("[Normal] assign/access: " + test2.result);
 		}
 	}
 }

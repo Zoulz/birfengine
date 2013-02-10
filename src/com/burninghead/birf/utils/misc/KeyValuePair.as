@@ -1,4 +1,4 @@
-package com.burninghead.birf.utils
+package com.burninghead.birf.utils.misc
 {
 	/**
 	 * Standard key/value pair. Holds a key and a value.
