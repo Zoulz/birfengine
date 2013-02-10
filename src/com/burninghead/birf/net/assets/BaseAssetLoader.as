@@ -24,8 +24,6 @@ package com.burninghead.birf.net.assets
 
 	/**
 	 * @author tomas.augustinovic
-	 * 
-	 * TODO loaded content delivery system...
 	 */
 	public class BaseAssetLoader implements IAssetLoader
 	{
@@ -42,7 +40,6 @@ package com.burninghead.birf.net.assets
 		public function BaseAssetLoader()
 		{
 			_assets = new Vector.<IAsset>();
-			
 			_totalComplete = new Signal();
 			_totalProgress = new Signal();
 			_totalError = new Signal();
@@ -50,6 +47,7 @@ package com.burninghead.birf.net.assets
 			_itemProgress = new Signal();
 			_itemFailed = new Signal();
 
+			//	Create configuration for loader.
 			_config = new LoaderMaxVars();
 			_config.name("baseAssetLoader");
 			_config.maxConnections(1);
@@ -103,7 +101,7 @@ package com.burninghead.birf.net.assets
 			_loader.cancel();
 		}
 		
-		private function createAsset(loader:LoaderCore):void
+		protected function createAsset(loader:LoaderCore):void
 		{
 			if (loader is BinaryDataLoader)
 			{
@@ -125,26 +123,24 @@ package com.burninghead.birf.net.assets
 			{
 				_assets.push(new Mp3Asset(loader as MP3Loader));
 			}
+			else
+			{
+				throw new Error("Asset loader cannot determine loaded asset type.");
+			}
 		}
 
 		private function onItemError(event:LoaderEvent):void
 		{
-			trace("onItemError");
-			
 			_itemFailed.dispatch(event.type, event.text);
 		}
 
 		private function onItemProgress(event:LoaderEvent):void
 		{
-			trace("onItemProgress");
-			
 			_itemProgress.dispatch(event.target.progress);
 		}
 
 		private function onItemComplete(event:LoaderEvent):void
 		{
-			trace("onItemComplete: " + event.target);
-			
 			createAsset(event.target as LoaderCore);
 			
 			_itemComplete.dispatch();
@@ -152,22 +148,16 @@ package com.burninghead.birf.net.assets
 
 		private function onLoaderProgress(event:LoaderEvent):void
 		{
-			trace("onLoaderProgress");
-			
 			_totalProgress.dispatch(event.target.progress);
 		}
 
 		private function onLoaderComplete(event:LoaderEvent):void
 		{
-			trace("onLoaderComplete");
-			
 			_totalComplete.dispatch();
 		}
 
 		private function onError(event:LoaderEvent):void
 		{
-			trace("onError");
-			
 			_totalError.dispatch(event.type, event.text);
 		}
 

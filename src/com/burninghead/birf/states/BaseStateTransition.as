@@ -5,21 +5,21 @@ package com.burninghead.birf.states
 	 */
 	public class BaseStateTransition implements IStateTransition
 	{
-		private var _fromId:Object;
-		private var _toId:Object;
+		private var _fromId:String;
+		private var _toId:String;
 		
-		public function BaseStateTransition(fromStateId:Object, toStateId:Object)
+		public function BaseStateTransition(fromStateId:String, toStateId:String)
 		{
 			_fromId = fromStateId;
 			_toId = toStateId;
 		}
 
-		public function get fromStateId():Object
+		public function get fromStateId():String
 		{
 			return _fromId;
 		}
 
-		public function get toStateId():Object
+		public function get toStateId():String
 		{
 			return _toId;
 		}

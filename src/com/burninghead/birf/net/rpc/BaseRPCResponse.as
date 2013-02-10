@@ -1,6 +1,5 @@
-package com.burninghead.birf.net.rpc.json
+package com.burninghead.birf.net.rpc
 {
-	import com.burninghead.birf.net.rpc.IRPCResponse;
 	/*********************************************************
 	 * Value object holding information about a standard RPC
 	 * response.
@@ -9,13 +8,13 @@ package com.burninghead.birf.net.rpc.json
 	 * @see com.warden.net.rpc.IRPCResponse
 	 * @see com.warden.net.rpc.json.JsonRPCService
 	 *********************************************************/
-	public class JsonRPCResponse implements IRPCResponse
+	public class BaseRPCResponse implements IRPCResponse
 	{
 		private var _id:int;
 		private var _result:Object;
 		private var _error:Object;
 		
-		public function JsonRPCResponse(data:Object)
+		public function BaseRPCResponse(data:Object)
 		{
 			_id = data.id;
 			_result = data.result;

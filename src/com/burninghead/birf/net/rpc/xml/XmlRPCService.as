@@ -1,11 +1,14 @@
 package com.burninghead.birf.net.rpc.xml
 {
-	import com.burninghead.birf.errors.AbstractMethodError;
+	import com.burninghead.birf.net.rpc.BaseRPCRequest;
+	import com.burninghead.birf.net.rpc.BaseRPCResponse;
 	import com.burninghead.birf.net.rpc.BaseRPCService;
 	import com.burninghead.birf.net.rpc.IRPCRequest;
 	import com.burninghead.birf.net.rpc.IRPCResponse;
 	import com.burninghead.birf.net.rpc.IRPCService;
 	/**
+	 * XML-RPC implementation of service.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public class XmlRPCService extends BaseRPCService implements IRPCService
@@ -17,12 +20,12 @@ package com.burninghead.birf.net.rpc.xml
 		
 		override protected function createResponse(initializer:Object):IRPCResponse
 		{
-			throw new AbstractMethodError();
+			return new BaseRPCResponse(initializer);
 		}
 		
 		override protected function createRequest(id:String, method:String, params:Array = null):IRPCRequest
 		{
-			throw new AbstractMethodError();
+			return new BaseRPCRequest(id, method, params);
 		}
 		
 		override protected function getRequestContentType():String
@@ -30,15 +33,23 @@ package com.burninghead.birf.net.rpc.xml
 			return "application/xml";
 		}
 		
-		override protected function encode(obj:Object):String
+		override protected function encodeRequests(reqs:Array):String
 		{
-			return XML(obj).toXMLString();
+			//	TODO implement.
+			
+			for each (var req:IRPCRequest in reqs)
+			{
+				
+			}
+			
+			return XML(reqs).toXMLString();
 		}
 		
 		override protected function parseResponse(resp:String):void
 		{
-			var data:XML = new XML(resp);
+			//	TODO implement.
 			
+			var data:XML = new XML(resp);
 			/*
 			if (rawObject is Array)
 			{

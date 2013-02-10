@@ -5,7 +5,7 @@ package com.burninghead.birf.states
 	 */
 	public interface IStateTransition
 	{
-		function get fromStateId():Object;
-		function get toStateId():Object;
+		function get fromStateId():String;
+		function get toStateId():String;
 	}
 }

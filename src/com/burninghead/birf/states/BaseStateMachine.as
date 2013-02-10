@@ -17,7 +17,7 @@ package com.burninghead.birf.states
 			_currentState = null;
 		}
 
-		public function changeState(id:Object):void
+		public function changeState(id:String):void
 		{
 			//	Exit old state (if available).
 			if (_currentState)
@@ -39,7 +39,7 @@ package com.burninghead.birf.states
 			}
 		}
 
-		public function registerState(id:Object, state:IState):void
+		public function registerState(id:String, state:IState):void
 		{
 			if (id != null && state != null)
 			{
@@ -48,12 +48,12 @@ package com.burninghead.birf.states
 			}
 		}
 		
-		public function unregisterState(id:Object):void
+		public function unregisterState(id:String):void
 		{
 			_states[id] = null;
 		}
 		
-		public function registerTransition(id:Object, transition:IStateTransition):void
+		public function registerTransition(id:String, transition:IStateTransition):void
 		{
 			if (id != null && transition != null)
 			{
@@ -61,16 +61,16 @@ package com.burninghead.birf.states
 			}
 		}
 
-		public function unregisterTransition(id:Object):void
+		public function unregisterTransition(id:String):void
 		{
 			_transitions[id] = null;
 		}
 		
-		protected function onStateTransition(state:IState, transitionId:Object):void
+		protected function onStateTransition(state:IState, transitionId:String):void
 		{
 			var transition:IStateTransition = _transitions[transitionId] as IStateTransition;
 			
-			if (transition.fromStateId == state)
+			if (_states[transition.fromStateId] == state)
 			{
 				changeState(transition.toStateId);
 			}

@@ -11,12 +11,14 @@ package com.burninghead.birf.net.rpc
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	/**
+	 * Abstract class implementing a basic RPC service.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public class BaseRPCService implements IRPCService
 	{
 		protected var _url:String;
-		protected var _requests:Vector.<Object>;
+		protected var _requests:Vector.<RequestItem>;
 		protected  var _responses:Vector.<IRPCResponse>;
 		
 		private var _currentId:int = 0;
@@ -35,7 +37,7 @@ package com.burninghead.birf.net.rpc
 		{
 			_currentId = 0;
 			_responses = new Vector.<IRPCResponse>();
-			_requests = new Vector.<Object>();
+			_requests = new Vector.<RequestItem>();
 		}
 		
 		protected function getNextId():String
@@ -43,11 +45,11 @@ package com.burninghead.birf.net.rpc
 			return (++_currentId).toString();
 		}
 		
-		private function findRequestById(id:int):Object
+		protected function findRequestById(id:int):Object
 		{
-			for each (var reqObj:Object in _requests)
+			for each (var reqObj:RequestItem in _requests)
 			{
-				if (reqObj.request.id == id)
+				if (reqObj.request.id == id.toString())
 				{
 					return reqObj;
 				}
@@ -59,46 +61,39 @@ package com.burninghead.birf.net.rpc
 		public function addMethodCall(method:String, params:Array = null, callback:Function = null):void
 		{
 			var req:IRPCRequest = createRequest(getNextId(), method, params);
-			_requests.push({ request: req, callback: callback });
+			_requests.push(new RequestItem(req, callback));
 		}
 
 		public function addNotification(method:String, params:Array = null):void
 		{
 			var req:IRPCRequest = createRequest(null, method, params);
-			_requests.push({ request: req });
+			_requests.push(new RequestItem(req));
 		}
 
 		public function flush():void
 		{
-			var req:URLRequest = new URLRequest(_url);
-			
-			if (_requests.length > 1)
+			if (_requests.length == 0)
 			{
-				//	More than one request, so make a bundled request.
-				var batch:Array = [];
-				
-				//	Populate array of RPC requests.
-				for each (var reqObj:Object in _requests)
-				{
-					batch.push(IRPCRequest(reqObj.request).asObject());
-				}
-			
-				req.data = encode(batch); //JSON.stringify(batch);
-			}
-			else if (_requests.length == 1)
-			{
-				//	Only one request.
-				req.data = encode(IRPCRequest(_requests[0].request).asObject()); //JSON.stringify(IRPCRequest(_requests[0].request).asObject());
-			}
-			else
-			{
-				//	No requests.
+				//	If no requests then return.
 				return;
 			}
 			
+			//	Create a url request.
+			var req:URLRequest = new URLRequest(_url);
+			var batchReqs:Array = [ ];
+			
+			//	Populate array of RPC request(s).
+			for each (var reqObj:RequestItem in _requests)
+			{
+				batchReqs.push(IRPCRequest(reqObj.request).asObject());
+			}
+
+			//	Encode the request(s).
+			req.data = encodeRequests(batchReqs);
+			
 			//	Populate URL request.
 			req.method = URLRequestMethod.POST;
-			req.contentType = getRequestContentType(); // "application/json";
+			req.contentType = getRequestContentType();
 
 			//	Setup URL loader and finally load.
 			_loader = new URLLoader();
@@ -109,8 +104,6 @@ package com.burninghead.birf.net.rpc
 		
 		private function onMethodCallFailed(event:IOErrorEvent):void
 		{
-			trace("onMethodCallFailed: " + event.errorID + ", " + event.text);
-
 			cleanUp();
 			
 			_complete.dispatch(false);
@@ -163,7 +156,7 @@ package com.burninghead.birf.net.rpc
 			throw new AbstractMethodError();
 		}
 		
-		protected function encode(obj:Object):String
+		protected function encodeRequests(reqs:Array):String
 		{
 			throw new AbstractMethodError();
 		}
