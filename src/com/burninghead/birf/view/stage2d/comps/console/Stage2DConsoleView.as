@@ -1,5 +1,6 @@
 package com.burninghead.birf.view.stage2d.comps.console
 {
+	import com.burninghead.birf.utils.StringUtil;
 	import com.burninghead.birf.utils.IDisposable;
 	import com.burninghead.birf.view.skinning.ISkinnable;
 

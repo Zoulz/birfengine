@@ -45,6 +45,8 @@ package com.burninghead.birf.view.stage2d.comps.console
 			_outputField.autoSize = TextFieldAutoSize.LEFT;
 			_outputField.x = 0;
 			_outputField.y = 0;
+			_outputField.width = this.stage.stageWidth;
+			_outputField.height = this.stage.stageHeight;
 			_outputField.selectable = true;
 			_outputField.defaultTextFormat = _textFormat;
 
