@@ -47,19 +47,24 @@ package com.burninghead.birf.view.stage2d.comps.console
 			_outputField.y = 0;
 			_outputField.selectable = true;
 			_outputField.defaultTextFormat = _textFormat;
+
+			createGraphics();
+
+			addChild(_inputField);
+			addChild(_outputField);
 			
+			mouseEnabled = true;
+			mouseChildren = true;
+		}
+
+		protected function createGraphics():void
+		{
 			graphics.beginFill(0, 0.7);
 			graphics.drawRect(0, this.stage.stageHeight - 20, this.stage.stageWidth, 20);
 			graphics.endFill();
 			graphics.beginFill(0, 0.7);
 			graphics.drawRect(0, 0, this.stage.stageWidth, this.stage.stageHeight);
 			graphics.endFill();
-			
-			addChild(_inputField);
-			addChild(_outputField);
-			
-			mouseEnabled = true;
-			mouseChildren = true;
 		}
 
 		public function get inputField():TextField

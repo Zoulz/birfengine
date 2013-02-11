@@ -1,14 +1,15 @@
 package com.burninghead.simplesphere.states
 {
+	import com.burninghead.simplesphere.controller.ConsoleChangeSkinCmd;
 	import com.burninghead.birf.controller.cmds.ConsoleFilterCategoryCmd;
-	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
 	import com.burninghead.birf.messaging.BaseMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.skinning.ISkinManager;
-	import com.burninghead.birf.view.stage2d.comps.console.DefaultConsoleSkin;
+	import com.burninghead.birf.view.stage2d.comps.console.AzureConsoleSkin;
 	import com.burninghead.birf.view.stage2d.comps.console.Stage2DConsoleView;
 	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediator;
+	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
 	import com.burninghead.birf.view.stage2d.states.IStage2DViewState;
 	import com.burninghead.birf.view.stage2d.states.Stage2DViewState;
 	import com.burninghead.simplesphere.view.comps.SphereView;
@@ -39,6 +40,7 @@ package com.burninghead.simplesphere.states
 			
 			//	Map commands for the console.
 			messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.MAP_COMMAND, this, { id: "filter", classDef: ConsoleFilterCategoryCmd }));
+			messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.MAP_COMMAND, this, { id: "changeskin", classDef: ConsoleChangeSkinCmd }));
 		}
 		
 		override protected function containerAdded():void
@@ -61,7 +63,7 @@ package com.burninghead.simplesphere.states
 			_consoleMediator.registerView(_console);
 			
 			//	Apply console skin.
-			skinManager.setSkin(new DefaultConsoleSkin(), Stage2DConsoleView);
+			skinManager.setSkin(new AzureConsoleSkin(), Stage2DConsoleView);
 		}
 
 		/**

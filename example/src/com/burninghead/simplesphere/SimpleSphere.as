@@ -1,5 +1,6 @@
 package com.burninghead.simplesphere
 {
+	import com.burninghead.simplesphere.controller.ConsoleChangeSkinCmd;
 	import com.burninghead.birf.controller.cmds.ConsoleFilterCategoryCmd;
 	import com.burninghead.birf.BaseGame;
 	import com.burninghead.birf.view.IView;
@@ -34,6 +35,7 @@ package com.burninghead.simplesphere
 		{
 			controller.registerCommand(SphereChangeColorCmd);
 			controller.registerCommand(ConsoleFilterCategoryCmd);
+			controller.registerCommand(ConsoleChangeSkinCmd);
 		}
 		
 		/**

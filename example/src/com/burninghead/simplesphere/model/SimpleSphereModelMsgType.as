@@ -5,6 +5,6 @@ package com.burninghead.simplesphere.model
 	 */
 	public class SimpleSphereModelMsgType
 	{
-		public static const SET_SPHERE_COLOR:String = "set_sphere_color";
+		public static const SET_SPHERE_COLOR:String = "__simplespheremodelmsgtype_SET_SPHERE_COLOR";
 	}
 }

@@ -4,6 +4,7 @@ package com.burninghead.birf.view
 	import com.burninghead.birf.audio.ISoundManager;
 	import com.burninghead.birf.errors.AbstractMethodError;
 	import com.burninghead.birf.messaging.BaseMessage;
+	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.net.assets.BaseAssetLoader;
@@ -38,10 +39,15 @@ package com.burninghead.birf.view
 		{
 			_model = model;
 			_messageHandler = msgHandler;
+			_messageHandler.listener.add(onMessageReceived);
 			
 			initInjection();
 			
 			injectDependencies();
+		}
+		
+		protected function onMessageReceived(msg:IMessage):void
+		{
 		}
 
 		protected function initInjection():void
