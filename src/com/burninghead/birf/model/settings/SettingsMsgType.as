@@ -5,14 +5,14 @@ package com.burninghead.birf.model.settings
 	 * 
 	 * @author BigZoulz
 	 */
-	public class SettingsMessageType
+	public class SettingsMsgType
 	{
 		/**
 		 * Initialize the settings model.
 		 * 
 		 * cookiename:String
 		 */
-		public static const INIT:String = "settings_init";
+		public static const INIT:String = "__SettingsMsgType_INIT";
 		/**
 		 * Change a setting.
 		 * 
@@ -20,6 +20,6 @@ package com.burninghead.birf.model.settings
 		 * music:Boolean
 		 * fullscreen:Boolean
 		 */
-		public static const SET_PLAYER_SETTING:String = "settings_set_player_setting";
+		public static const SET_PLAYER_SETTING:String = "__SettingsMsgType_SET_PLAYER_SETTING";
 	}
 }

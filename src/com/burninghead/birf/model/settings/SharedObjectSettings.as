@@ -1,7 +1,7 @@
 package com.burninghead.birf.model.settings
 {
 	import com.burninghead.birf.messaging.IMessage;
-	import com.burninghead.birf.model.BaseModelMessageType;
+	import com.burninghead.birf.model.BaseModelMsgType;
 	import com.burninghead.birf.model.BaseModelPart;
 	import com.burninghead.birf.model.language.LanguageEnum;
 
@@ -29,7 +29,7 @@ package com.burninghead.birf.model.settings
 			
 			switch (msg.type)
 			{
-				case SettingsMessageType.SET_PLAYER_SETTING:
+				case SettingsMsgType.SET_PLAYER_SETTING:
 				{
 					if (pl.effects != null)
 					{
@@ -51,7 +51,7 @@ package com.burninghead.birf.model.settings
 					update();
 					break;
 				}
-				case SettingsMessageType.INIT:
+				case SettingsMsgType.INIT:
 				{
 					if (pl.cookiename != null)
 					{
@@ -69,7 +69,7 @@ package com.burninghead.birf.model.settings
 		{
 			_sharedObject.flush();
 			
-			_messenger.sendMessage(BaseModelMessageType.UPDATE);
+			_messenger.sendMessage(BaseModelMsgType.UPDATE);
 		}
 		
 		public function get soundEffects():Boolean

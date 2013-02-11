@@ -1,7 +1,7 @@
 package com.burninghead.simplesphere.view.mediators
 {
 	import com.burninghead.birf.messaging.IMessage;
-	import com.burninghead.birf.model.BaseModelMessageType;
+	import com.burninghead.birf.model.BaseModelMsgType;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.view.IMediator;
 	import com.burninghead.birf.view.stage2d.Stage2DMediator;
@@ -38,7 +38,7 @@ package com.burninghead.simplesphere.view.mediators
 		{
 			switch (msg.type)
 			{
-				case BaseModelMessageType.UPDATE:
+				case BaseModelMsgType.UPDATE:
 				{
 					//	The model has been updated so update sphere view.
 					_component.setColor(_sphere.color);

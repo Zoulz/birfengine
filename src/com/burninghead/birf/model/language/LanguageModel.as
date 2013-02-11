@@ -1,7 +1,7 @@
 package com.burninghead.birf.model.language
 {
 	import com.burninghead.birf.messaging.IMessage;
-	import com.burninghead.birf.model.BaseModelMessageType;
+	import com.burninghead.birf.model.BaseModelMsgType;
 	import com.burninghead.birf.model.BaseModelPart;
 
 	import flash.utils.Dictionary;
@@ -41,18 +41,18 @@ package com.burninghead.birf.model.language
 		
 		override protected function onMessageReceived(msg:IMessage):void
 		{
-			if (msg.type == LanguageModelMessageType.SET_STRINGS)
+			if (msg.type == LanguageModelMsgType.SET_STRINGS)
 			{
 				for each (var stringObj:Object in Object(msg.payload).strings)
 				{
 					addString(stringObj.id, stringObj.lang, stringObj.translation);
 				}
-				_messenger.sendMessage(BaseModelMessageType.UPDATE);
+				_messenger.sendMessage(BaseModelMsgType.UPDATE);
 			}
-			if (msg.type == LanguageModelMessageType.SET_LANGUAGE)
+			if (msg.type == LanguageModelMsgType.SET_LANGUAGE)
 			{
 				_currentLanguage = Object(msg.payload).lang;
-				_messenger.sendMessage(BaseModelMessageType.UPDATE);
+				_messenger.sendMessage(BaseModelMsgType.UPDATE);
 			}
 		}
 

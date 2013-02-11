@@ -1,6 +1,6 @@
 package com.burninghead.simplesphere.model
 {
-	import com.burninghead.birf.model.BaseModelMessageType;
+	import com.burninghead.birf.model.BaseModelMsgType;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.model.BaseModelPart;
 	import com.burninghead.birf.model.IProxy;
@@ -28,7 +28,7 @@ package com.burninghead.simplesphere.model
 					_numClicks++;
 					
 					//	Dispatch message indicating that model has been updated.
-					_messenger.sendMessage(BaseModelMessageType.UPDATE);
+					_messenger.sendMessage(BaseModelMsgType.UPDATE);
 					break;
 				}
 			}
