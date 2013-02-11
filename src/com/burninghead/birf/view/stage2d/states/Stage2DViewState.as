@@ -1,5 +1,6 @@
 package com.burninghead.birf.view.stage2d.states
 {
+	import flash.events.Event;
 	import com.burninghead.birf.states.BaseState;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.IView;
@@ -21,6 +22,7 @@ package com.burninghead.birf.view.stage2d.states
 			super();
 			
 			_container = new Sprite();
+			_container.addEventListener(Event.ADDED_TO_STAGE, onContainerAddedToStage);
 		}
 		
 		[PostConstruct]
@@ -31,6 +33,18 @@ package com.burninghead.birf.view.stage2d.states
 		
 		protected function init():void
 		{
+		}
+		
+		private function onContainerAddedToStage(event:Event):void
+		{
+			_container.removeEventListener(Event.ADDED_TO_STAGE, onContainerAddedToStage);
+			
+			containerAdded();
+		}
+		
+		protected function containerAdded():void
+		{
+			
 		}
 		
 		public function get container():Sprite

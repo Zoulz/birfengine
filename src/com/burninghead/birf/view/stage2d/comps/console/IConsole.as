@@ -7,5 +7,7 @@ package com.burninghead.birf.view.stage2d.comps.console
 	{
 		function activate():void;
 		function deactivate():void;
+		function print(msg:String):void;
+		function get isActive():Boolean;
 	}
 }

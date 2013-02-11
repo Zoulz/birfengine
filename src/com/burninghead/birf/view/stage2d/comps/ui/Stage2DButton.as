@@ -1,5 +1,6 @@
 package com.burninghead.birf.view.stage2d.comps.ui
 {
+	import flash.text.TextField;
 	import com.burninghead.birf.audio.groups.IUISoundGroup;
 	import com.burninghead.birf.utils.IDisposable;
 	import com.burninghead.birf.view.skinning.ISkinnable;
@@ -33,7 +34,10 @@ package com.burninghead.birf.view.stage2d.comps.ui
 
 			_soundGroup = sndGroup;
 			
-			this.skin = skin;
+			if (skin != null)
+			{
+				this.skin = skin;
+			}
 		}
 		
 		public function dispose():void
@@ -122,7 +126,7 @@ package com.burninghead.birf.view.stage2d.comps.ui
 		{
 			if (_skin["tfCaption"] != null && _caption != null)
 			{
-				_skin["tfCaption"].text = _caption;
+				TextField(_skin["tfCaption"]).text = _caption;
 			}
 		}
 

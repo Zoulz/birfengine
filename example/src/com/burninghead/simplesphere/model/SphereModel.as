@@ -1,4 +1,4 @@
-package com.burninghead.birfexample.model
+package com.burninghead.simplesphere.model
 {
 	import com.burninghead.birf.model.BaseModelMessageType;
 	import com.burninghead.birf.messaging.IMessage;
@@ -10,31 +10,44 @@ package com.burninghead.birfexample.model
 	public class SphereModel extends BaseModelPart implements IProxy, ISphereModel
 	{
 		private var _color:uint = 0xff0000;
+		private var _numClicks:uint = 0;
 		
-		public function SphereModel()
-		{
-		}
-		
-		override protected function init():void
-		{
-		}
-		
+		/**
+		 * Handle received messages.
+		 */
 		override protected function onMessageReceived(msg:IMessage):void
 		{
+			var pl:Object = msg.payload;
+			
 			switch (msg.type)
 			{
-				case BirfExampleModelMessageType.SET_SPHERE_COLOR:
+				case SimpleSphereModelMsgType.SET_SPHERE_COLOR:
 				{
-					_color = msg.payload.color;
+					//	Change color and increment click count.
+					_color = pl.color;
+					_numClicks++;
+					
+					//	Dispatch message indicating that model has been updated.
 					_messenger.sendMessage(BaseModelMessageType.UPDATE);
 					break;
 				}
 			}
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		public function get color():uint
 		{
 			return _color;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function get numClicks():uint
+		{
+			return _numClicks;
 		}
 	}
 }

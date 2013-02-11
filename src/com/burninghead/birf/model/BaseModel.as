@@ -1,7 +1,9 @@
 package com.burninghead.birf.model
 {
+	import com.burninghead.birf.messaging.BaseMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.utils.ReflectionUtil;
+	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
 
 	import org.swiftsuspenders.Injector;
 
@@ -12,18 +14,14 @@ package com.burninghead.birf.model
 	public class BaseModel implements IModel
 	{
 		private var _injector:Injector;
+		private var _messageHandler:IMessageHandler;
 		
-		[Inject] public var messageHandler:IMessageHandler;
-		
-		public function BaseModel()
+		public function BaseModel(msgHandler:IMessageHandler)
 		{
-		}
-		
-		[PostConstruct]
-		public function postConstruct():void
-		{
+			_messageHandler = msgHandler;
+			
 			_injector = new Injector();
-			_injector.mapValue(IMessageHandler, messageHandler);
+			_injector.mapValue(IMessageHandler, _messageHandler);
 			_injector.mapValue(IModel, this);
 		}
 		
@@ -35,6 +33,7 @@ package com.burninghead.birf.model
 			}
 			else
 			{
+				_messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.PRINT_MESSAGE, this, { msg: "ModelPart is missing. Have you registered it?", category: "warn" }));
 				return null;
 			}
 		}

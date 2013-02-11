@@ -1,5 +1,7 @@
 package com.burninghead.birf.controller
 {
+	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
+	import com.burninghead.birf.messaging.BaseMessage;
 	import com.burninghead.birf.messaging.CommandMessage;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
@@ -28,8 +30,8 @@ package com.burninghead.birf.controller
 			_messageHandler = messageHandler;
 			
 			_injector = new Injector();
-			_injector.mapValue(IView, _view);		//	TODO is it a good idea to expose both view and model to commands?
-			_injector.mapValue(IModel, _model);		//	Maybe we should have view/model specific commands?
+			_injector.mapValue(IView, _view);
+			_injector.mapValue(IModel, _model);
 			_injector.mapValue(IMessageHandler, _messageHandler);
 			
 			_messageHandler.listener.add(onMessageReceived);
@@ -44,7 +46,17 @@ package com.burninghead.birf.controller
 			}
 			else
 			{
-				//_view.console.println("CONTROLLER> Command is missing. Have you registered it?", "error", 0xff0000);
+				var msg:String = "";
+				if (clazz != null)
+				{
+					msg = "Command '" + ReflectionUtil.getNameOfObject(clazz, true) + "' is missing. Have you registered it?";
+				}
+				else
+				{
+					msg = "Command is null.";
+				}
+				
+				_messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.PRINT_MESSAGE, this, { msg: msg, category: "warn" }));
 			}
 		}
 		

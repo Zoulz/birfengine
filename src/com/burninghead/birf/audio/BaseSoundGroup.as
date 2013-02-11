@@ -58,7 +58,7 @@ package com.burninghead.birf.audio
 				var index:uint = getNewIndex();
 				var channel:SoundChannel = snd.play(offset, loops, sndTransform);
 				channel.addEventListener(Event.SOUND_COMPLETE, onSoundPlayComplete);
-				_soundInstances[index] = { channel: channel, name: id, loops: loops, sndTransform: sndTransform };
+				_soundInstances[index] = new SoundGroupItem(id, channel, loops, sndTransform);
 				return index;
 			}
 			
@@ -72,7 +72,7 @@ package com.burninghead.birf.audio
 		 */
 		public function getPlayingSound(index:int):SoundChannel
 		{
-			var value:Object = _soundInstances[index];
+			var value:SoundGroupItem = _soundInstances[index];
 			
 			if (value != null)
 			{
@@ -88,7 +88,7 @@ package com.burninghead.birf.audio
 		 */
 		public function stopSound(index:int):void
 		{
-			var snd:SoundChannel = _soundInstances[index].channel;
+			var snd:SoundChannel = SoundGroupItem(_soundInstances[index]).channel;
 			
 			if (snd != null)
 			{
@@ -104,7 +104,7 @@ package com.burninghead.birf.audio
 		 */
 		private function onSoundPlayComplete(event:Event):void
 		{
-			for each (var value:Object in _soundInstances)
+			for each (var value:SoundGroupItem in _soundInstances)
 			{
 				if (value.channel == event.target)
 				{
@@ -120,7 +120,7 @@ package com.burninghead.birf.audio
 		 */
 		public function stopAllSounds():void
 		{
-			for each (var value:Object in _soundInstances)
+			for each (var value:SoundGroupItem in _soundInstances)
 			{
 				value.channel.removeEventListener(Event.SOUND_COMPLETE, onSoundPlayComplete);
 				value.channel.stop();
@@ -173,9 +173,13 @@ package com.burninghead.birf.audio
 		{
 			_pausedSounds = new Vector.<Object>();
 			
-			for each (var value:Object in _soundInstances)
+			for each (var value:SoundGroupItem in _soundInstances)
 			{
-				_pausedSounds.push({ name: value.name, pos: value.channel.position, loops: value.loops, sndTransform: value.sndTransform });
+				//	Save current position.
+				value.offset = value.channel.position;
+				
+				//	Push a clone of the playing sound to a new list.
+				_pausedSounds.push(value.clone());
 			}
 			
 			stopAllSounds();
@@ -183,9 +187,9 @@ package com.burninghead.birf.audio
 
 		public function resumeAllSounds():void
 		{
-			for each (var value:Object in _pausedSounds)
+			for each (var value:SoundGroupItem in _pausedSounds)
 			{
-				playSound(value.name, value.loops, value.sndTransform, value.pos);
+				playSound(value.name, value.loops, value.sndTransform, value.offset);
 			}
 			
 			_pausedSounds = new Vector.<Object>();

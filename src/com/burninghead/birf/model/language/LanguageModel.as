@@ -43,7 +43,7 @@ package com.burninghead.birf.model.language
 		{
 			if (msg.type == LanguageModelMessageType.SET_STRINGS)
 			{
-				for each (var stringObj:Object in msg.payload.strings)
+				for each (var stringObj:Object in Object(msg.payload).strings)
 				{
 					addString(stringObj.id, stringObj.lang, stringObj.translation);
 				}
@@ -51,7 +51,7 @@ package com.burninghead.birf.model.language
 			}
 			if (msg.type == LanguageModelMessageType.SET_LANGUAGE)
 			{
-				_currentLanguage = msg.payload.lang;
+				_currentLanguage = Object(msg.payload).lang;
 				_messenger.sendMessage(BaseModelMessageType.UPDATE);
 			}
 		}

@@ -1,5 +1,7 @@
 package com.burninghead.birf.view.stage2d
 {
+	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.view.BaseView;
@@ -28,8 +30,10 @@ package com.burninghead.birf.view.stage2d
 		/**
 		 * Create ADDED_TO_STAGE event listener.
 		 */
-		public function Stage2DView()
+		public function Stage2DView(model:IModel, msgHandler:IMessageHandler)
 		{
+			super(model, msgHandler);
+			
 			_container = new Sprite();
 			_initialized = new Signal();
 			

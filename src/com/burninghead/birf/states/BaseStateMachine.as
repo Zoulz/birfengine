@@ -29,10 +29,9 @@ package com.burninghead.birf.states
 			{
 				_currentState.exit();
 			}
-			
-			var oldState:IState = _currentState;
-			
+
 			//	Set the new state.
+			var oldState:IState = _currentState;
 			_currentState = _states[id] as IState;
 			
 			//	Enter the new state.

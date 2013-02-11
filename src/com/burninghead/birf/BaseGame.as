@@ -9,8 +9,6 @@ package com.burninghead.birf
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.view.IView;
 
-	import org.swiftsuspenders.Injector;
-
 	import flash.display.MovieClip;
 	import flash.events.Event;
 
@@ -22,7 +20,10 @@ package com.burninghead.birf
 	 */
 	public dynamic class BaseGame extends MovieClip
 	{
-		private var _mvc:Injector;
+		private var _view:IView;
+		private var _model:IModel;
+		private var _controller:IController;
+		private var _messageHandler:IMessageHandler;
 		
 		/**
 		 * Listen for the ADDED_TO_STAGE event if the game is not running stand-alone. Initialize
@@ -71,21 +72,19 @@ package com.burninghead.birf
 		private function initializeMVC():void
 		{
 			//	Create MVC.
-			_mvc = new Injector();
-			_mvc.mapSingletonOf(IView, injectView());
-			_mvc.mapSingletonOf(IModel, injectModel());
-			_mvc.mapSingletonOf(IMessageHandler, injectMessageHandler());
-			_mvc.mapValue(IController, createController());
-
+			_messageHandler = createMessageHandler();
+			_model = createModel();
+			_view = createView();
+			_controller = createController();
+			
 			//	Register everything.
 			registerCommands();
 			registerMediators();
 			registerModelParts();
 
 			//	Initialize view.
-			var view:IView = _mvc.getInstance(IView);
-			view.initialized.addOnce(onViewInitialized);
-			view.init(this);
+			_view.initialized.addOnce(onViewInitialized);
+			_view.init(this);
 		}
 		
 		/**
@@ -132,7 +131,7 @@ package com.burninghead.birf
 		 * [Abstract] Return the injection class for the view.
 		 * @return Class
 		 */
-		protected function injectView():Class
+		protected function createView():IView
 		{
 			throw new AbstractMethodError();
 		}
@@ -141,18 +140,18 @@ package com.burninghead.birf
 		 * Return the injection class for the model.
 		 * @return Class
 		 */
-		protected function injectModel():Class
+		protected function createModel():IModel
 		{
-			return BaseModel;
+			return new BaseModel(messageHandler);
 		}
 		
 		/**
 		 * Return the injection class for the message handler.
 		 * @return Class
 		 */
-		protected function injectMessageHandler():Class
+		protected function createMessageHandler():IMessageHandler
 		{
-			return BaseMessageHandler;
+			return new BaseMessageHandler();
 		}
 		
 		/**
@@ -161,7 +160,7 @@ package com.burninghead.birf
 		 */
 		public function get controller():IController
 		{
-			return _mvc.getInstance(IController);
+			return _controller;
 		}
 		
 		/**
@@ -170,7 +169,7 @@ package com.burninghead.birf
 		 */
 		public function get view():IView
 		{
-			return _mvc.getInstance(IView);
+			return _view;
 		}
 		
 		/**
@@ -179,7 +178,7 @@ package com.burninghead.birf
 		 */
 		public function get model():IModel
 		{
-			return _mvc.getInstance(IModel);
+			return _model;
 		}
 		
 		/**
@@ -188,7 +187,7 @@ package com.burninghead.birf
 		 */
 		public function get messageHandler():IMessageHandler
 		{
-			return _mvc.getInstance(IMessageHandler);
+			return _messageHandler;
 		}
 	}
 }

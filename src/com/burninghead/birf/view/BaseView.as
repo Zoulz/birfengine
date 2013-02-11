@@ -3,13 +3,14 @@ package com.burninghead.birf.view
 	import com.burninghead.birf.audio.BaseSoundManager;
 	import com.burninghead.birf.audio.ISoundManager;
 	import com.burninghead.birf.errors.AbstractMethodError;
+	import com.burninghead.birf.messaging.BaseMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.net.assets.BaseAssetLoader;
 	import com.burninghead.birf.net.assets.IAssetLoader;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.utils.ReflectionUtil;
-	import com.burninghead.birf.view.states.ViewStateDefinition;
+	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
 
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
@@ -27,15 +28,17 @@ package com.burninghead.birf.view
 		protected var _isInit:Boolean = false;
 		protected var _injector:Injector;
 		
-		[Inject] public var model:IModel;
-		[Inject] public var messageHandler:IMessageHandler;
+		private var _model:IModel;
+		private var _messageHandler:IMessageHandler;
 		
 		/**
 		 * Maps injections for the mediators.
 		 */
-		[PostConstruct]
-		public function postConstruct():void
+		public function BaseView(model:IModel, msgHandler:IMessageHandler):void
 		{
+			_model = model;
+			_messageHandler = msgHandler;
+			
 			initInjection();
 			
 			injectDependencies();
@@ -46,8 +49,8 @@ package com.burninghead.birf.view
 			_initialized = new Signal();
 			_injector = new Injector();
 			_injector.mapValue(IView, this);
-			_injector.mapValue(IModel, model);
-			_injector.mapValue(IMessageHandler, messageHandler);
+			_injector.mapValue(IModel, _model);
+			_injector.mapValue(IMessageHandler, _messageHandler);
 		}
 		
 		/**
@@ -78,6 +81,7 @@ package com.burninghead.birf.view
 			}
 			else
 			{
+				_messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.PRINT_MESSAGE, this, { msg: "Mediator is missing. Have you registered it?", category: "warn" }));
 				return null;
 			}
 		}
