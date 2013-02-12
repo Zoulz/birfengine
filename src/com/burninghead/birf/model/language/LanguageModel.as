@@ -49,6 +49,7 @@ package com.burninghead.birf.model.language
 				}
 				_messenger.sendMessage(BaseModelMsgType.UPDATE);
 			}
+			
 			if (msg.type == LanguageModelMsgType.SET_LANGUAGE)
 			{
 				_currentLanguage = Object(msg.payload).lang;

@@ -25,15 +25,15 @@ package com.burninghead.birf.model.settings
 		
 		override protected function onMessageReceived(msg:IMessage):void
 		{
-			var pl:Object = msg.payload;
+			var pl:SharedObjectSettingsPayload = msg.payload as SharedObjectSettingsPayload;
 			
 			switch (msg.type)
 			{
 				case SettingsMsgType.SET_PLAYER_SETTING:
 				{
-					if (pl.effects != null)
+					if (pl.soundEffects != null)
 					{
-						_sharedObject.data.soundEffects = pl.effects;
+						_sharedObject.data.soundEffects = pl.soundEffects;
 					}
 					else if (pl.music != null)
 					{
@@ -43,20 +43,21 @@ package com.burninghead.birf.model.settings
 					{
 						_sharedObject.data.fullScreen = pl.fullscreen;
 					}
-					else if (pl.lang != null)
+					else if (pl.langCode != null)
 					{
-						_sharedObject.data.lang = pl.lang;
+						_sharedObject.data.lang = pl.langCode;
 					}
 
 					update();
 					break;
 				}
+				
 				case SettingsMsgType.INIT:
 				{
-					if (pl.cookiename != null)
+					if (pl.cookieName != null)
 					{
 						//	Get flash cookie for settings.
-						_sharedObject = SharedObject.getLocal("BurningHeadGames_" + pl.cookiename + "_Settings");
+						_sharedObject = SharedObject.getLocal(pl.cookieName);
 					}
 					
 					update();

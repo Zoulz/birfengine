@@ -9,7 +9,6 @@ package com.burninghead.birf.view.stage2d
 	import com.burninghead.birf.view.stage2d.states.IStage2DViewState;
 	import com.burninghead.birf.view.stage2d.states.Stage2DStateMachine;
 
-	import org.osflash.signals.Signal;
 	import org.osflash.signals.natives.NativeSignal;
 
 	import flash.display.DisplayObject;
@@ -35,7 +34,6 @@ package com.burninghead.birf.view.stage2d
 			super(model, msgHandler);
 			
 			_container = new Sprite();
-			_initialized = new Signal();
 			
 			//	Attach stage listener.
 			_addedToStage = new NativeSignal(_container, Event.ADDED_TO_STAGE, Event);

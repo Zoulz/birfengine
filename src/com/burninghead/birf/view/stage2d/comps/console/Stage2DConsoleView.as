@@ -1,12 +1,10 @@
 package com.burninghead.birf.view.stage2d.comps.console
 {
-	import com.burninghead.birf.utils.StringUtil;
 	import com.burninghead.birf.utils.IDisposable;
 	import com.burninghead.birf.view.skinning.ISkinnable;
 
 	import flash.display.Sprite;
 	import flash.text.TextField;
-	import flash.text.TextFormat;
 	/**
 	 * @author Zoulz
 	 */
@@ -15,15 +13,18 @@ package com.burninghead.birf.view.stage2d.comps.console
 		private var _skin:Sprite;
 		private var _categories:Vector.<Object>;
 		private var _filters:Vector.<String>;
+		private var _lineNum:uint = 0;
+		
+		private static const MAX_LINES:uint = 100;
 		
 		public function Stage2DConsoleView(skin:Sprite = null)
 		{
 			_filters = new Vector.<String>();
 			
 			_categories = new Vector.<Object>();
-			_categories.push({ id: "warn", color: 0xff9900 });
-			_categories.push({ id: "error", color: 0xff0000 });
-			_categories.push({ id: "command", color: 0xa3ffaf });
+			_categories.push({ id: "warn", color: "#F7D85C" });
+			_categories.push({ id: "error", color: "#FF0000" });
+			_categories.push({ id: "command", color: "#A3FFAF" });
 			
 			if (skin != null)
 			{
@@ -53,6 +54,7 @@ package com.burninghead.birf.view.stage2d.comps.console
 		{
 			_skin.visible = true;
 			parent.setChildIndex(this, parent.numChildren - 1);
+			stage.focus = TextField(_skin["inputField"]);
 		}
 
 		public function deactivate():void
@@ -70,18 +72,31 @@ package com.burninghead.birf.view.stage2d.comps.console
 			
 			var tf:TextField = TextField(_skin["outputField"]);
 			
-			tf.appendText(msg);
-			tf.appendText("\n");
-			
 			if (category != "")
 			{
-				var fmt:TextFormat = new TextFormat();
-				fmt.color = getColorByCategory(category);
-				tf.setTextFormat(fmt, tf.length - (msg.length + 1), tf.length);
+				tf.htmlText += "<font face=\"birfConsoleFont\" color=\"" + getColorByCategory(category) + "\">" + msg + "</font>";
 			}
+			else
+			{
+				tf.htmlText += msg;
+			}
+			
+			tf.htmlText += "<br/>";
+			
+			_lineNum++;
+			tf.scrollV++;
+
+			//	Truncate log.
+			/*if (_lineNum > MAX_LINES)
+			{
+				var offset:int = tf.getLineOffset(MAX_LINES);
+				var newText:String = tf.text.slice(offset);
+				tf.text = newText;
+				_lineNum = MAX_LINES;
+			}*/
 		}
 		
-		private function getColorByCategory(category:String):uint
+		private function getColorByCategory(category:String):String
 		{
 			for each (var cat:Object in _categories)
 			{
@@ -91,7 +106,7 @@ package com.burninghead.birf.view.stage2d.comps.console
 				}
 			}
 			
-			return 0xffffff;
+			return "#FFFFFF";
 		}
 		
 		public function clearOutput():void

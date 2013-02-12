@@ -16,7 +16,7 @@ package com.burninghead.simplesphere
 	 * 
 	 * @author Zoulz
 	 */
-	[SWF(backgroundColor="#FFFFFF", frameRate="60", width="300", height="300")]
+	[SWF(backgroundColor="#FFFFFF", frameRate="60", width="640", height="300")]
 	public class SimpleSphere extends BaseGame
 	{
 		/**
@@ -34,6 +34,7 @@ package com.burninghead.simplesphere
 		override protected function registerCommands():void
 		{
 			controller.registerCommand(SphereChangeColorCmd);
+			
 			controller.registerCommand(ConsoleFilterCategoryCmd);
 			controller.registerCommand(ConsoleChangeSkinCmd);
 		}

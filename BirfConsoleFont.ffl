@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<library name="BirfConsoleFont" output="lib" format="2" static="false">
+	<font id="birfConsoleFont" family="Courier New" style="0" cs="1,2,3,4" type="0" path="" ascff="false" autoId="false"/>
+</library>

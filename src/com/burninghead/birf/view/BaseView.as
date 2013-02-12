@@ -41,6 +41,8 @@ package com.burninghead.birf.view
 			_messageHandler = msgHandler;
 			_messageHandler.listener.add(onMessageReceived);
 			
+			_initialized = new Signal();
+			
 			initInjection();
 			
 			injectDependencies();
