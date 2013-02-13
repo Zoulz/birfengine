@@ -1,6 +1,5 @@
 package com.burninghead.birf.view.bitmaprenderer
 {
-	import flash.display.DisplayObjectContainer;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.states.BaseStateMachine;
@@ -13,6 +12,7 @@ package com.burninghead.birf.view.bitmaprenderer
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	/**
 	 * @author tomas.augustinovic
@@ -24,12 +24,13 @@ package com.burninghead.birf.view.bitmaprenderer
 		private var _addedToStage:NativeSignal;
 		private var _stageObject:DisplayObject;
 		
+		protected var _renderer:IBitmapRenderer;
 		protected var _stateMachine:IStateMachine;
 		
 		public function BitmapRendererView(model:IModel, msgHandler:IMessageHandler):void
 		{
 			super(model, msgHandler);
-			
+
 			_bmpData = new BitmapData(_stageObject.stage.stageWidth, _stageObject.stage.stageHeight);
 			_container = new Bitmap(_bmpData);
 			
@@ -54,8 +55,12 @@ package com.burninghead.birf.view.bitmaprenderer
 			_stateMachine = new BaseStateMachine();
 			_stateMachine.stateChanged.add(onStateChanged);
 			
-			//	Map state machine to injector.
+			//	Create renderer.
+			_renderer = new BaseBitmapRenderer(_container);
+			
+			//	Map to injector.
 			_injector.mapValue(IStateMachine, _stateMachine);
+			_injector.mapValue(IBitmapRenderer, _renderer);
 		}
 		
 		override public function get stageObject():DisplayObject
