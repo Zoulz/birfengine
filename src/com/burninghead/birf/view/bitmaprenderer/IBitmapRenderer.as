@@ -5,6 +5,7 @@ package com.burninghead.birf.view.bitmaprenderer
 	 */
 	public interface IBitmapRenderer
 	{
-		function get renderables():Vector.<IBitmapRenderable>;
+		function registerRenderable(renderable:IBitmapRenderable):void;
+		function unregisterRenderable(renderable:IBitmapRenderable):void;
 	}
 }

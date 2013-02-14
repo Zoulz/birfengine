@@ -13,6 +13,7 @@ package com.burninghead.birf.view.bitmaprenderer
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	/**
 	 * @author tomas.augustinovic
@@ -31,7 +32,7 @@ package com.burninghead.birf.view.bitmaprenderer
 		{
 			super(model, msgHandler);
 
-			_bmpData = new BitmapData(_stageObject.stage.stageWidth, _stageObject.stage.stageHeight);
+			_bmpData = new BitmapData(_stageObject.stage.stageWidth, _stageObject.stage.stageHeight, false, 0x49af00);
 			_container = new Bitmap(_bmpData);
 			
 			//	Attach stage listener.
@@ -45,6 +46,31 @@ package com.burninghead.birf.view.bitmaprenderer
 			
 			//	Dispatch signal indicating that view is ready.
 			_initialized.dispatch();
+		}
+		
+		protected function initViewStates():void
+		{
+		}
+		
+		override public function init(stageObject:Sprite):void
+		{
+			_stageObject = stageObject;
+			
+			if (_isInit == false)
+			{
+				//	Flag that we are initialized.
+				_isInit = true;
+
+				//	Add this view to stage.
+				stageObject.addChild(_container);
+				
+				//	Initialize view states.
+				initViewStates();
+			}
+			else
+			{
+				throw new Error("View is already initialized.");
+			}
 		}
 		
 		override protected function initInjection():void
