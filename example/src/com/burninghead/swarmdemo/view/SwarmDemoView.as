@@ -2,8 +2,10 @@ package com.burninghead.swarmdemo.view
 {
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
+	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.birf.view.bitmaprenderer.BitmapRendererView;
+	import com.burninghead.swarmdemo.states.SwarmViewState;
 	/**
 	 * @author tomas.augustinovic
 	 */
@@ -14,13 +16,20 @@ package com.burninghead.swarmdemo.view
 			super(model, msgHandler);
 		}
 		
-		override protected function initViewStates():void
+		override public function initViewStates():void
 		{
+			var stateMachine:IStateMachine = _injector.getInstance(IStateMachine);
+			
 			//	Register all our states.
-			//_stateMachine.registerState("sphere", new SphereViewState());
+			stateMachine.registerState("swarm", new SwarmViewState());
 			
 			//	Change to initial state.
-			//_stateMachine.changeState("sphere");
+			stateMachine.changeState("swarm");
+		}
+		
+		override protected function getStageColor():uint
+		{
+			return 0xffffff;
 		}
 	}
 }

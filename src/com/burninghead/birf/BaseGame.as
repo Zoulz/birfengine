@@ -84,7 +84,7 @@ package com.burninghead.birf
 
 			//	Initialize view.
 			_view.initialized.addOnce(onViewInitialized);
-			_view.init(this);
+			_view.stageObject = this;
 		}
 		
 		/**

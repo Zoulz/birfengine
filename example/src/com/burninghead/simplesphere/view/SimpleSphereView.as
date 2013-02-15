@@ -1,5 +1,6 @@
 package com.burninghead.simplesphere.view
 {
+	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
@@ -23,18 +24,20 @@ package com.burninghead.simplesphere.view
 		 * Register the required view states and change to the initial
 		 * state the app starts in.
 		 */
-		override protected function initViewStates():void
+		override public function initViewStates():void
 		{
+			var stateMachine:IStateMachine = _injector.getInstance(IStateMachine);
+			
 			//	Register all our states.
-			_stateMachine.registerState("sphere", new SphereViewState());
+			stateMachine.registerState("sphere", new SphereViewState());
 			
 			//	Change to initial state.
-			_stateMachine.changeState("sphere");
+			stateMachine.changeState("sphere");
 		}
 		
-		override protected function injectDependencies():void
+		override protected function injectAdditionalDependencies():void
 		{
-			super.injectDependencies();
+			super.injectAdditionalDependencies();
 			
 			//	Inject instance of skin manager.
 			_injector.mapSingletonOf(ISkinManager, Stage2DSkinManager);

@@ -1,30 +1,33 @@
 package com.burninghead.birf.view.stage2d
 {
+	import com.burninghead.birf.audio.BaseSoundManager;
+	import com.burninghead.birf.audio.ISoundManager;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
+	import com.burninghead.birf.net.assets.BaseAssetLoader;
+	import com.burninghead.birf.net.assets.IAssetLoader;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.view.BaseView;
+	import com.burninghead.birf.view.IStateDrivenView;
 	import com.burninghead.birf.view.IView;
+	import com.burninghead.birf.view.InjectedStateMachine;
 	import com.burninghead.birf.view.stage2d.states.IStage2DViewState;
-	import com.burninghead.birf.view.stage2d.states.Stage2DStateMachine;
 
 	import org.osflash.signals.natives.NativeSignal;
 
-	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class Stage2DView extends BaseView implements IView
+	public class Stage2DView extends BaseView implements IView, IStateDrivenView
 	{
 		private var _container:Sprite;
 		private var _addedToStage:NativeSignal;
-		private var _stageObject:DisplayObject;
 		
-		protected var _stateMachine:Stage2DStateMachine;
+		private var _stateMachine:IStateMachine;
 
 		/**
 		 * Create ADDED_TO_STAGE event listener.
@@ -32,55 +35,8 @@ package com.burninghead.birf.view.stage2d
 		public function Stage2DView(model:IModel, msgHandler:IMessageHandler)
 		{
 			super(model, msgHandler);
-			
-			_container = new Sprite();
-			
-			//	Attach stage listener.
-			_addedToStage = new NativeSignal(_container, Event.ADDED_TO_STAGE, Event);
-			_addedToStage.addOnce(onAddedToStage);
 		}
 		
-		override protected function initInjection():void
-		{
-			super.initInjection();
-			
-			//	Create instance of state machine.
-			_stateMachine = new Stage2DStateMachine(_injector);
-			_stateMachine.stateChanged.add(onStateChanged);
-			
-			//	Map state machine to injector.
-			_injector.mapValue(IStateMachine, _stateMachine);
-		}
-		
-		protected function initViewStates():void
-		{
-		}
-		
-		/**
-		 * Add this view's container object as child to the game root object.
-		 * @inheritDoc
-		 */
-		override public function init(stageObject:Sprite):void
-		{
-			_stageObject = stageObject;
-			
-			if (_isInit == false)
-			{
-				//	Flag that we are initialized.
-				_isInit = true;
-
-				//	Add this view to stage.
-				stageObject.addChild(_container);
-				
-				//	Initialize view states.
-				initViewStates();
-			}
-			else
-			{
-				throw new Error("View is already initialized.");
-			}
-		}
-
 		/**
 		 * Create and initialize the view state handler. Then signal that the
 		 * view is initialized.
@@ -88,8 +44,56 @@ package com.burninghead.birf.view.stage2d
 		 */
 		private function onAddedToStage(event:Event):void
 		{
+			//	Dispose signal.
+			_addedToStage.removeAll();
+			_addedToStage = null;
+			
 			//	Dispatch signal indicating that view is ready.
 			_initialized.dispatch();
+		}
+		
+		public function initViewStates():void
+		{
+		}
+		
+		/**
+		 * Add this view's container object as child to the game root object.
+		 * @inheritDoc
+		 */
+		override protected function init():void
+		{
+			//	Create container sprite.
+			_container = new Sprite();
+			
+			//	Attach stage listener.
+			_addedToStage = new NativeSignal(_container, Event.ADDED_TO_STAGE, Event);
+			_addedToStage.addOnce(onAddedToStage);
+			
+			//	Attach container display object to stage.
+			stageObject.addChild(_container);
+			
+			//	Inject dependencies.
+			injectStateMachine();
+			injectAdditionalDependencies();
+			
+			//	Initialize view states.
+			initViewStates();
+		}
+		
+		protected function injectAdditionalDependencies():void
+		{
+			_injector.mapSingletonOf(IAssetLoader, BaseAssetLoader);
+			_injector.mapSingletonOf(ISoundManager, BaseSoundManager);
+		}
+		
+		protected function injectStateMachine():void
+		{
+			//	Create instance of state machine.
+			_stateMachine = new InjectedStateMachine(_injector);
+			_stateMachine.stateChanged.add(onStateChanged);
+			
+			//	Inject.
+			_injector.mapValue(IStateMachine, _stateMachine);
 		}
 
 		/**
@@ -107,11 +111,6 @@ package com.burninghead.birf.view.stage2d
 			{
 				_container.removeChild(IStage2DViewState(oldState).container);
 			}
-		}
-		
-		override public function get stageObject():DisplayObject
-		{
-			return _stageObject;
 		}
 	}
 }

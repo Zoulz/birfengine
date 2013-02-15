@@ -1,11 +1,13 @@
 package com.burninghead.swarmdemo
 {
+	import com.burninghead.swarmdemo.view.mediators.SwarmMediator;
 	import com.burninghead.birf.BaseGame;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.swarmdemo.view.SwarmDemoView;
 	/**
 	 * @author tomas.augustinovic
 	 */
+	[SWF(backgroundColor="#FFFFFF", frameRate="60", width="300", height="300")]
 	public class SwarmDemo extends BaseGame
 	{
 		/**
@@ -29,6 +31,7 @@ package com.burninghead.swarmdemo
 		 */
 		override protected function registerMediators():void
 		{
+			view.registerMediator(SwarmMediator);
 		}
 		
 		/**

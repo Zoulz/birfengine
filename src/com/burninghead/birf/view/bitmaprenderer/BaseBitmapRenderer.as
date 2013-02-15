@@ -1,7 +1,9 @@
 package com.burninghead.birf.view.bitmaprenderer
 {
-	import flash.display.BitmapData;
+	import com.burninghead.birf.view.bitmaprenderer.renderables.DisplayObject;
+
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.events.Event;
 	import flash.utils.getTimer;
 	/**
@@ -9,7 +11,7 @@ package com.burninghead.birf.view.bitmaprenderer
 	 */
 	public class BaseBitmapRenderer implements IBitmapRenderer
 	{
-		private var _renderables:Vector.<IBitmapRenderable>;
+		private var _renderables:Vector.<DisplayObject>;
 		private var _lastFrameTime:int = 0;
 		private var _curFrameTime:int = 0;
 		private var _container:Bitmap;
@@ -19,7 +21,7 @@ package com.burninghead.birf.view.bitmaprenderer
 		{
 			_container = container;
 			_renderData = _container.bitmapData;
-			_renderables = new Vector.<IBitmapRenderable>();
+			_renderables = new Vector.<DisplayObject>();
 			
 			_container.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
@@ -39,7 +41,7 @@ package com.burninghead.birf.view.bitmaprenderer
 			_renderData.unlock();
 		}
 
-		public function registerRenderable(renderable:IBitmapRenderable):void
+		public function addChild(renderable:DisplayObject):void
 		{
 			if (renderable != null)
 			{
@@ -48,7 +50,7 @@ package com.burninghead.birf.view.bitmaprenderer
 			}
 		}
 
-		public function unregisterRenderable(renderable:IBitmapRenderable):void
+		public function removeChild(renderable:DisplayObject):void
 		{
 		}
 	}

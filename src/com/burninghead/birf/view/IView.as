@@ -11,11 +11,6 @@ package com.burninghead.birf.view
 	public interface IView
 	{
 		/**
-		 * Perform the initialization of the view. Will signal when completed.
-		 * @param stageObject The root game display object
-		 */
-		function init(stageObject:Sprite):void;
-		/**
 		 * Register a mediator with this view.
 		 * @param mediator Class of the mediator (must implement IMediator)
 		 * @param name String identifer for mediator
@@ -47,6 +42,10 @@ package com.burninghead.birf.view
 		/**
 		 * Get the actual game root stage display object.
 		 */
-		function get stageObject():DisplayObject;
+		function get stageObject():Sprite;
+		/**
+		 * Set the actual game root stage display object.
+		 */
+		function set stageObject(value:Sprite):void;
 	}
 }

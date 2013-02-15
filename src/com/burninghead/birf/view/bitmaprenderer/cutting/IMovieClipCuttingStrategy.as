@@ -1,12 +1,11 @@
 package com.burninghead.birf.view.bitmaprenderer.cutting
 {
-	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public interface IBitmapCuttingStrategy
+	public interface IMovieClipCuttingStrategy
 	{
-		function clip(mc:MovieClip):BitmapData;
+		function clip(mc:MovieClip):MovieClipCuttingResult;
 	}
 }

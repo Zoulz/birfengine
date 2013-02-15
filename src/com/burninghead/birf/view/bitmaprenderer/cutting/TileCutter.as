@@ -7,7 +7,7 @@ package com.burninghead.birf.view.bitmaprenderer.cutting
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class TileCutter implements IBitmapCuttingStrategy
+	public class TileCutter implements IMovieClipCuttingStrategy
 	{
 		private var _tileSize:Rectangle;
 		
@@ -16,20 +16,30 @@ package com.burninghead.birf.view.bitmaprenderer.cutting
 			_tileSize = tileSize;
 		}
 		
-		public function clip(mc:MovieClip):BitmapData
+		public function clip(mc:MovieClip):MovieClipCuttingResult
 		{
-			var data:BitmapData = new BitmapData(mc.totalFrames * _tileSize.width, _tileSize.height);
+			var result:MovieClipCuttingResult = new MovieClipCuttingResult();
+			var mx:Matrix = new Matrix();
+
+			result.bitmapData = new BitmapData(mc.totalFrames * _tileSize.width, _tileSize.height);
+			result.frames = new Vector.<Rectangle>();
 			
 			for (var i:uint = 0; i < mc.totalFrames; i++)
 			{
-				var mx:Matrix = new Matrix();
+				//	Translate matrix to next position.
 				mx.translate(i * _tileSize.width, 0);
 				
-				data.draw(mc, mx);
+				//	Draw movieclip frame to bitmap.
+				result.bitmapData.draw(mc, mx);
+				
+				//	Push frame position and size.
+				result.frames.push(new Rectangle(i * _tileSize.width, 0, _tileSize.width, _tileSize.height));
+				
+				//	Move to next movieclip frame.
 				mc.nextFrame();
 			}
 			
-			return data;
+			return result;
 		}
 	}
 }

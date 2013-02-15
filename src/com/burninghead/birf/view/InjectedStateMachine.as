@@ -1,4 +1,4 @@
-package com.burninghead.birf.view.stage2d.states
+package com.burninghead.birf.view
 {
 	import com.burninghead.birf.states.BaseStateMachine;
 	import com.burninghead.birf.states.IState;
@@ -6,13 +6,13 @@ package com.burninghead.birf.view.stage2d.states
 
 	import org.swiftsuspenders.Injector;
 	/**
-	 * @author Zoulz
+	 * @author tomas.augustinovic
 	 */
-	public class Stage2DStateMachine extends BaseStateMachine implements IStateMachine
+	public class InjectedStateMachine extends BaseStateMachine implements IStateMachine
 	{
 		private var _injector:Injector;
 		
-		public function Stage2DStateMachine(injector:Injector)
+		public function InjectedStateMachine(injector:Injector)
 		{
 			super();
 			

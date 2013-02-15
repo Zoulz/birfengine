@@ -1,14 +1,9 @@
 package com.burninghead.birf.view
 {
-	import com.burninghead.birf.audio.BaseSoundManager;
-	import com.burninghead.birf.audio.ISoundManager;
-	import com.burninghead.birf.errors.AbstractMethodError;
 	import com.burninghead.birf.messaging.BaseMessage;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
-	import com.burninghead.birf.net.assets.BaseAssetLoader;
-	import com.burninghead.birf.net.assets.IAssetLoader;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.utils.ReflectionUtil;
 	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
@@ -17,7 +12,6 @@ package com.burninghead.birf.view
 	import org.osflash.signals.Signal;
 	import org.swiftsuspenders.Injector;
 
-	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 
 	/**
@@ -26,10 +20,11 @@ package com.burninghead.birf.view
 	public class BaseView implements IView
 	{
 		protected var _initialized:Signal;
-		protected var _isInit:Boolean = false;
+		protected var _isInit:Boolean;
 		protected var _injector:Injector;
 		
 		private var _model:IModel;
+		private var _stageObject:Sprite;
 		private var _messageHandler:IMessageHandler;
 		
 		/**
@@ -41,41 +36,18 @@ package com.burninghead.birf.view
 			_messageHandler = msgHandler;
 			_messageHandler.listener.add(onMessageReceived);
 			
+			_stageObject = null;
 			_initialized = new Signal();
-			
-			initInjection();
-			
-			injectDependencies();
+			_injector = new Injector();
+			_isInit = false;
 		}
 		
 		protected function onMessageReceived(msg:IMessage):void
 		{
 		}
 
-		protected function initInjection():void
+		protected function init():void
 		{
-			_initialized = new Signal();
-			_injector = new Injector();
-			_injector.mapValue(IView, this);
-			_injector.mapValue(IModel, _model);
-			_injector.mapValue(IMessageHandler, _messageHandler);
-		}
-		
-		/**
-		 * Maps any additional injections that is needed for the view.
-		 */
-		protected function injectDependencies():void
-		{
-			_injector.mapSingletonOf(IAssetLoader, BaseAssetLoader);
-			_injector.mapSingletonOf(ISoundManager, BaseSoundManager);
-		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		public function init(stageObject:Sprite):void
-		{
-			throw new AbstractMethodError();
 		}
 		
 		/**
@@ -143,9 +115,32 @@ package com.burninghead.birf.view
 			return _isInit;
 		}
 
-		public function get stageObject():DisplayObject
+		public function get stageObject():Sprite
 		{
-			return null;
+			return _stageObject;
+		}
+
+		public function set stageObject(value:Sprite):void
+		{
+			_stageObject = value;
+			
+			if (_isInit == false)
+			{
+				//	Flag that we are initialized.
+				_isInit = true;
+				
+				//	Create dependency injector and add the standard dependencies.
+				_injector.mapValue(IView, this);
+				_injector.mapValue(IModel, _model);
+				_injector.mapValue(IMessageHandler, _messageHandler);
+				
+				//	Perform any initialization.
+				init();
+			}
+			else
+			{
+				throw new Error("View is already initialized.");
+			}
 		}
 	}
 }
