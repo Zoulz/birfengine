@@ -72,8 +72,8 @@ package com.burninghead.birf.view.bitmaprenderer
 		
 		protected function injectAdditionalDependencies():void
 		{
-			_injector.mapSingletonOf(IAssetLoader, BaseAssetLoader);
-			_injector.mapSingletonOf(ISoundManager, BaseSoundManager);
+			_injector.map(IAssetLoader).toSingleton(BaseAssetLoader);
+			_injector.map(ISoundManager).toSingleton(BaseSoundManager);
 		}
 
 		protected function injectRenderer():void
@@ -82,7 +82,7 @@ package com.burninghead.birf.view.bitmaprenderer
 			_renderer = new BaseBitmapRenderer(_container);
 			
 			//	Inject.
-			_injector.mapValue(IBitmapRenderer, _renderer);
+			_injector.map(IBitmapRenderer).toValue(_renderer);
 		}
 
 		protected function injectStateMachine():void
@@ -92,7 +92,7 @@ package com.burninghead.birf.view.bitmaprenderer
 			_stateMachine.stateChanged.add(onStateChanged);
 			
 			//	Inject.
-			_injector.mapValue(IStateMachine, _stateMachine);
+			_injector.map(IStateMachine).toValue(_stateMachine);
 		}
 	}
 }

@@ -1,6 +1,5 @@
 package com.burninghead.birf.controller
 {
-	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
 	import com.burninghead.birf.messaging.BaseMessage;
 	import com.burninghead.birf.messaging.CommandMessage;
 	import com.burninghead.birf.messaging.IMessage;
@@ -8,6 +7,7 @@ package com.burninghead.birf.controller
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.utils.ReflectionUtil;
 	import com.burninghead.birf.view.IView;
+	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
 
 	import org.swiftsuspenders.Injector;
 
@@ -30,9 +30,9 @@ package com.burninghead.birf.controller
 			_messageHandler = messageHandler;
 			
 			_injector = new Injector();
-			_injector.mapValue(IView, _view);
-			_injector.mapValue(IModel, _model);
-			_injector.mapValue(IMessageHandler, _messageHandler);
+			_injector.map(IView).toValue(_view);
+			_injector.map(IModel).toValue(_model);
+			_injector.map(IMessageHandler).toValue(_messageHandler);
 			
 			_messageHandler.listener.add(onMessageReceived);
 		}
@@ -72,7 +72,7 @@ package com.burninghead.birf.controller
 		{
 			if (ReflectionUtil.isType(clazz, ICommand))
 			{
-				_injector.mapSingleton(clazz);
+				_injector.map(clazz).asSingleton();
 			}
 			else
 			{

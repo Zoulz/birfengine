@@ -81,7 +81,7 @@ package com.burninghead.birf.view
 		{
 			if (ReflectionUtil.isType(mediator, IMediator))
 			{
-				_injector.mapSingleton(mediator, name);
+				_injector.map(mediator, name).asSingleton();
 			}
 			else
 			{
@@ -130,9 +130,9 @@ package com.burninghead.birf.view
 				_isInit = true;
 				
 				//	Create dependency injector and add the standard dependencies.
-				_injector.mapValue(IView, this);
-				_injector.mapValue(IModel, _model);
-				_injector.mapValue(IMessageHandler, _messageHandler);
+				_injector.map(IView).toValue(this);
+				_injector.map(IModel).toValue(_model);
+				_injector.map(IMessageHandler).toValue(_messageHandler);
 				
 				//	Perform any initialization.
 				init();

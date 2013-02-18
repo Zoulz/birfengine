@@ -82,8 +82,8 @@ package com.burninghead.birf.view.stage2d
 		
 		protected function injectAdditionalDependencies():void
 		{
-			_injector.mapSingletonOf(IAssetLoader, BaseAssetLoader);
-			_injector.mapSingletonOf(ISoundManager, BaseSoundManager);
+			_injector.map(IAssetLoader).toSingleton(BaseAssetLoader);
+			_injector.map(ISoundManager).toSingleton(BaseSoundManager);
 		}
 		
 		protected function injectStateMachine():void
@@ -93,7 +93,7 @@ package com.burninghead.birf.view.stage2d
 			_stateMachine.stateChanged.add(onStateChanged);
 			
 			//	Inject.
-			_injector.mapValue(IStateMachine, _stateMachine);
+			_injector.map(IStateMachine).toValue(_stateMachine);
 		}
 
 		/**

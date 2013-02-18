@@ -21,8 +21,8 @@ package com.burninghead.birf.model
 			_messageHandler = msgHandler;
 			
 			_injector = new Injector();
-			_injector.mapValue(IMessageHandler, _messageHandler);
-			_injector.mapValue(IModel, this);
+			_injector.map(IMessageHandler).toValue(_messageHandler);
+			_injector.map(IModel).toValue(this);
 		}
 		
 		public function getModelPart(proxy:Class, name:String = ""):IProxy
@@ -42,7 +42,7 @@ package com.burninghead.birf.model
 		{
 			if (ReflectionUtil.isType(impl, IProxy))
 			{
-				_injector.mapSingletonOf(proxy, impl, name);
+				_injector.map(proxy, name).toSingleton(impl);
 			}
 			else
 			{

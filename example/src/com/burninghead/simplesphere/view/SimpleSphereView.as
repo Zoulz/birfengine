@@ -46,7 +46,7 @@ package com.burninghead.simplesphere.view
 			super.injectAdditionalDependencies();
 			
 			//	Inject instance of skin manager.
-			_injector.mapSingletonOf(ISkinManager, Stage2DSkinManager);
+			_injector.map(ISkinManager).toSingleton(Stage2DSkinManager);
 		}
 		
 		/**
