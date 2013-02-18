@@ -26,6 +26,8 @@ package com.burninghead.swarmdemo.view.mediators
 		override public function registerView(value:*):void
 		{
 			_swarm = value;
+			
+			_swarm.createRobins();
 		}
 
 		override public function dispose():void

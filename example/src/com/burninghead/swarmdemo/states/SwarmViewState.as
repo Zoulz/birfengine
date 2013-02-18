@@ -24,7 +24,6 @@ package com.burninghead.swarmdemo.states
 		override public function enter():void
 		{
 			_swarm = new SwarmView(renderer);
-			_swarm.createRobins();
 			
 			_swarmMediator = view.getMediator(SwarmMediator) as SwarmMediator;
 			_swarmMediator.registerView(_swarm);

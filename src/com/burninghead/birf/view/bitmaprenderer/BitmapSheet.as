@@ -28,8 +28,10 @@ package com.burninghead.birf.view.bitmaprenderer
 			}
 		}
 
-		public function fromMovieClip(mc:MovieClip, strategy:IMovieClipCuttingStrategy = null):void
+		public static function fromMovieClip(mc:MovieClip, strategy:IMovieClipCuttingStrategy = null):BitmapSheet
 		{
+			var ret:BitmapSheet = new BitmapSheet();
+			
 			if (strategy == null)
 			{
 				//	Default to tile cutter (32x32).
@@ -38,18 +40,37 @@ package com.burninghead.birf.view.bitmaprenderer
 			
 			//	Perform cutting and set bitmap data and frame coordinates.
 			var result:MovieClipCuttingResult = strategy.clip(mc);
-			_data = result.bitmapData;
-			_frames = result.frames;
+			ret.data = result.bitmapData;
+			ret.frames = result.frames;
+			
+			return ret;
 		}
 		
-		public function fromSprite(spr:Sprite):void
+		public static function fromSprite(spr:Sprite):BitmapSheet
 		{
+			var ret:BitmapSheet = new BitmapSheet();
+			
 			//	Simply draw the sprite into bitmap data.
-			_data = new BitmapData(spr.width, spr.height);
-			_data.draw(spr);
+			ret.data = new BitmapData(spr.width, spr.height);
+			ret.data.draw(spr);
 			
 			//	Add frame dimensions for the sprite.
-			_frames.push(new Rectangle(0, 0, spr.width, spr.height));
+			ret.frames.push(new Rectangle(0, 0, spr.width, spr.height));
+			
+			return ret;
+		}
+		
+		public static function fromBitmapData(bmd:BitmapData, xml:XML):BitmapSheet
+		{
+			var ret:BitmapSheet = new BitmapSheet();
+			
+			ret.data = bmd;
+			for each (var frame:XML in xml)
+			{
+				ret.frames.push(new Rectangle(parseInt(frame.frame.@x), parseInt(frame.frame.@y), parseInt(frame.frame.@width), parseInt(frame.frame.@height)));
+			}
+			
+			return ret;
 		}
 		
 		public function getFrame(index:uint):BitmapData
@@ -69,6 +90,16 @@ package com.burninghead.birf.view.bitmaprenderer
 		public function get data():BitmapData
 		{
 			return _data;
+		}
+
+		public function set data(data:BitmapData):void
+		{
+			_data = data;
+		}
+
+		public function set frames(frames:Vector.<Rectangle>):void
+		{
+			_frames = frames;
 		}
 	}
 }
