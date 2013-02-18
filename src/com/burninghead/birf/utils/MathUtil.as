@@ -1,12 +1,13 @@
 package com.burninghead.birf.utils
 {
 	import flash.geom.Point;
+
 	/**
 	 * Collection of math-related static functions.
 	 * 
 	 * @author tomas.augustinovic
 	 */
-	public class MathUtil
+	public final class MathUtil
 	{
 		public static const EPSILON:Number = 0.0000000000001;
 		public static const EPSILON_SQR:Number = EPSILON * EPSILON;

@@ -7,7 +7,7 @@ package com.burninghead.swarmdemo
 	/**
 	 * @author tomas.augustinovic
 	 */
-	[SWF(backgroundColor="#FFFFFF", frameRate="60", width="300", height="300")]
+	[SWF(backgroundColor="#FFFFFF", frameRate="60", width="400", height="300")]
 	public class SwarmDemo extends BaseGame
 	{
 		/**

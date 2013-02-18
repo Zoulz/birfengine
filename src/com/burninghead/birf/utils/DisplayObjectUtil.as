@@ -7,12 +7,13 @@ package com.burninghead.birf.utils
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Matrix;
+
 	/**
 	 * Utility methods for manipulating display objects and containers.
 	 * 
 	 * @author BigZoulz
 	 */
-	public class DisplayObjectUtil
+	public final class DisplayObjectUtil
 	{
 		/**
 		 * Remove all the children of the supplied container object.

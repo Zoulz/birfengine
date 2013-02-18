@@ -21,6 +21,9 @@ package com.burninghead.birf.view.bitmaprenderer.renderables
 		{
 			_position = new Point(0, 0);
 			_scale = new Point(1, 1);
+			_anchor = new Point(0, 0);
+			_alpha = 1;
+			_rotation = 0;
 			_renderData = null;
 		}
 		

@@ -48,5 +48,10 @@ package com.burninghead.birf.net.assets.types
 		{
 			return _loader.bytesTotal;
 		}
+
+		public function get data():*
+		{
+			return _loader.content;
+		}
 	}
 }

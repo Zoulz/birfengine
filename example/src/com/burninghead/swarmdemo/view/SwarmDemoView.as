@@ -27,9 +27,9 @@ package com.burninghead.swarmdemo.view
 			stateMachine.changeState("swarm");
 		}
 		
-		override protected function getStageColor():uint
+		override protected function getRenderClearColor():uint
 		{
-			return 0xffffff;
+			return 0xf3faff;
 		}
 	}
 }

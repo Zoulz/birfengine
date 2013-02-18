@@ -11,6 +11,7 @@ package com.burninghead.birf.net.rpc
 		function flush():void;
 		function abort():void;
 		
+		//	Getters/setters
 		function get complete():ISignal;
 	}
 }

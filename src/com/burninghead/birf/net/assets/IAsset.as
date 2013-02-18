@@ -9,5 +9,6 @@ package com.burninghead.birf.net.assets
 		function get size():uint;
 		function get name():String;
 		function set name(value:String):void;
+		function get data():*;
 	}
 }

@@ -2,12 +2,13 @@ package com.burninghead.birf.utils
 {
 	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
+
 	/**
 	 * Utility class for manipulating and building filters easier.
 	 * 
 	 * @author tomas.augustinovic
 	 */
-	public class FilterUtil
+	public final class FilterUtil
 	{
 		/**
 		 * Creates a blur filter with the supplied paramaters.

@@ -1,24 +1,22 @@
 package com.burninghead.birf.net.assets.types
 {
 	import com.burninghead.birf.net.assets.IAsset;
-	import com.greensock.loading.CSSLoader;
-
-	import flash.text.StyleSheet;
+	import com.greensock.loading.core.LoaderItem;
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class CssAsset implements IAsset
+	public class GenericAsset implements IAsset
 	{
-		private var _loader:CSSLoader;
+		protected var _loader:LoaderItem;
 		private var _name:String;
 		
-		public function CssAsset(loader:CSSLoader)
+		public function GenericAsset(loader:LoaderItem)
 		{
 			_name = loader.name;
 			_loader = loader;
 		}
 		
-		public function styleSheet():StyleSheet
+		public function get data():*
 		{
 			return _loader.content;
 		}
@@ -37,7 +35,7 @@ package com.burninghead.birf.net.assets.types
 		{
 			_name = value;
 		}
-		
+
 		public function get size():uint
 		{
 			return _loader.bytesTotal;

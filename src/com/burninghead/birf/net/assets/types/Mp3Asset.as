@@ -52,5 +52,10 @@ package com.burninghead.birf.net.assets.types
 		{
 			_name = value;
 		}
+
+		public function get data():*
+		{
+			return _loader.content;
+		}
 	}
 }

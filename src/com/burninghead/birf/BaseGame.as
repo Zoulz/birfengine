@@ -9,7 +9,7 @@ package com.burninghead.birf
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.view.IView;
 
-	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.Event;
 
 	/**
@@ -18,7 +18,7 @@ package com.burninghead.birf
 	 * 
 	 * @author tomas.augustinovic
 	 */
-	public dynamic class BaseGame extends MovieClip
+	public class BaseGame extends Sprite
 	{
 		private var _view:IView;
 		private var _model:IModel;

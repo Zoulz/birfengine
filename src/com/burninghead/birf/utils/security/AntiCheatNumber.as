@@ -1,6 +1,7 @@
 package com.burninghead.birf.utils.security
 {
 	import com.burninghead.birf.utils.MathUtil;
+
 	/**
 	 * This class is used to counter memory sniff cheating. It's not perfect, but it makes it
 	 * a bit harder. Should only be used for critical numbers since it adds a bit of memory and

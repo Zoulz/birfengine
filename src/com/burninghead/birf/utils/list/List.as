@@ -2,6 +2,7 @@ package com.burninghead.birf.utils.list
 {
 	import org.osflash.signals.Signal;
 	import org.osflash.signals.ISignal;
+
 	/**
 	 * Executes a list of items in sequential order.
 	 * 

@@ -11,7 +11,7 @@ package com.burninghead.birf.utils
 	 * 
 	 * @author tomas.augustinovic
 	 */
-	public class ReflectionUtil
+	public final class ReflectionUtil
 	{
 		/**
 		 * Return the type name of the supplied object as a string.

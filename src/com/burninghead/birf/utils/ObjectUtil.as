@@ -1,14 +1,14 @@
 package com.burninghead.birf.utils
 {
-	import flash.utils.Dictionary;
 	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
 	/**
 	 * Utility class for the manipulation of objects.
 	 * 
 	 * @author tomas.augustinovic
 	 */
-	public class ObjectUtil
+	public final class ObjectUtil
 	{
 		/**
 		 * Merge together two objects.

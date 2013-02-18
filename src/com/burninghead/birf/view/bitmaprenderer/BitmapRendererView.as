@@ -42,7 +42,7 @@ package com.burninghead.birf.view.bitmaprenderer
 		override protected function init():void
 		{
 			//	Create bitmap rendering container.
-			_bmpData = new BitmapData(stageObject.stage.stageWidth, stageObject.stage.stageHeight, false, getStageColor());
+			_bmpData = new BitmapData(stageObject.stage.stageWidth, stageObject.stage.stageHeight, false, getRenderClearColor());
 			_container = new Bitmap(_bmpData);
 			
 			//	Attach stage listener.
@@ -61,7 +61,7 @@ package com.burninghead.birf.view.bitmaprenderer
 			initViewStates();
 		}
 		
-		protected function getStageColor():uint
+		protected function getRenderClearColor():uint
 		{
 			return 0x49af00;
 		}
@@ -79,7 +79,7 @@ package com.burninghead.birf.view.bitmaprenderer
 		protected function injectRenderer():void
 		{
 			//	Create renderer.
-			_renderer = new BaseBitmapRenderer(_container);
+			_renderer = new BaseBitmapRenderer(_container, getRenderClearColor());
 			
 			//	Inject.
 			_injector.map(IBitmapRenderer).toValue(_renderer);

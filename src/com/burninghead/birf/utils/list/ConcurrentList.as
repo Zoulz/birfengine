@@ -2,6 +2,7 @@ package com.burninghead.birf.utils.list
 {
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
+
 	/**
 	 * A list that executes all the items at once and is
 	 * completed when all the items are completed.

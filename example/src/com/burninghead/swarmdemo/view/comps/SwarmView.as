@@ -1,5 +1,6 @@
 package com.burninghead.swarmdemo.view.comps
 {
+	import com.burninghead.birf.utils.MathUtil;
 	import com.burninghead.birf.utils.IDisposable;
 	import com.burninghead.birf.view.bitmaprenderer.IBitmapRenderer;
 	import com.burninghead.birf.view.bitmaprenderer.BitmapSheet;
@@ -40,7 +41,8 @@ package com.burninghead.swarmdemo.view.comps
 			for (var i:uint = 0; i < num; i++)
 			{
 				var robin:Sprite = new Sprite(_sheet);
-				robin.x = i * 10;
+				robin.x = MathUtil.randomNumber(0, 400, true);
+				robin.y = MathUtil.randomNumber(0, 300, true);
 				_renderer.addChild(robin);
 			}
 		}

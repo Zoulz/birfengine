@@ -6,7 +6,7 @@ package com.burninghead.birf.utils
 	/**
 	 * @author BigZoulz
 	 */
-	public class NetUtil
+	public final class NetUtil
 	{
 		public static function openURL(url:String):void
 		{

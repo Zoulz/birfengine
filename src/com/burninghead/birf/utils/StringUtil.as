@@ -5,7 +5,7 @@ package com.burninghead.birf.utils
 	 * 
 	 * @author tomas.augustinovic
 	 */
-	public class StringUtil
+	public final class StringUtil
 	{
 		/**
 		 * Resolves the parameter placeholders {0} etc inside the given string.

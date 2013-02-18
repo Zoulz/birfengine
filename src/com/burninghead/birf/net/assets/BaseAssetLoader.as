@@ -1,10 +1,8 @@
 package com.burninghead.birf.net.assets
 {
-	import com.burninghead.birf.net.assets.types.BinaryAsset;
-	import com.burninghead.birf.net.assets.types.CssAsset;
-	import com.burninghead.birf.net.assets.types.DataAsset;
-	import com.burninghead.birf.net.assets.types.Mp3Asset;
-	import com.burninghead.birf.net.assets.types.SwfAsset;
+	import com.burninghead.birf.net.assets.parsers.Mp3AssetParser;
+	import com.burninghead.birf.net.assets.parsers.SwfAssetParser;
+	import com.burninghead.birf.net.assets.parsers.GenericAssetParser;
 	import com.burninghead.birf.utils.ObjectUtil;
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.BinaryDataLoader;
@@ -36,10 +34,15 @@ package com.burninghead.birf.net.assets
 		private var _config:LoaderMaxVars;
 		private var _loader:LoaderMax;
 		private var _assets:Vector.<IAsset>;
+		private var _parsers:Vector.<IAssetParser>;
 		
 		public function BaseAssetLoader()
 		{
 			_assets = new Vector.<IAsset>();
+			_parsers = new Vector.<IAssetParser>();
+			
+			registerAssetParsers();
+			
 			_totalComplete = new Signal();
 			_totalProgress = new Signal();
 			_totalError = new Signal();
@@ -60,6 +63,29 @@ package com.burninghead.birf.net.assets
 			_config.onChildComplete(onItemComplete);
 			_config.onChildProgress(onItemProgress);
 			_config.onChildFail(onItemError);
+		}
+		
+		protected function registerAssetParsers():void
+		{
+			registerAssetParser(new GenericAssetParser());
+			registerAssetParser(new SwfAssetParser());
+			registerAssetParser(new Mp3AssetParser());
+		}
+		
+		public function registerAssetParser(parser:IAssetParser):void
+		{
+			if (parser != null)
+			{
+				_parsers.push(parser);
+			}
+		}
+		
+		public function unregisterAssetParser(parser:IAssetParser):void
+		{
+			if (_parsers.indexOf(parser) >= 0)
+			{
+				_parsers = _parsers.splice(_parsers.indexOf(parser), 1);
+			}
 		}
 		
 		public function load(urls:Vector.<String>, flushContent:Boolean = false):void
@@ -100,34 +126,6 @@ package com.burninghead.birf.net.assets
 		{
 			_loader.cancel();
 		}
-		
-		protected function createAsset(loader:LoaderCore):void
-		{
-			if (loader is BinaryDataLoader)
-			{
-				_assets.push(new BinaryAsset(loader as BinaryDataLoader));
-			}
-			else if (loader is DataLoader)
-			{
-				_assets.push(new DataAsset(loader as DataLoader));
-			}
-			else if (loader is CSSLoader)
-			{
-				_assets.push(new CssAsset(loader as CSSLoader));
-			}
-			else if (loader is SWFLoader)
-			{
-				_assets.push(new SwfAsset(loader as SWFLoader));
-			}
-			else if (loader is MP3Loader)
-			{
-				_assets.push(new Mp3Asset(loader as MP3Loader));
-			}
-			else
-			{
-				throw new Error("Asset loader cannot determine loaded asset type.");
-			}
-		}
 
 		private function onItemError(event:LoaderEvent):void
 		{
@@ -141,7 +139,25 @@ package com.burninghead.birf.net.assets
 
 		private function onItemComplete(event:LoaderEvent):void
 		{
-			createAsset(event.target as LoaderCore);
+			var asset:IAsset = null;
+			
+			for each (var parser:IAssetParser in _parsers)
+			{
+				asset = parser.parse(event.target as LoaderCore);
+				if (asset != null)
+				{
+					break;
+				}
+			}
+			
+			if (asset != null)
+			{
+				_assets.push(asset);
+			}
+			else
+			{
+				throw new Error("Asset loader cannot determine loaded asset type.");
+			}
 			
 			_itemComplete.dispatch();
 		}
