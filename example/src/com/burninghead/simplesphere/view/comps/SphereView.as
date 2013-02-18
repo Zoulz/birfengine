@@ -11,6 +11,9 @@ package com.burninghead.simplesphere.view.comps
 	{
 		private var _tf:TextField;
 		
+		/**
+		 * Constructor.
+		 */
 		public function SphereView()
 		{
 			//	Make this a button.

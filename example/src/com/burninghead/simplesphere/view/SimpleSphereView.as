@@ -15,6 +15,9 @@ package com.burninghead.simplesphere.view
 	 */
 	public class SimpleSphereView extends Stage2DView implements IView
 	{
+		/**
+		 * Constructor.
+		 */
 		public function SimpleSphereView(model:IModel, msgHandler:IMessageHandler)
 		{
 			super(model, msgHandler);
@@ -35,6 +38,9 @@ package com.burninghead.simplesphere.view
 			stateMachine.changeState("sphere");
 		}
 		
+		/**
+		 * Inject singleton of skin manager.
+		 */
 		override protected function injectAdditionalDependencies():void
 		{
 			super.injectAdditionalDependencies();
@@ -43,6 +49,9 @@ package com.burninghead.simplesphere.view
 			_injector.mapSingletonOf(ISkinManager, Stage2DSkinManager);
 		}
 		
+		/**
+		 * Handle messages about changing skins.
+		 */
 		override protected function onMessageReceived(msg:IMessage):void
 		{
 			var pl:Object = msg.payload;
