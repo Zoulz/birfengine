@@ -1,5 +1,7 @@
 package com.burninghead.birf.utils.security
 {
+	import org.osflash.signals.ISignal;
+	import org.osflash.signals.Signal;
 	import com.burninghead.birf.utils.MathUtil;
 
 	/**
@@ -15,6 +17,7 @@ package com.burninghead.birf.utils.security
 		
 		private var _offset:Number;
 		private var _num:Vector.<Number>;
+		private var _cheatSignal:Signal;
 		
 		/**
 		 * Constructor. Randomizes a offset value used to alter the stored value.
@@ -23,6 +26,8 @@ package com.burninghead.birf.utils.security
 		 */
 		public function AntiCheatNumber(num:Number, multiInstance:Boolean = true)
 		{
+			_cheatSignal = new Signal();
+			
 			_offset = MathUtil.randomNumber(-1000, 1000, true);
 			
 			_num = new Vector.<Number>();
@@ -45,8 +50,7 @@ package com.burninghead.birf.utils.security
 			{
 				if (_num[i] != ref)
 				{
-					//	TODO Someone has altered memory. Someone is cheating!
-					trace("CHEATER!");
+					_cheatSignal.dispatch();
 				}
 				
 				_num[i] = value + _offset + SALT;
@@ -60,6 +64,11 @@ package com.burninghead.birf.utils.security
 		public function get value():Number
 		{
 			return _num[Math.floor(_num.length / 2)] - _offset - SALT;
+		}
+
+		public function get cheater():ISignal
+		{
+			return _cheatSignal;
 		}
 	}
 }

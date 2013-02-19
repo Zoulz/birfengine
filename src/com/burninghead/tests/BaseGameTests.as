@@ -1,9 +1,10 @@
 package com.burninghead.tests
 {
-	import flexunit.framework.Assert;
-
 	import com.burninghead.TestRunner;
 	import com.burninghead.birf.BaseGame;
+
+	import org.flexunit.assertThat;
+	import org.hamcrest.object.notNullValue;
 
 	/**
 	 * @author tomas.augustinovic
@@ -34,25 +35,25 @@ package com.burninghead.tests
 		[Test]
 		public function testControllerNotNull():void
 		{
-			Assert.assertNotNull(_game.controller);
+			assertThat(_game.controller, notNullValue());
 		}
 		
 		[Test]
 		public function testModelNotNull():void
 		{
-			Assert.assertNotNull(_game.model);
+			assertThat(_game.model, notNullValue());
 		}
 		
 		[Test]
 		public function testViewNotNull():void
 		{
-			Assert.assertNotNull(_game.view);
+			assertThat(_game.view, notNullValue());
 		}
 		
 		[Test]
 		public function testMessageHandlerNotNull():void
 		{
-			Assert.assertNotNull(_game.messageHandler);
+			assertThat(_game.messageHandler, notNullValue());
 		}
 	}
 }

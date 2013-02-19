@@ -14,5 +14,6 @@ package com.burninghead.birf.states
 		function unregisterTransition(id:String):void;
 		
 		function get stateChanged():ISignal;
+		function get stateId():String;
 	}
 }

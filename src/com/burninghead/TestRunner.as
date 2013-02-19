@@ -1,5 +1,6 @@
 package com.burninghead
 {
+	import mockolate.runner.MockolateRule;
 	import com.burninghead.tests.BirfTestSuite;
 
 	import org.flexunit.internals.TraceListener;
@@ -11,6 +12,8 @@ package com.burninghead
 	 */
 	public class TestRunner extends Sprite
 	{
+		[Rule] public var mockolateRule:MockolateRule = new MockolateRule();
+		
 		public static var stageContainer:Sprite;
 		
 		private var _core:FlexUnitCore;

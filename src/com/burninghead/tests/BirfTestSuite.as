@@ -1,5 +1,7 @@
 package com.burninghead.tests
 {
+	import com.burninghead.tests.states.BaseStateMachineTests;
+	import com.burninghead.tests.utils.AntiCheatNumberTests;
 	import com.burninghead.tests.view.stage2d.Stage2DViewTests;
 	import com.burninghead.tests.view.BaseViewTests;
 	/**
@@ -11,8 +13,14 @@ package com.burninghead.tests
 	{
 		public var gameTest:BaseGameTests;
 		
-		//	VIEW PACKAGE
+		//	VIEW
 		public var viewTests:BaseViewTests;
 		public var stage2dViewTests:Stage2DViewTests;
+		
+		//	STATES
+		public var stateMachineTests:BaseStateMachineTests;
+		
+		//	UTILS
+		public var antiCheatNumTests:AntiCheatNumberTests;
 	}
 }

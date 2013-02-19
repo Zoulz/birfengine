@@ -1,7 +1,6 @@
 package com.burninghead.tests.view.stage2d
 {
-	import flexunit.framework.Assert;
-
+	import org.hamcrest.object.equalTo;
 	import com.burninghead.TestRunner;
 	import com.burninghead.birf.messaging.BaseMessageHandler;
 	import com.burninghead.birf.messaging.IMessageHandler;
@@ -9,6 +8,7 @@ package com.burninghead.tests.view.stage2d
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.view.stage2d.Stage2DView;
 
+	import org.flexunit.assertThat;
 	import org.osflash.signals.utils.SignalAsyncEvent;
 	import org.osflash.signals.utils.handleSignal;
 	/**
@@ -43,7 +43,7 @@ package com.burninghead.tests.view.stage2d
 		
 		private function onViewInitialized(event:SignalAsyncEvent, data:Object):void
 		{
-			Assert.assertTrue(_view.isInitialized);
+			assertThat(_view.isInitialized, equalTo(true));
 		}
 	}
 }

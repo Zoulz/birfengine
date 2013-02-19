@@ -10,7 +10,8 @@ package com.burninghead.tests.view
 	import com.burninghead.birf.view.BaseMediator;
 	import com.burninghead.birf.view.BaseView;
 
-	import org.flexunit.asserts.fail;
+	import org.flexunit.assertThat;
+	import org.hamcrest.object.notNullValue;
 	import org.osflash.signals.utils.SignalAsyncEvent;
 	import org.osflash.signals.utils.handleSignal;
 	/**
@@ -53,14 +54,7 @@ package com.burninghead.tests.view
 		{
 			_view.stageObject = TestRunner.stageContainer;
 			
-			try
-			{
-				_view.registerMediator(BaseMediator);
-			}
-			catch (err:Error)
-			{
-				fail(err.message);
-			}
+			_view.registerMediator(BaseMediator);
 		}
 		
 		[Test]
@@ -68,16 +62,9 @@ package com.burninghead.tests.view
 		{
 			_view.stageObject = TestRunner.stageContainer;
 			
-			try
-			{
-				_view.registerMediator(BaseMediator);
-				
-				Assert.assertNotNull(_view.getMediator(BaseMediator));
-			}
-			catch (err:Error)
-			{
-				fail(err.message);
-			}
+			_view.registerMediator(BaseMediator);
+			
+			assertThat(_view.getMediator(BaseMediator), notNullValue());
 		}
 		
 		[Test]
@@ -85,16 +72,9 @@ package com.burninghead.tests.view
 		{
 			_view.stageObject = TestRunner.stageContainer;
 			
-			try
-			{
-				_view.registerMediator(BaseMediator);
+			_view.registerMediator(BaseMediator);
 				
-				_view.unregisterMediator(BaseMediator);
-			}
-			catch (err:Error)
-			{
-				fail(err.message);
-			}
+			_view.unregisterMediator(BaseMediator);
 		}
 	}
 }

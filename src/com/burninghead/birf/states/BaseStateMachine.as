@@ -12,6 +12,7 @@ package com.burninghead.birf.states
 		
 		private var _states:Dictionary;
 		private var _currentState:IState;
+		private var _currentStateId:String;
 		private var _stateChanged:Signal;
 		
 		public function BaseStateMachine()
@@ -19,6 +20,7 @@ package com.burninghead.birf.states
 			_states = new Dictionary();
 			_stateChanged = new Signal();
 			_transitions = new Dictionary();
+			_currentStateId = "";
 			_currentState = null;
 		}
 
@@ -37,9 +39,11 @@ package com.burninghead.birf.states
 			//	Enter the new state.
 			if (_currentState)
 			{
-				_currentState.enter();
-				
+				_currentStateId = id;
+
 				_stateChanged.dispatch(oldState, _currentState);
+				
+				_currentState.enter();
 			}
 			else
 			{
@@ -95,6 +99,11 @@ package com.burninghead.birf.states
 		public function get stateChanged():ISignal
 		{
 			return _stateChanged;
+		}
+
+		public function get stateId():String
+		{
+			return _currentStateId;
 		}
 	}
 }

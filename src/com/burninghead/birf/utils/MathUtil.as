@@ -51,7 +51,7 @@ package com.burninghead.birf.utils
 		 */
 		public static function isEven(num:Number):Boolean
 		{
-			return !(num % 2);
+			return (num & 1) == 0;
 		}
 		
 		/**

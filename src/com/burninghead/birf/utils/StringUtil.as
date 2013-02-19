@@ -17,7 +17,8 @@ package com.burninghead.birf.utils
 		{
 			if (s != null && params.length > 0)
 			{
-				for (var i:int = 0; i < params.length; ++i)
+				var len:uint = params.length;
+				for (var i:int = 0; i < len; ++i)
 				{
 					var r:RegExp = new RegExp("\\{" + i + "\\}", "gi");
 					s = s.replace(r, params[i]);
@@ -78,7 +79,8 @@ package com.burninghead.birf.utils
 		{
 			if(s.length < len)
 			{
-				for(var i:int = s.length; i < len; i++)
+				var slen:uint = s.length;
+				for(var i:int = slen; i < len; i++)
 				{
 					 s += char;
 				}
