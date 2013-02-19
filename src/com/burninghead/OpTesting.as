@@ -1,9 +1,7 @@
 package com.burninghead
 {
 	import com.burninghead.birf.utils.StringUtil;
-	import com.burninghead.birf.utils.MathUtil;
-	import com.burninghead.birf.utils.misc.TimedFunction;
-	import com.burninghead.birf.utils.security.AntiCheatNumber;
+	import com.burninghead.birf.utils.perf.TimedFunction;
 
 	import flash.display.Sprite;
 	/**
@@ -39,19 +37,14 @@ package com.burninghead
 //			});
 //			trace("[Normal] assign/access: " + test2.result);
 
-			var test:TimedFunction = new TimedFunction(function():void
+			var test:TimedFunction = new TimedFunction("StringUtil.resolveParameterizedString", 
+			function():void
 			{
 				var str:String = "This is {0} a parameterized string.";
-				var dest:String = "";
-				var i:int = 0;
-				
-				for (i = 0; i < 1000000; i++)
-				{
-					dest = StringUtil.resolveParameterizedString(str, "funny");
-				}
-			});
-			
-			trace("StringUtil.resolveParameterizedString(): " + test.result);
+				var dest = StringUtil.resolveParameterizedString(str, "funny");
+
+			}, 1000000);
+
 		}
 	}
 }

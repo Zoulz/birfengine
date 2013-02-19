@@ -36,6 +36,23 @@ package com.burninghead.birf.utils
 			return objName;
 		}
 		
+		public static function getNameOfFunction(obj:*, f:Function):String
+		{
+			var functionName:String = "error!";
+			var type:XML = describeType(obj);
+
+			for each (var node:XML in type.method)
+			{
+				if (obj[node.@name] == f)
+				{
+					functionName = node.@name;
+					break;
+				}
+			}
+			
+			return functionName;
+		}
+		
 		/**
 		 * Determines if the supplied object implements the specified interface.
 		 * 
