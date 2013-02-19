@@ -1,19 +1,19 @@
 package com.burninghead.birf.view.starling
 {
-	import com.burninghead.birf.errors.AbstractMethodError;
 	import starling.core.Starling;
 	import starling.events.Event;
 
 	import com.burninghead.birf.audio.BaseSoundManager;
 	import com.burninghead.birf.audio.ISoundManager;
+	import com.burninghead.birf.errors.AbstractMethodError;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.net.assets.BaseAssetLoader;
 	import com.burninghead.birf.net.assets.IAssetLoader;
 	import com.burninghead.birf.states.IStateMachine;
+	import com.burninghead.birf.states.InjectedStateMachine;
 	import com.burninghead.birf.view.BaseView;
 	import com.burninghead.birf.view.IView;
-	import com.burninghead.birf.view.InjectedStateMachine;
 	/**
 	 * @author tomas.augustinovic
 	 */

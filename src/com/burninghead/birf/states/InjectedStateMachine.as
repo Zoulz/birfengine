@@ -1,9 +1,5 @@
-package com.burninghead.birf.view
+package com.burninghead.birf.states
 {
-	import com.burninghead.birf.states.BaseStateMachine;
-	import com.burninghead.birf.states.IState;
-	import com.burninghead.birf.states.IStateMachine;
-
 	import org.swiftsuspenders.Injector;
 	/**
 	 * @author tomas.augustinovic

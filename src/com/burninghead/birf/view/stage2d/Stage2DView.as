@@ -8,10 +8,10 @@ package com.burninghead.birf.view.stage2d
 	import com.burninghead.birf.net.assets.IAssetLoader;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.states.IStateMachine;
+	import com.burninghead.birf.states.InjectedStateMachine;
 	import com.burninghead.birf.view.BaseView;
 	import com.burninghead.birf.view.IStateDrivenView;
 	import com.burninghead.birf.view.IView;
-	import com.burninghead.birf.view.InjectedStateMachine;
 	import com.burninghead.birf.view.stage2d.states.IStage2DViewState;
 
 	import org.osflash.signals.natives.NativeSignal;

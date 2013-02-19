@@ -48,6 +48,7 @@ package com.burninghead.birf.view
 
 		protected function init():void
 		{
+			_initialized.dispatch();
 		}
 		
 		/**
@@ -126,13 +127,13 @@ package com.burninghead.birf.view
 			
 			if (_isInit == false)
 			{
-				//	Flag that we are initialized.
-				_isInit = true;
-				
 				//	Create dependency injector and add the standard dependencies.
 				_injector.map(IView).toValue(this);
 				_injector.map(IModel).toValue(_model);
 				_injector.map(IMessageHandler).toValue(_messageHandler);
+				
+				//	Flag that we are initialized.
+				_isInit = true;
 				
 				//	Perform any initialization.
 				init();

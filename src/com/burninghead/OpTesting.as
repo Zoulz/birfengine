@@ -7,9 +7,9 @@ package com.burninghead
 	/**
 	 * @author BigZoulz
 	 */
-	public class Testing extends Sprite
+	public class OpTesting extends Sprite
 	{
-		public function Testing()
+		public function OpTesting()
 		{
 			var test1:TimedFunction = new TimedFunction(function():void {
 				var i:int;

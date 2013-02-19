@@ -1,6 +1,5 @@
 package com.burninghead.birf.audio
 {
-	import com.burninghead.birf.utils.ReflectionUtil;
 	/**
 	 * @author tomas.augustinovic
 	 */

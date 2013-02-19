@@ -1,5 +1,6 @@
 package com.burninghead.birf
 {
+	import com.burninghead.birf.view.BaseView;
 	import com.burninghead.birf.controller.BaseController;
 	import com.burninghead.birf.controller.IController;
 	import com.burninghead.birf.errors.AbstractMethodError;
@@ -133,7 +134,7 @@ package com.burninghead.birf
 		 */
 		protected function createView():IView
 		{
-			throw new AbstractMethodError();
+			return new BaseView(model, messageHandler);
 		}
 		
 		/**
