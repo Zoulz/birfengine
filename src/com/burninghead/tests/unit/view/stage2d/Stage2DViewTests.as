@@ -1,14 +1,14 @@
-package com.burninghead.tests.view.stage2d
+package com.burninghead.tests.unit.view.stage2d
 {
-	import org.hamcrest.object.equalTo;
-	import com.burninghead.TestRunner;
-	import com.burninghead.birf.messaging.SignalMessageHandler;
 	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.messaging.handlers.SignalMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.view.stage2d.Stage2DView;
+	import com.burninghead.tests.TestRunner;
 
 	import org.flexunit.assertThat;
+	import org.hamcrest.object.equalTo;
 	import org.osflash.signals.utils.SignalAsyncEvent;
 	import org.osflash.signals.utils.handleSignal;
 	/**

@@ -1,5 +1,9 @@
-package com.burninghead.birf.messaging
+package com.burninghead.birf.messaging.handlers
 {
+	import com.burninghead.birf.messaging.BirfMessageEvent;
+	import com.burninghead.birf.messaging.IMessage;
+	import com.burninghead.birf.messaging.IMessageHandler;
+
 	import flash.events.EventDispatcher;
 	/**
 	 * @author tomas.augustinovic

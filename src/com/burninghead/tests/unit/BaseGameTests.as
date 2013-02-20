@@ -1,7 +1,7 @@
-package com.burninghead.tests
+package com.burninghead.tests.unit
 {
-	import com.burninghead.TestRunner;
 	import com.burninghead.birf.BaseGame;
+	import com.burninghead.tests.TestRunner;
 
 	import org.flexunit.assertThat;
 	import org.hamcrest.object.notNullValue;

@@ -1,4 +1,4 @@
-package com.burninghead.tests.states
+package com.burninghead.tests.unit.states
 {
 	import org.hamcrest.object.equalTo;
 	import mockolate.nice;

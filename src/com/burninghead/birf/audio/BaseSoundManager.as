@@ -6,10 +6,7 @@ package com.burninghead.birf.audio
 	public class BaseSoundManager implements ISoundManager
 	{
 		private var _soundGroups:Vector.<ISoundGroup>;
-		
-		/**
-		 * Constructor.
-		 */
+
 		public function BaseSoundManager()
 		{
 			_soundGroups = new Vector.<ISoundGroup>();

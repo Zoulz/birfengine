@@ -1,7 +1,7 @@
 package com.burninghead.birf.model
 {
-	import com.burninghead.birf.messaging.BaseMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.utils.ReflectionUtil;
 	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
 

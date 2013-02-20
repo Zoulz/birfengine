@@ -1,9 +1,9 @@
 package com.burninghead.birf.controller
 {
-	import com.burninghead.birf.messaging.BaseMessage;
-	import com.burninghead.birf.messaging.CommandMessage;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.messaging.messages.BaseMessage;
+	import com.burninghead.birf.messaging.messages.CommandMessage;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.utils.ReflectionUtil;
 	import com.burninghead.birf.view.IView;

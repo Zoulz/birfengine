@@ -1,12 +1,12 @@
 package com.burninghead
 {
 	import com.burninghead.birf.messaging.BirfMessageEvent;
-	import com.burninghead.birf.messaging.EventMessageHandler;
 	import com.burninghead.birf.messaging.IMessage;
-	import com.burninghead.birf.messaging.MessageHandler;
 	import com.burninghead.birf.messaging.Messenger;
-	import com.burninghead.birf.messaging.SignalMessageHandler;
-	import com.burninghead.birf.messaging.TurboSignalMessageHandler;
+	import com.burninghead.birf.messaging.handlers.EventMessageHandler;
+	import com.burninghead.birf.messaging.handlers.MessageHandler;
+	import com.burninghead.birf.messaging.handlers.SignalMessageHandler;
+	import com.burninghead.birf.messaging.handlers.TurboSignalMessageHandler;
 	import com.burninghead.birf.utils.perf.TimedFunction;
 	import com.jacksondunstan.signals.Slot1;
 

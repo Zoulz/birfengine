@@ -1,4 +1,4 @@
-package com.burninghead.tests.utils
+package com.burninghead.tests.unit.utils
 {
 	import org.hamcrest.object.equalTo;
 	import com.burninghead.birf.utils.security.AntiCheatNumber;

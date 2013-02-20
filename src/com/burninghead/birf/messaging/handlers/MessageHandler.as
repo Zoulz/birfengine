@@ -1,5 +1,7 @@
-package com.burninghead.birf.messaging
+package com.burninghead.birf.messaging.handlers
 {
+	import com.burninghead.birf.messaging.IMessage;
+	import com.burninghead.birf.messaging.IMessageHandler;
 	/**
 	 * @author tomas.augustinovic
 	 */

@@ -1,7 +1,8 @@
-package com.burninghead
+package com.burninghead.tests
 {
 	import mockolate.runner.MockolateRule;
-	import com.burninghead.tests.BirfTestSuite;
+
+	import com.burninghead.tests.unit.BirfTestSuite;
 
 	import org.flexunit.internals.TraceListener;
 	import org.flexunit.runner.FlexUnitCore;

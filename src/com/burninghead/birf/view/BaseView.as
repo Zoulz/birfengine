@@ -1,8 +1,8 @@
 package com.burninghead.birf.view
 {
-	import com.burninghead.birf.messaging.BaseMessage;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.utils.ReflectionUtil;

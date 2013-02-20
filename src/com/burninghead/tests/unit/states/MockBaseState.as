@@ -1,4 +1,4 @@
-package com.burninghead.tests.states
+package com.burninghead.tests.unit.states
 {
 	import com.burninghead.birf.states.BaseState;
 	/**

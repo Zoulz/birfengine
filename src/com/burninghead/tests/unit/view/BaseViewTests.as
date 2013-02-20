@@ -1,14 +1,14 @@
-package com.burninghead.tests.view
+package com.burninghead.tests.unit.view
 {
 	import flexunit.framework.Assert;
 
-	import com.burninghead.TestRunner;
-	import com.burninghead.birf.messaging.SignalMessageHandler;
 	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.messaging.handlers.SignalMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.view.BaseMediator;
 	import com.burninghead.birf.view.BaseView;
+	import com.burninghead.tests.TestRunner;
 
 	import org.flexunit.assertThat;
 	import org.hamcrest.object.notNullValue;

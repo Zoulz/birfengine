@@ -1,5 +1,6 @@
-package com.burninghead.birf.messaging
+package com.burninghead.birf.messaging.messages
 {
+	import com.burninghead.birf.messaging.IMessage;
 	/**
 	 * Message that supplies a command instead of a textual message.
 	 * 

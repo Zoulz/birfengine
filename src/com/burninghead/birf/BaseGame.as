@@ -1,13 +1,13 @@
 package com.burninghead.birf
 {
-	import com.burninghead.birf.view.BaseView;
 	import com.burninghead.birf.controller.BaseController;
 	import com.burninghead.birf.controller.IController;
 	import com.burninghead.birf.errors.AbstractMethodError;
-	import com.burninghead.birf.messaging.SignalMessageHandler;
 	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.messaging.handlers.SignalMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
+	import com.burninghead.birf.view.BaseView;
 	import com.burninghead.birf.view.IView;
 
 	import flash.display.Sprite;
