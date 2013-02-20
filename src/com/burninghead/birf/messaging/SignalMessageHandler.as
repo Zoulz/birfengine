@@ -5,11 +5,11 @@ package com.burninghead.birf.messaging
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class BaseMessageHandler implements IMessageHandler
+	public class SignalMessageHandler implements IMessageHandler
 	{
 		private var _msg:Signal;
 		
-		public function BaseMessageHandler()
+		public function SignalMessageHandler()
 		{
 			_msg = new Signal();
 		}
@@ -28,6 +28,21 @@ package com.burninghead.birf.messaging
 		public function get listener():ISignal
 		{
 			return _msg;
+		}
+
+		public function addListener(listener:*):void
+		{
+			_msg.add(listener);
+		}
+
+		public function removeListener(listener:*):void
+		{
+			_msg.remove(listener);
+		}
+
+		public function clearListeners():void
+		{
+			_msg.removeAll();
 		}
 	}
 }

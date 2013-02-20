@@ -4,7 +4,7 @@ package com.burninghead.birf
 	import com.burninghead.birf.controller.BaseController;
 	import com.burninghead.birf.controller.IController;
 	import com.burninghead.birf.errors.AbstractMethodError;
-	import com.burninghead.birf.messaging.BaseMessageHandler;
+	import com.burninghead.birf.messaging.SignalMessageHandler;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
@@ -152,7 +152,7 @@ package com.burninghead.birf
 		 */
 		protected function createMessageHandler():IMessageHandler
 		{
-			return new BaseMessageHandler();
+			return new SignalMessageHandler();
 		}
 		
 		/**

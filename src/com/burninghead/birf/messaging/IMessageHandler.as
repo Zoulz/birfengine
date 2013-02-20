@@ -1,6 +1,5 @@
 package com.burninghead.birf.messaging
 {
-	import org.osflash.signals.ISignal;
 	/**
 	 * @author tomas.augustinovic
 	 */
@@ -11,10 +10,9 @@ package com.burninghead.birf.messaging
 		 * @param msg Message instance
 		 */
 		function send(msg:IMessage):void;
-		/**
-		 * Return the listener signal object.
-		 * @return ISignal
-		 */
-		function get listener():ISignal;
+
+		function addListener(listener:*):void;
+		function removeListener(listener:*):void;
+		function clearListeners():void;
 	}
 }

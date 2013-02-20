@@ -24,7 +24,7 @@ package com.burninghead.birf.utils.list.items
 		{
 			if (msg.type == _type && msg.sender == _sender)
 			{
-				_handler.listener.remove(onMessageReceived);
+				_handler.removeListener(onMessageReceived);
 				
 				_callback();
 			}
@@ -33,12 +33,12 @@ package com.burninghead.birf.utils.list.items
 		public function execute(callback:Function):void
 		{
 			_callback = callback;
-			_handler.listener.add(onMessageReceived);
+			_handler.addListener(onMessageReceived);
 		}
 
 		public function abort():void
 		{
-			_handler.listener.remove(onMessageReceived);
+			_handler.removeListener(onMessageReceived);
 			
 			_callback();
 		}

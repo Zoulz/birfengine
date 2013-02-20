@@ -34,7 +34,7 @@ package com.burninghead.birf.view
 		{
 			_model = model;
 			_messageHandler = msgHandler;
-			_messageHandler.listener.add(onMessageReceived);
+			_messageHandler.addListener(onMessageReceived);
 			
 			_stageObject = null;
 			_initialized = new Signal();

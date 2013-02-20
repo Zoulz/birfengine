@@ -2,7 +2,7 @@ package com.burninghead.tests.view.stage2d
 {
 	import org.hamcrest.object.equalTo;
 	import com.burninghead.TestRunner;
-	import com.burninghead.birf.messaging.BaseMessageHandler;
+	import com.burninghead.birf.messaging.SignalMessageHandler;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
@@ -21,7 +21,7 @@ package com.burninghead.tests.view.stage2d
 		[Before]
 		public function runBeforeEveryTest():void
 		{
-			var msgHandler:IMessageHandler = new BaseMessageHandler();
+			var msgHandler:IMessageHandler = new SignalMessageHandler();
 			var model:IModel = new BaseModel(msgHandler);
 			
 			_view = new Stage2DView(model, msgHandler);

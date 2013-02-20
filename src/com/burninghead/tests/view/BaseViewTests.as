@@ -3,7 +3,7 @@ package com.burninghead.tests.view
 	import flexunit.framework.Assert;
 
 	import com.burninghead.TestRunner;
-	import com.burninghead.birf.messaging.BaseMessageHandler;
+	import com.burninghead.birf.messaging.SignalMessageHandler;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
@@ -24,7 +24,7 @@ package com.burninghead.tests.view
 		[Before]
 		public function runBeforeEveryTest():void
 		{
-			var msgHandler:IMessageHandler = new BaseMessageHandler();
+			var msgHandler:IMessageHandler = new SignalMessageHandler();
 			var model:IModel = new BaseModel(msgHandler);
 			
 			_view = new BaseView(model, msgHandler);

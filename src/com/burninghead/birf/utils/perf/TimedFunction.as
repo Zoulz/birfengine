@@ -7,6 +7,7 @@ package com.burninghead.birf.utils.perf
 	public class TimedFunction
 	{
 		private var _name:String;
+		private var _result:String;
 		
 		public function TimedFunction(name:String, codeFunc:Function = null, iterations:uint = 1)
 		{
@@ -29,7 +30,13 @@ package com.burninghead.birf.utils.perf
 			
 			var endTime:uint = getTimer() - t;
 			
-			trace(_name + ": " + endTime + "ms");
+			_result = _name + ": " + endTime + "ms";
+			trace(_result);
+		}
+
+		public function get result():String
+		{
+			return _result;
 		}
 	}
 }

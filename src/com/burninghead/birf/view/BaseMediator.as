@@ -15,7 +15,7 @@ package com.burninghead.birf.view
 		[PostConstruct]
 		public function postConstruct():void
 		{
-			messageHandler.listener.add(onMessageReceived);
+			messageHandler.addListener(onMessageReceived);
 			_messenger = new Messenger(messageHandler, this);
 			
 			init();

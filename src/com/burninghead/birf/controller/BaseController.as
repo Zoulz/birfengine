@@ -34,7 +34,7 @@ package com.burninghead.birf.controller
 			_injector.map(IModel).toValue(_model);
 			_injector.map(IMessageHandler).toValue(_messageHandler);
 			
-			_messageHandler.listener.add(onMessageReceived);
+			_messageHandler.addListener(onMessageReceived);
 		}
 		
 		public function executeCommand(clazz:Class, params:Object):void
