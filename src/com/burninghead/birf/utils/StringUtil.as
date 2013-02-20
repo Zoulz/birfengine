@@ -35,7 +35,7 @@ package com.burninghead.birf.utils
 		 */
 		public static function toBoolean(s:String):Boolean
 		{
-			return s !== "false";
+			return s.toLowerCase() !== "false";
 		}
 		
 		/**
@@ -53,15 +53,20 @@ package com.burninghead.birf.utils
 			var secStr:String = secs < 10 ? ("0" + secs) : secs.toString();
 			var minStr:String = mins < 10 ? ("0" + mins) : mins.toString();
 			var hourStr:String = hour < 10 ? ("0" + hour) : hour.toString();
-			var ret:String = secStr;
+			var ret:String = "";
 			
 			if (withMinutes)
 			{
-				ret = minStr + ":" + ret;
+				ret = minStr + ":" + secStr;
+				
+				if (withHours)
+				{
+					ret = hourStr + ":" + ret;
+				}
 			}
-			if (withHours)
+			else
 			{
-				ret = hourStr + ":" + ret;
+				ret = seconds.toString();
 			}
 			
 			return ret;
@@ -75,12 +80,32 @@ package com.burninghead.birf.utils
 		 * @param len How many times to pad the string.
 		 * @return
 		 */
-		public static function padString(s:String, len:int, char:String = " "):String
+		public static function padBeforeString(s:String, len:int, char:String = " "):String
 		{
-			if(s.length < len)
+			if(len > 0)
 			{
-				var slen:uint = s.length;
-				for(var i:int = slen; i < len; i++)
+				for(var i:int = 0; i < len; i++)
+				{
+					 s = char + s;
+				}
+			}
+
+			return s;
+		}
+		
+		/**
+		 * Pads a string with the specified character or substring.
+		 * 
+		 * @param s The string to pad.
+		 * @param char The character or string to pad with.
+		 * @param len How many times to pad the string.
+		 * @return
+		 */
+		public static function padAfterString(s:String, len:int, char:String = " "):String
+		{
+			if(len > 0)
+			{
+				for(var i:int = 0; i < len; i++)
 				{
 					 s += char;
 				}
@@ -146,7 +171,7 @@ package com.burninghead.birf.utils
 		 */
 		public static function isAlphaNumeric(s:String):Boolean
 		{
-			var reg:RegExp = /^[a-zA-Z\s0-9]+$/;
+			var reg:RegExp = new RegExp(/[^a-zA-Z 0-9]+/g); ///^[a-zA-Z\s0-9]+$/;
 			
 			return reg.test(s);
 		}

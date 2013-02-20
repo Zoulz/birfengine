@@ -1,62 +1,53 @@
 package com.burninghead.tests.unit.states
 {
-	import org.hamcrest.object.equalTo;
-	import mockolate.nice;
-	import mockolate.partial;
-	import mockolate.prepare;
-	import mockolate.runner.MockolateRule;
-
 	import com.burninghead.birf.states.BaseState;
 	import com.burninghead.birf.states.BaseStateMachine;
 	import com.burninghead.birf.states.BaseStateTransition;
+	import com.burninghead.tests.unit.mocks.MockBaseState;
 
 	import org.flexunit.assertThat;
-	import org.flexunit.async.Async;
-	import org.hamcrest.object.notNullValue;
+	import org.hamcrest.object.equalTo;
 	import org.osflash.signals.utils.SignalAsyncEvent;
 	import org.osflash.signals.utils.handleSignal;
-
-	import flash.events.Event;
 
 	/**
 	 * @author tomas.augustinovic
 	 */
 	public class BaseStateMachineTests
 	{
-		[Rule] public var mockolateRule:MockolateRule = new MockolateRule();
-		[Mock(type="partial")] public var mockState:MockBaseState;
-		[Mock(type="partial")] public var mockStateTwo:BaseState;
-		
 		private var _sm:BaseStateMachine;
+		private var _state:BaseState;
+		private var _mockState:MockBaseState;
+		private var _transition:BaseStateTransition;
 		
-		[Before(async)]
+		[Before]
 		public function runBeforeEachTest():void
 		{
 			_sm = new BaseStateMachine();
-			
-			Async.proceedOnEvent(this, prepare(MockBaseState, BaseState, BaseStateTransition), Event.COMPLETE);
+			_state = new BaseState();
+			_mockState = new MockBaseState();
+			_transition = new BaseStateTransition("firstState", "secondState");
 		}
 		
 		[After]
 		public function runAfterEveryTest():void
 		{
 			_sm = null;
+			_state = null;
+			_mockState = null;
+			_transition = null;
 		}
 		
 		[Test]
 		public function registerStateTest():void
 		{
-			assertThat(mockState, notNullValue());
-
-			_sm.registerState("firstState", mockState);
+			_sm.registerState("firstState", _state);
 		}
 		
 		[Test]
 		public function unregisterStateTest():void
 		{
-			assertThat(mockState, notNullValue());
-
-			_sm.registerState("firstState", mockState);
+			_sm.registerState("firstState", _state);
 			
 			_sm.unregisterState("firstState");
 		}
@@ -64,19 +55,13 @@ package com.burninghead.tests.unit.states
 		[Test]
 		public function registerStateTransitionTest():void
 		{
-			var mockTransition:BaseStateTransition = nice(BaseStateTransition);
-			
-			assertThat(mockTransition, notNullValue());
-
-			_sm.registerTransition("test", mockTransition);
+			_sm.registerTransition("test", _transition);
 		}
 		
 		[Test]
 		public function updateStatesTest():void
 		{
-			assertThat(mockState, notNullValue());
-
-			_sm.registerState("firstState", mockState);
+			_sm.registerState("firstState", _state);
 			
 			_sm.update();
 		}
@@ -84,13 +69,8 @@ package com.burninghead.tests.unit.states
 		[Test(async)]
 		public function changeStateTest():void
 		{
-			var mockTransition:BaseStateTransition = nice(BaseStateTransition, null, [ "firstState", "nextState"] );
-			
-			assertThat(mockState, notNullValue());
-			assertThat(mockTransition, notNullValue());
-			
-			_sm.registerState("firstState", mockState);
-			_sm.registerTransition("testTransition", mockTransition);
+			_sm.registerState("firstState", _state);
+			_sm.registerTransition("testTransition", _transition);
 			
 			handleSignal(this, _sm.stateChanged, changeStateTest_stateChanged);
 			
@@ -105,15 +85,9 @@ package com.burninghead.tests.unit.states
 		[Test(async)]
 		public function stateTransitionTest():void
 		{
-			var mockTransition:BaseStateTransition = partial(BaseStateTransition, null, [ "firstState", "nextState"] );
-			
-			assertThat(mockState, notNullValue());
-			assertThat(mockStateTwo, notNullValue());
-			assertThat(mockTransition, notNullValue());
-
-			_sm.registerState("firstState", mockState);
-			_sm.registerState("nextState", mockStateTwo);
-			_sm.registerTransition("testTransition", mockTransition);
+			_sm.registerState("firstState", _mockState);
+			_sm.registerState("secondState", _state);
+			_sm.registerTransition("testTransition", _transition);
 			
 			handleSignal(this, _sm.stateChanged, stateTransitionTest_stateChanged);
 			
@@ -129,7 +103,7 @@ package com.burninghead.tests.unit.states
 		
 		private function onStateChangedToNext(event:SignalAsyncEvent, data:Object):void
 		{
-			assertThat(_sm.stateId, equalTo("nextState"));
+			assertThat(_sm.stateId, equalTo("secondState"));
 		}
 	}
 }

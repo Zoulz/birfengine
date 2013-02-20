@@ -3,6 +3,7 @@ package com.burninghead.tests.unit
 	import com.burninghead.tests.unit.messaging.SignalMessageHandlerTests;
 	import com.burninghead.tests.unit.states.BaseStateMachineTests;
 	import com.burninghead.tests.unit.utils.AntiCheatNumberTests;
+	import com.burninghead.tests.unit.utils.StringUtilTests;
 	import com.burninghead.tests.unit.view.BaseViewTests;
 	import com.burninghead.tests.unit.view.stage2d.Stage2DViewTests;
 	/**
@@ -26,5 +27,6 @@ package com.burninghead.tests.unit
 		
 		//	UTILS
 		public var antiCheatNumTests:AntiCheatNumberTests;
+		public var stringUtilTests:StringUtilTests;
 	}
 }
