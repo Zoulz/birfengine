@@ -20,7 +20,7 @@ package com.burninghead.birf.performance
 			
 			for each (var test:Object in _tests)
 			{
-				System.gc();
+				System.gc();	//	TODO measure memory usage. This does not work.
 				
 				var mem:uint = System.totalMemory;
 				var testFunc:Function = test.func;

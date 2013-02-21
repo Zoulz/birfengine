@@ -2,7 +2,6 @@ package com.burninghead.birf.view
 {
 	import org.osflash.signals.ISignal;
 
-	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 
 	/**

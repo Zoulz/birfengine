@@ -1,5 +1,6 @@
 package com.burninghead.birf.view
 {
+	import com.jacksondunstan.signals.Slot1;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.messaging.messages.BaseMessage;
@@ -17,7 +18,7 @@ package com.burninghead.birf.view
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class BaseView implements IView
+	public class BaseView implements IView, Slot1
 	{
 		protected var _initialized:Signal;
 		protected var _isInit:Boolean;
@@ -44,6 +45,11 @@ package com.burninghead.birf.view
 		
 		protected function onMessageReceived(msg:IMessage):void
 		{
+		}
+		
+		public function onSignal1(arg:*):void
+		{
+			onMessageReceived(arg as IMessage);
 		}
 
 		protected function init():void
@@ -123,10 +129,10 @@ package com.burninghead.birf.view
 
 		public function set stageObject(value:Sprite):void
 		{
-			_stageObject = value;
-			
 			if (_isInit == false)
 			{
+				_stageObject = value;
+				
 				//	Create dependency injector and add the standard dependencies.
 				_injector.map(IView).toValue(this);
 				_injector.map(IModel).toValue(_model);
@@ -140,7 +146,7 @@ package com.burninghead.birf.view
 			}
 			else
 			{
-				throw new Error("View is already initialized.");
+				throw new Error("Cannot change stage instance. View is already initialized.");
 			}
 		}
 	}

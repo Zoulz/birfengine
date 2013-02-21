@@ -1,12 +1,13 @@
 package com.burninghead.birf.model
 {
+	import com.jacksondunstan.signals.Slot1;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.messaging.Messenger;
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class BaseModelPart implements IProxy
+	public class BaseModelPart implements IProxy, Slot1
 	{
 		[Inject] public var messageHandler:IMessageHandler;
 		
@@ -31,6 +32,11 @@ package com.burninghead.birf.model
 		
 		protected function onMessageReceived(msg:IMessage):void
 		{
+		}
+		
+		public function onSignal1(arg:*):void
+		{
+			onMessageReceived(arg as IMessage);
 		}
 	}
 }

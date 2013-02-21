@@ -5,6 +5,7 @@ package com.burninghead.tests
 	import com.burninghead.tests.unit.BirfTestSuite;
 
 	import org.flexunit.internals.TraceListener;
+	import org.flexunit.listeners.CIListener;
 	import org.flexunit.runner.FlexUnitCore;
 
 	import flash.display.Sprite;
@@ -26,6 +27,7 @@ package com.burninghead.tests
 			
 			//	Create FlexUnit core object.
 			_core = new FlexUnitCore();
+			_core.addListener(new CIListener());
 			_core.addListener(new TraceListener());
 
 			//	Run tests.

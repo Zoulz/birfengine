@@ -5,6 +5,6 @@ package com.burninghead.birf
 	 */
 	public final class Birf
 	{
-		public static const VERSION:String = "0.1A";
+		public static const VERSION:String = CONFIG::VERSION;
 	}
 }

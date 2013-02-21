@@ -3,7 +3,7 @@ package com.burninghead.birf.view
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public interface IStateDrivenView extends IView
+	public interface IViewStateDriven extends IView
 	{
 		function initViewStates():void;
 	}

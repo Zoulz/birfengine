@@ -44,7 +44,6 @@ package com.burninghead.birf.view.stage2d.states
 		
 		protected function containerAdded():void
 		{
-			
 		}
 		
 		public function get container():Sprite

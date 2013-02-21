@@ -1,15 +1,13 @@
-package com.burninghead.birf.view.stage2d
+package com.burninghead.birf.view.skinning
 {
-	import com.burninghead.birf.view.skinning.ISkinManager;
-	import com.burninghead.birf.view.skinning.ISkinnable;
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class Stage2DSkinManager implements ISkinManager
+	public class BaseSkinManager implements ISkinManager
 	{
 		private var _skinnables:Vector.<ISkinnable>;
 		
-		public function Stage2DSkinManager()
+		public function BaseSkinManager()
 		{
 			_skinnables = new Vector.<ISkinnable>();
 		}

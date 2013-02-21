@@ -1,4 +1,4 @@
-package com.burninghead.birf.utils.perf
+package com.burninghead.birf.utils.misc
 {
 	import flash.utils.getTimer;
 	/**

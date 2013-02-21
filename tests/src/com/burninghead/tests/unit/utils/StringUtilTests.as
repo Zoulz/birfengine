@@ -143,7 +143,44 @@ package com.burninghead.tests.unit.utils
 		{
 			assertThat(StringUtil.truncate("berra is a fine goose.", 10), equalTo("berra is a..."));
 			assertThat(StringUtil.truncate("berra is a fine goose.", 10, "O_o"), equalTo("berra is aO_o"));
-			assertThat(StringUtil.truncate("berra is a fine goose.", 50), equalTo("berra is a fine goose."));
+			assertThat(StringUtil.truncate("berra is a fine goose.", 90), equalTo("berra is a fine goose."));
+		}
+		
+		[Test]
+		public function countWordsTest():void
+		{
+			assertThat(StringUtil.wordCount("berra is a fine goose."), equalTo(5));
+			assertThat(StringUtil.wordCount("berra i$ a| fine g0ose."), equalTo(5));
+			assertThat(StringUtil.wordCount("berra!"), equalTo(1));
+		}
+		
+		[Test]
+		public function trimmingTest():void
+		{
+			assertThat(StringUtil.trim("   berra is a fine goose. "), equalTo("berra is a fine goose."));
+			assertThat(StringUtil.trim("berra is a fine goose. "), equalTo("berra is a fine goose."));
+			assertThat(StringUtil.trim("      berra is a fine goose."), equalTo("berra is a fine goose."));
+			
+			assertThat(StringUtil.trimLeft("      berra is a fine goose."), equalTo("berra is a fine goose."));
+			assertThat(StringUtil.trimLeft("berra is a fine goose.   "), equalTo("berra is a fine goose.   "));
+			
+			assertThat(StringUtil.trimRight("berra is a fine goose.        "), equalTo("berra is a fine goose."));
+			assertThat(StringUtil.trimRight("  berra is a fine goose."), equalTo("  berra is a fine goose."));
+		}
+		
+		[Test]
+		public function swapCaseTest():void
+		{
+			assertThat(StringUtil.swapCase("berra is a fine goose."), equalTo("BERRA IS A FINE GOOSE."));
+			assertThat(StringUtil.swapCase("BERRA is a fine GOOSE."), equalTo("berra IS A FINE goose."));
+		}
+		
+		[Test]
+		public function stripTagsTest():void
+		{
+			assertThat(StringUtil.stripTags("<berra id=\"kalle\">Tag are gone!</berra>"), equalTo("Tag are gone!"));
+			
+			assertThat(StringUtil.stripTags("<berra id=\"kalle\">>Tag are gone!><</berra>"), equalTo(">Tag are gone!>"));
 		}
 	}
 }

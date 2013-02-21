@@ -10,7 +10,7 @@ package com.burninghead.birf.view.stage2d
 	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.states.InjectedStateMachine;
 	import com.burninghead.birf.view.BaseView;
-	import com.burninghead.birf.view.IStateDrivenView;
+	import com.burninghead.birf.view.IViewStateDriven;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.birf.view.stage2d.states.IStage2DViewState;
 
@@ -22,7 +22,7 @@ package com.burninghead.birf.view.stage2d
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class Stage2DView extends BaseView implements IView, IStateDrivenView
+	public class Stage2DView extends BaseView implements IView, IViewStateDriven
 	{
 		private var _container:Sprite;
 		private var _addedToStage:NativeSignal;

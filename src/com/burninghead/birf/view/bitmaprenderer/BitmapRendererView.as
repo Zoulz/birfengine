@@ -9,7 +9,7 @@ package com.burninghead.birf.view.bitmaprenderer
 	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.states.InjectedStateMachine;
 	import com.burninghead.birf.view.BaseView;
-	import com.burninghead.birf.view.IStateDrivenView;
+	import com.burninghead.birf.view.IViewStateDriven;
 	import com.burninghead.birf.view.IView;
 
 	import org.osflash.signals.natives.NativeSignal;
@@ -20,7 +20,7 @@ package com.burninghead.birf.view.bitmaprenderer
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class BitmapRendererView extends BaseView implements IView, IStateDrivenView
+	public class BitmapRendererView extends BaseView implements IView, IViewStateDriven
 	{
 		private var _container:Bitmap;
 		private var _bmpData:BitmapData;

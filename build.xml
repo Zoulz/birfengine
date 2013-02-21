@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="birf" default="compile-release">
+	<property file="build.properties" />
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	<taskdef resource="flexUnitTasks.tasks" classpath="${FLEXUNIT_HOME}/lib/flexUnitTasks-4.1.0-9.jar" />
+
+	<target name="compile-release" depends="run-unittests">
+		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}.swc"
+				optimize="true"
+				debug="false"
+				compiler.as3="true"
+				incremental="true"
+				maxmemory="512m"
+				strict="true"
+				compiler.show-deprecation-warnings="false"
+				swf-version="14"
+				target-player="11.1.0">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${SRC_DIR}" />
+			<include-sources dir="${SRC_DIR}" includes="*" />
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="false" />
+		</compc>
+	</target>
+	
+	<target name="compile" depends="run-unittests">
+		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-debug.swc"
+				optimize="false"
+				debug="true"
+				compiler.as3="true"
+				incremental="true"
+				maxmemory="512m"
+				compiler.show-deprecation-warnings="true"
+				swf-version="14"
+				target-player="11.1.0">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${SRC_DIR}" />
+			<include-sources dir="${SRC_DIR}" includes="*" />
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="true" />
+		</compc>
+	</target>
+	
+	<target name="run-unittests">
+		<mxmlc output="${OUT_DIR}/TestRunner.swf"
+				file="${TESTRUNNER_FILE}"
+				optimize="false"
+				debug="true"
+				compiler.as3="true"
+				incremental="true"
+				maxmemory="512m"
+				compiler.show-deprecation-warnings="true"
+				swf-version="14"
+				dump-config="test.xml"
+				target-player="11.1.0">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<static-link-runtime-shared-libraries />
+			<source-path path-element="${SRC_DIR}" />
+			<source-path path-element="${TESTS_SRC_DIR}" />
+			<compiler.include-libraries dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</compiler.include-libraries>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="true" />
+		</mxmlc>
+	
+		<flexunit swf="${OUT_DIR}/TestRunner.swf"
+			command="${FLASH_PLAYER_FILE}"
+            toDir="${OUT_DIR}"
+            haltonfailure="false"
+            verbose="true"
+            localTrusted="true" />
+	</target>
+</project>

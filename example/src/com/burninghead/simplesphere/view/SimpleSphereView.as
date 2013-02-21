@@ -1,12 +1,12 @@
 package com.burninghead.simplesphere.view
 {
-	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
+	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.birf.view.skinning.ISkinManager;
-	import com.burninghead.birf.view.stage2d.Stage2DSkinManager;
+	import com.burninghead.birf.view.skinning.BaseSkinManager;
 	import com.burninghead.birf.view.stage2d.Stage2DView;
 	import com.burninghead.simplesphere.states.SphereViewState;
 
@@ -46,7 +46,7 @@ package com.burninghead.simplesphere.view
 			super.injectAdditionalDependencies();
 			
 			//	Inject instance of skin manager.
-			_injector.map(ISkinManager).toSingleton(Stage2DSkinManager);
+			_injector.map(ISkinManager).toSingleton(BaseSkinManager);
 		}
 		
 		/**

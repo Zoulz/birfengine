@@ -1,5 +1,6 @@
 package com.burninghead.birf.controller
 {
+	import com.jacksondunstan.signals.Slot1;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.messaging.messages.BaseMessage;
@@ -15,7 +16,7 @@ package com.burninghead.birf.controller
 	/**
 	 * @author BigZoulz
 	 */
-	public class BaseController implements IController
+	public class BaseController implements IController, Slot1
 	{
 		private var _injector:Injector;
 		
@@ -66,6 +67,11 @@ package com.burninghead.birf.controller
 			{
 				executeCommand(CommandMessage(msg).command, msg.payload);
 			}
+		}
+		
+		public function onSignal1(arg:*):void
+		{
+			onMessageReceived(arg as IMessage);
 		}
 		
 		public function registerCommand(clazz:Class):void

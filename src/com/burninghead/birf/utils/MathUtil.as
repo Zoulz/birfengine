@@ -13,6 +13,8 @@ package com.burninghead.birf.utils
 		public static const EPSILON_SQR:Number = EPSILON * EPSILON;
 		public static const RADIANS_TO_DEGREE:Number = 180 / Math.PI;
 		
+		private static var _seed:int;
+		
 		/**
 		 * Returns a random number between min and max.
 		 * 
@@ -22,9 +24,26 @@ package com.burninghead.birf.utils
 		 */
 		public static function randomNumber(min:Number, max:Number, rounded:Boolean = false):Number
 		{
+			
 			var rnd:Number = (min + Math.random() * (max - min));
 			
 			return rounded ? Math.round(rnd) : rnd;
+		}
+		
+		public static function setPseudoRandomSeed(seed:int = 1):void
+		{
+			_seed = seed;
+		}
+		
+		public static function nextPseudoRandomInt(max:int = int.MAX_VALUE):int
+		{
+			return max > 0 ? nextPseudoRandomNumber() * max : nextPseudoRandomNumber();
+		}
+		
+		public static function nextPseudoRandomNumber():Number
+		{
+			_seed = (_seed * 9301 + 49297) % 233280;
+			return _seed / 233280.0;
 		}
 		
 		/**

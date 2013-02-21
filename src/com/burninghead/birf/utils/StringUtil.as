@@ -503,7 +503,7 @@ package com.burninghead.birf.utils
 				return "";
 			}
 			
-			len -= suffix.length;
+			//len -= suffix.length;
 			var trunc:String = s;
 			
 			if (trunc.length > len)
@@ -583,7 +583,14 @@ package com.burninghead.birf.utils
 				return "";
 			}
 			
-			return s.replace(/(\w)/, swapCaseInternal);
+			var len:uint = s.length;
+			var ret:String = "";
+			for (var i:uint = 0; i < len; i++)
+			{
+				ret += swapCaseInternal(s.substr(i, 1));
+			}
+			
+			return ret;
 		}
 		
 		/**
@@ -633,7 +640,7 @@ package com.burninghead.birf.utils
 			return pattern.replace(/(\]|\[|\{|\}|\(|\)|\*|\+|\?|\.|\\)/g, '\\$1');
 		}
 		
-		private static function swapCaseInternal(char:String, ...params):String
+		private static function swapCaseInternal(char:String):String
 		{
 			var lowChar:String = char.toLowerCase();
 			var upChar:String = char.toUpperCase();
