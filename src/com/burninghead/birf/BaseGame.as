@@ -2,11 +2,13 @@ package com.burninghead.birf
 {
 	import com.burninghead.birf.controller.BaseController;
 	import com.burninghead.birf.controller.IController;
-	import com.burninghead.birf.errors.AbstractMethodError;
+	import com.burninghead.birf.messaging.BaseMessageHandler;
 	import com.burninghead.birf.messaging.IMessageHandler;
-	import com.burninghead.birf.messaging.handlers.SignalMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
+	import com.burninghead.birf.utils.logger.BaseLogger;
+	import com.burninghead.birf.utils.logger.ILogger;
+	import com.burninghead.birf.utils.logger.TraceLoggerOutput;
 	import com.burninghead.birf.view.BaseView;
 	import com.burninghead.birf.view.IView;
 
@@ -24,6 +26,7 @@ package com.burninghead.birf
 		private var _view:IView;
 		private var _model:IModel;
 		private var _controller:IController;
+		private var _logger:ILogger;
 		private var _messageHandler:IMessageHandler;
 		
 		/**
@@ -77,6 +80,10 @@ package com.burninghead.birf
 			_model = createModel();
 			_view = createView();
 			_controller = createController();
+			_logger = createLogger();
+			
+			//	Register logger outputs.
+			registerLoggerOutput();
 			
 			//	Register everything.
 			registerCommands();
@@ -86,6 +93,11 @@ package com.burninghead.birf
 			//	Initialize view.
 			_view.initialized.addOnce(onViewInitialized);
 			_view.stageObject = this;
+		}
+
+		protected function createLogger():ILogger
+		{
+			return new BaseLogger();
 		}
 		
 		/**
@@ -119,13 +131,18 @@ package com.burninghead.birf
 		{
 		}
 		
+		protected function registerLoggerOutput():void
+		{
+			_logger.registerOutput(new TraceLoggerOutput());
+		}
+		
 		/**
 		 * Factory method for creating a instance of the game controller.
 		 * @return IController
 		 */
 		protected function createController():IController
 		{
-			return new BaseController(view, model, messageHandler);
+			return new BaseController(view, model, messageHandler, logger);
 		}
 		
 		/**
@@ -134,7 +151,7 @@ package com.burninghead.birf
 		 */
 		protected function createView():IView
 		{
-			return new BaseView(model, messageHandler);
+			return new BaseView(model, messageHandler, logger);
 		}
 		
 		/**
@@ -152,7 +169,7 @@ package com.burninghead.birf
 		 */
 		protected function createMessageHandler():IMessageHandler
 		{
-			return new SignalMessageHandler();
+			return new BaseMessageHandler();
 		}
 		
 		/**
@@ -189,6 +206,11 @@ package com.burninghead.birf
 		public function get messageHandler():IMessageHandler
 		{
 			return _messageHandler;
+		}
+
+		public function get logger():ILogger
+		{
+			return _logger;
 		}
 	}
 }

@@ -2,9 +2,9 @@ package com.burninghead.swarmdemo.view.comps
 {
 	import com.burninghead.birf.utils.IDisposable;
 	import com.burninghead.birf.utils.MathUtil;
-	import com.burninghead.birf.view.bitmaprenderer.BitmapSheet;
-	import com.burninghead.birf.view.bitmaprenderer.IBitmapRenderer;
-	import com.burninghead.birf.view.bitmaprenderer.renderables.Sprite;
+	import com.burninghead.extensions.view.bitmaprenderer.BitmapSheet;
+	import com.burninghead.extensions.view.bitmaprenderer.IBitmapRenderer;
+	import com.burninghead.extensions.view.bitmaprenderer.renderables.Sprite;
 	import com.burninghead.swarmdemo.assets.RobinBitmapSheet;
 	/**
 	 * @author tomas.augustinovic

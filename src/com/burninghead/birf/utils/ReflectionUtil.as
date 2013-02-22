@@ -1,7 +1,5 @@
 package com.burninghead.birf.utils
 {
-	import com.burninghead.birf.utils.misc.KeyValuePair;
-
 	import flash.system.ApplicationDomain;
 	import flash.utils.describeType;
 	import flash.utils.getQualifiedClassName;

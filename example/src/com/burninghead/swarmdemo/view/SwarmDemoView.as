@@ -4,7 +4,7 @@ package com.burninghead.swarmdemo.view
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.view.IView;
-	import com.burninghead.birf.view.bitmaprenderer.BitmapRendererView;
+	import com.burninghead.extensions.view.bitmaprenderer.BitmapRendererView;
 	import com.burninghead.swarmdemo.states.SwarmViewState;
 	/**
 	 * @author tomas.augustinovic

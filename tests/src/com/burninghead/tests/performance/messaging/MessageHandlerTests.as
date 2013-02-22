@@ -1,21 +1,21 @@
 package com.burninghead.tests.performance.messaging
 {
-	import com.burninghead.birf.messaging.BirfMessageEvent;
-	import com.jacksondunstan.signals.Slot1;
-	import com.burninghead.birf.messaging.handlers.EventMessageHandler;
-	import com.burninghead.birf.messaging.handlers.TurboSignalMessageHandler;
-	import com.burninghead.birf.messaging.handlers.MessageHandler;
+	import com.burninghead.birf.messaging.BaseMessageHandler;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.messages.BaseMessage;
-	import com.burninghead.birf.messaging.handlers.SignalMessageHandler;
-	import com.burninghead.birf.performance.PerfTestCase;
+	import com.burninghead.extensions.messaging.BirfMessageEvent;
+	import com.burninghead.extensions.messaging.handlers.EventMessageHandler;
+	import com.burninghead.extensions.messaging.handlers.SignalMessageHandler;
+	import com.burninghead.extensions.messaging.handlers.TurboSignalMessageHandler;
+	import com.burninghead.extensions.performance.PerfTestCase;
+	import com.jacksondunstan.signals.Slot1;
 	/**
 	 * @author tomas.augustinovic
 	 */
 	public class MessageHandlerTests extends PerfTestCase implements Slot1
 	{
 		private var _signalHandler:SignalMessageHandler;
-		private var _defHandler:MessageHandler;
+		private var _defHandler:BaseMessageHandler;
 		private var _tsignalHandler:TurboSignalMessageHandler;
 		private var _eventHandler:EventMessageHandler;
 		
@@ -24,7 +24,7 @@ package com.burninghead.tests.performance.messaging
 			super();
 			
 			_signalHandler = new SignalMessageHandler();
-			_defHandler = new MessageHandler();
+			_defHandler = new BaseMessageHandler();
 			_tsignalHandler = new TurboSignalMessageHandler();
 			_eventHandler = new EventMessageHandler();
 			

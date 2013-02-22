@@ -1,13 +1,13 @@
 package com.burninghead.birf.view
 {
-	import com.jacksondunstan.signals.Slot1;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
-	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.utils.ReflectionUtil;
-	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
+	import com.burninghead.birf.utils.logger.ILogger;
+	import com.burninghead.birf.utils.logger.LogType;
+	import com.jacksondunstan.signals.Slot1;
 
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
@@ -27,15 +27,17 @@ package com.burninghead.birf.view
 		private var _model:IModel;
 		private var _stageObject:Sprite;
 		private var _messageHandler:IMessageHandler;
+		private var _logger:ILogger;
 		
 		/**
 		 * Maps injections for the mediators.
 		 */
-		public function BaseView(model:IModel, msgHandler:IMessageHandler):void
+		public function BaseView(model:IModel, msgHandler:IMessageHandler, logger:ILogger = null):void
 		{
 			_model = model;
 			_messageHandler = msgHandler;
 			_messageHandler.addListener(onMessageReceived);
+			_logger = logger;
 			
 			_stageObject = null;
 			_initialized = new Signal();
@@ -68,7 +70,7 @@ package com.burninghead.birf.view
 			}
 			else
 			{
-				_messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.PRINT_MESSAGE, this, { msg: "Mediator is missing. Have you registered it?", category: "warn" }));
+				_logger.log("Mediator is missing. Have you registered it?", LogType.WARN);
 				return null;
 			}
 		}
@@ -137,6 +139,7 @@ package com.burninghead.birf.view
 				_injector.map(IView).toValue(this);
 				_injector.map(IModel).toValue(_model);
 				_injector.map(IMessageHandler).toValue(_messageHandler);
+				_injector.map(ILogger).toValue(_logger);
 				
 				//	Flag that we are initialized.
 				_isInit = true;

@@ -4,7 +4,7 @@ package com.burninghead.simplesphere.view.mediators
 	import com.burninghead.birf.model.BaseModelMsgType;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.view.IMediator;
-	import com.burninghead.birf.view.stage2d.Stage2DMediator;
+	import com.burninghead.extensions.view.stage2d.Stage2DMediator;
 	import com.burninghead.simplesphere.controller.SphereChangeColorCmd;
 	import com.burninghead.simplesphere.model.ISphereModel;
 	import com.burninghead.simplesphere.view.comps.SphereView;

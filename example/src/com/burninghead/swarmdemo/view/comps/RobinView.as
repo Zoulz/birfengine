@@ -1,7 +1,7 @@
 package com.burninghead.swarmdemo.view.comps
 {
-	import com.burninghead.birf.view.bitmaprenderer.BitmapSheet;
-	import com.burninghead.birf.view.bitmaprenderer.renderables.Sprite;
+	import com.burninghead.extensions.view.bitmaprenderer.BitmapSheet;
+	import com.burninghead.extensions.view.bitmaprenderer.renderables.Sprite;
 	/**
 	 * @author tomas.augustinovic
 	 */

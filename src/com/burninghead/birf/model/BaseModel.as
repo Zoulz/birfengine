@@ -1,9 +1,9 @@
 package com.burninghead.birf.model
 {
 	import com.burninghead.birf.messaging.IMessageHandler;
-	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.utils.ReflectionUtil;
-	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
+	import com.burninghead.birf.utils.logger.ILogger;
+	import com.burninghead.birf.utils.logger.LogType;
 
 	import org.swiftsuspenders.Injector;
 
@@ -15,14 +15,17 @@ package com.burninghead.birf.model
 	{
 		private var _injector:Injector;
 		private var _messageHandler:IMessageHandler;
+		private var _logger:ILogger;
 		
-		public function BaseModel(msgHandler:IMessageHandler)
+		public function BaseModel(msgHandler:IMessageHandler, logger:ILogger = null)
 		{
 			_messageHandler = msgHandler;
+			_logger = logger;
 			
 			_injector = new Injector();
 			_injector.map(IMessageHandler).toValue(_messageHandler);
 			_injector.map(IModel).toValue(this);
+			_injector.map(ILogger).toValue(_logger);
 		}
 		
 		public function getModelPart(proxy:Class, name:String = ""):IProxy
@@ -33,7 +36,7 @@ package com.burninghead.birf.model
 			}
 			else
 			{
-				_messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.PRINT_MESSAGE, this, { msg: "ModelPart is missing. Have you registered it?", category: "warn" }));
+				_logger.log("ModelPart is missing. Have you registered it?", LogType.WARN);
 				return null;
 			}
 		}
@@ -46,7 +49,7 @@ package com.burninghead.birf.model
 			}
 			else
 			{
-				throw new Error("Must implement IProxy interface.");
+				_logger.log("Must implement IProxy interface.", LogType.FATAL);
 			}
 		}
 		

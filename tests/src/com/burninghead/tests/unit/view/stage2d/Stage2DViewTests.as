@@ -1,10 +1,10 @@
 package com.burninghead.tests.unit.view.stage2d
 {
 	import com.burninghead.birf.messaging.IMessageHandler;
-	import com.burninghead.birf.messaging.handlers.SignalMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
-	import com.burninghead.birf.view.stage2d.Stage2DView;
+	import com.burninghead.extensions.messaging.handlers.SignalMessageHandler;
+	import com.burninghead.extensions.view.stage2d.Stage2DView;
 	import com.burninghead.tests.TestRunner;
 
 	import org.flexunit.assertThat;

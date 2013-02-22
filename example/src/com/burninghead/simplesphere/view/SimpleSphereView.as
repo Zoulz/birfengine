@@ -5,9 +5,9 @@ package com.burninghead.simplesphere.view
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.states.IStateMachine;
 	import com.burninghead.birf.view.IView;
-	import com.burninghead.birf.view.skinning.ISkinManager;
 	import com.burninghead.birf.view.skinning.BaseSkinManager;
-	import com.burninghead.birf.view.stage2d.Stage2DView;
+	import com.burninghead.birf.view.skinning.ISkinManager;
+	import com.burninghead.extensions.view.stage2d.Stage2DView;
 	import com.burninghead.simplesphere.states.SphereViewState;
 
 	/**

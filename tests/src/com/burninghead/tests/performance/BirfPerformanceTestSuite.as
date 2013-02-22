@@ -1,7 +1,7 @@
 package com.burninghead.tests.performance
 {
+	import com.burninghead.extensions.performance.PerfTestSuite;
 	import com.burninghead.tests.performance.messaging.MessageHandlerTests;
-	import com.burninghead.birf.performance.PerfTestSuite;
 	/**
 	 * @author tomas.augustinovic
 	 */

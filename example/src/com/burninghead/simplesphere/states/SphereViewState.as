@@ -1,16 +1,16 @@
 package com.burninghead.simplesphere.states
 {
-	import com.burninghead.birf.controller.cmds.ConsoleFilterCategoryCmd;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.skinning.ISkinManager;
-	import com.burninghead.birf.view.stage2d.comps.console.AzureConsoleSkin;
-	import com.burninghead.birf.view.stage2d.comps.console.Stage2DConsoleView;
-	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediator;
-	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
-	import com.burninghead.birf.view.stage2d.states.IStage2DViewState;
-	import com.burninghead.birf.view.stage2d.states.Stage2DViewState;
+	import com.burninghead.extensions.controller.cmds.ConsoleFilterCategoryCmd;
+	import com.burninghead.extensions.view.stage2d.comps.console.AzureConsoleSkin;
+	import com.burninghead.extensions.view.stage2d.comps.console.Stage2DConsoleView;
+	import com.burninghead.extensions.view.stage2d.mediators.ConsoleMediator;
+	import com.burninghead.extensions.view.stage2d.mediators.ConsoleMediatorMsgType;
+	import com.burninghead.extensions.view.stage2d.states.IStage2DViewState;
+	import com.burninghead.extensions.view.stage2d.states.Stage2DViewState;
 	import com.burninghead.simplesphere.controller.ConsoleChangeSkinCmd;
 	import com.burninghead.simplesphere.view.comps.SphereView;
 	import com.burninghead.simplesphere.view.mediators.SphereMediator;

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="birf" default="compile-release">
+<project name="birf" default="compile-birfcore-release">
 	<property file="build.properties" />
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	<taskdef resource="flexUnitTasks.tasks" classpath="${FLEXUNIT_HOME}/lib/flexUnitTasks-4.1.0-9.jar" />
 
-	<target name="compile-release" depends="run-unittests">
+	<target name="compile" depends="compile-birfcore,compile-birfex">
+	</target>
+	
+	<target name="compile-birfcore-release" depends="run-unittests">
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}.swc"
 				optimize="true"
 				debug="false"
@@ -18,15 +21,17 @@
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<source-path path-element="${SRC_DIR}" />
 			<include-sources dir="${SRC_DIR}" includes="*" />
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
-			</external-library-path>
+			<compiler.include-libraries dir="${LIB_DIR}" append="true">
+				<include name="as3-signals-v0.8.swc" />
+				<include name="Swiftsuspenders-v2.0.0rc2stray2.swc" />
+				<include name="TurboSignals.swc" />
+			</compiler.include-libraries>
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="false" />
 		</compc>
 	</target>
 	
-	<target name="compile" depends="run-unittests">
+	<target name="compile-birfcore" depends="run-unittests">
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-debug.swc"
 				optimize="false"
 				debug="true"
@@ -39,9 +44,35 @@
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<source-path path-element="${SRC_DIR}" />
 			<include-sources dir="${SRC_DIR}" includes="*" />
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
+			<compiler.include-libraries dir="${LIB_DIR}" append="true">
+				<include name="as3-signals-v0.8.swc" />
+				<include name="Swiftsuspenders-v2.0.0rc2stray2.swc" />
+				<include name="TurboSignals.swc" />
+			</compiler.include-libraries>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="true" />
+		</compc>
+	</target>
+	
+	<target name="compile-birfex" depends="run-unittests">
+		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}-debug.swc"
+				optimize="false"
+				debug="true"
+				compiler.as3="true"
+				incremental="true"
+				maxmemory="512m"
+				compiler.show-deprecation-warnings="true"
+				swf-version="14"
+				target-player="11.1.0">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${EX_SRC_DIR}" />
+			<include-sources dir="${EX_SRC_DIR}" includes="*" />
+			<external-library-path dir="${OUT_DIR}" append="true">
+				<include name="birf-v${BUILD_VERSION}-debug.swc" />
 			</external-library-path>
+			<compiler.include-libraries dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</compiler.include-libraries>
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="true" />
 		</compc>
@@ -55,14 +86,14 @@
 				compiler.as3="true"
 				incremental="true"
 				maxmemory="512m"
-				compiler.show-deprecation-warnings="true"
+				compiler.show-deprecation-warnings="false"
 				swf-version="14"
-				dump-config="test.xml"
 				target-player="11.1.0">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<static-link-runtime-shared-libraries />
 			<source-path path-element="${SRC_DIR}" />
 			<source-path path-element="${TESTS_SRC_DIR}" />
+			<source-path path-element="${EX_SRC_DIR}" />
 			<compiler.include-libraries dir="${LIB_DIR}" append="true">
 				<include name="*.swc" />
 			</compiler.include-libraries>

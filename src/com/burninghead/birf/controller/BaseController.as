@@ -1,14 +1,14 @@
 package com.burninghead.birf.controller
 {
-	import com.jacksondunstan.signals.Slot1;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
-	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.messaging.messages.CommandMessage;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.utils.ReflectionUtil;
+	import com.burninghead.birf.utils.logger.ILogger;
+	import com.burninghead.birf.utils.logger.LogType;
 	import com.burninghead.birf.view.IView;
-	import com.burninghead.birf.view.stage2d.mediators.ConsoleMediatorMsgType;
+	import com.jacksondunstan.signals.Slot1;
 
 	import org.swiftsuspenders.Injector;
 
@@ -23,17 +23,20 @@ package com.burninghead.birf.controller
 		private var _view:IView;
 		private var _model:IModel;
 		private var _messageHandler:IMessageHandler;
+		private var _logger:ILogger;
 		
-		public function BaseController(view:IView, model:IModel, messageHandler:IMessageHandler)
+		public function BaseController(view:IView, model:IModel, messageHandler:IMessageHandler, logger:ILogger = null)
 		{
 			_view = view;
 			_model = model;
 			_messageHandler = messageHandler;
+			_logger = logger;
 			
 			_injector = new Injector();
 			_injector.map(IView).toValue(_view);
 			_injector.map(IModel).toValue(_model);
 			_injector.map(IMessageHandler).toValue(_messageHandler);
+			_injector.map(ILogger).toValue(_logger);
 			
 			_messageHandler.addListener(onMessageReceived);
 		}
@@ -57,7 +60,7 @@ package com.burninghead.birf.controller
 					msg = "Command is null.";
 				}
 				
-				_messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.PRINT_MESSAGE, this, { msg: msg, category: "warn" }));
+				_logger.log(msg, LogType.WARN);
 			}
 		}
 		
@@ -82,7 +85,7 @@ package com.burninghead.birf.controller
 			}
 			else
 			{
-				throw new Error("Must implement ICommand interface.");
+				_logger.log("Must implement ICommand interface.", LogType.FATAL);
 			}
 		}
 	}

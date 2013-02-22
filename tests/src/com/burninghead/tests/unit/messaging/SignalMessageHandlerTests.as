@@ -1,8 +1,8 @@
 package com.burninghead.tests.unit.messaging
 {
-	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.messaging.IMessage;
-	import com.burninghead.birf.messaging.handlers.SignalMessageHandler;
+	import com.burninghead.birf.messaging.messages.BaseMessage;
+	import com.burninghead.extensions.messaging.handlers.SignalMessageHandler;
 	/**
 	 * @author tomas.augustinovic
 	 */
