@@ -7,14 +7,16 @@ package com.burninghead.birf.audio
 	{
 		private var _soundGroups:Vector.<ISoundGroup>;
 
+		/**
+		 * Set default member values.
+		 */
 		public function BaseSoundManager()
 		{
 			_soundGroups = new Vector.<ISoundGroup>();
 		}
 		
 		/**
-		 * Register a new sound group with the manager.
-		 * @param soundGroup Sound group to register.
+		 * @inheritDoc
 		 */
 		public function registerSoundGroup(soundGroup:ISoundGroup):void
 		{
@@ -22,8 +24,7 @@ package com.burninghead.birf.audio
 		}
 		
 		/**
-		 * Remove a sound group from the manager.
-		 * @param soundGroup Sound group to remove.
+		 * @inheritDoc
 		 */
 		public function unregisterSoundGroup(soundGroup:ISoundGroup):void
 		{
@@ -38,9 +39,7 @@ package com.burninghead.birf.audio
 		}
 		
 		/**
-		 * Return sound group by it's index.
-		 * @param index
-		 * @return ISoundGroup
+		 * @inheritDoc
 		 */
 		public function getSoundGroupByIndex(index:uint):ISoundGroup
 		{
@@ -48,46 +47,8 @@ package com.burninghead.birf.audio
 		}
 		
 		/**
-		 * Stop all the playing sounds in all the groups.
+		 * @inheritDoc
 		 */
-		public function stopAllSounds():void
-		{
-			for each (var grp:ISoundGroup in _soundGroups)
-			{
-				grp.stopAllSounds();
-			}
-		}
-
-		/**
-		 * Set mute flag on all the groups.
-		 * @param value If manager is muted or not.
-		 */
-		public function set isMute(value:Boolean):void
-		{
-			for each (var grp:ISoundGroup in _soundGroups)
-			{
-				grp.isMute = value;
-			}
-		}
-		
-		/**
-		 * Return the mute status of the manager. If any group is unmuted this
-		 * will return false, otherwise it will return true.
-		 * @return Boolean
-		 */
-		public function get isMute():Boolean
-		{
-			for each (var grp:ISoundGroup in _soundGroups)
-			{
-				if (grp.isMute == false)
-				{
-					return false;
-				}
-			}
-			
-			return true;
-		}
-
 		public function getSoundGroupByInterface(interFace:Class):ISoundGroup
 		{
 			for each (var grp:ISoundGroup in _soundGroups)
@@ -99,6 +60,44 @@ package com.burninghead.birf.audio
 			}
 			
 			return null;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function stopAllSounds():void
+		{
+			for each (var grp:ISoundGroup in _soundGroups)
+			{
+				grp.stopAllSounds();
+			}
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function set isMute(value:Boolean):void
+		{
+			for each (var grp:ISoundGroup in _soundGroups)
+			{
+				grp.isMute = value;
+			}
+		}
+
+		/**
+		 * @inheritDoc
+		 */		
+		public function get isMute():Boolean
+		{
+			for each (var grp:ISoundGroup in _soundGroups)
+			{
+				if (grp.isMute == false)
+				{
+					return false;
+				}
+			}
+			
+			return true;
 		}
 	}
 }

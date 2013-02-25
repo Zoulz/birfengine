@@ -1,4 +1,4 @@
-package com.burninghead.extensions.view.stage2d.comps.console
+package com.burninghead.extensions.view.displaylist.comps.console
 {
 	/**
 	 * @author tomas.augustinovic

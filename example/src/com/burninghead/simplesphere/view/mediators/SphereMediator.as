@@ -4,7 +4,7 @@ package com.burninghead.simplesphere.view.mediators
 	import com.burninghead.birf.model.BaseModelMsgType;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.view.IMediator;
-	import com.burninghead.extensions.view.stage2d.Stage2DMediator;
+	import com.burninghead.extensions.view.displaylist.DisplayListMediator;
 	import com.burninghead.simplesphere.controller.SphereChangeColorCmd;
 	import com.burninghead.simplesphere.model.ISphereModel;
 	import com.burninghead.simplesphere.view.comps.SphereView;
@@ -13,7 +13,7 @@ package com.burninghead.simplesphere.view.mediators
 	/**
 	 * @author Zoulz
 	 */
-	public class SphereMediator extends Stage2DMediator implements IMediator
+	public class SphereMediator extends DisplayListMediator implements IMediator
 	{
 		[Inject] public var model:IModel;
 		
@@ -27,7 +27,7 @@ package com.burninghead.simplesphere.view.mediators
 		override protected function init():void
 		{
 			//	Save reference to model.
-			_sphere = model.getModelPart(ISphereModel) as ISphereModel;
+			_sphere = model.getProxy(ISphereModel) as ISphereModel;
 		}
 		
 		/**

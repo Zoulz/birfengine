@@ -1,10 +1,10 @@
-package com.burninghead.tests.unit.view.stage2d
+package com.burninghead.tests.unit.view.displaylist
 {
+	import com.burninghead.extensions.view.displaylist.DisplayListView;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.extensions.messaging.handlers.SignalMessageHandler;
-	import com.burninghead.extensions.view.stage2d.Stage2DView;
 	import com.burninghead.tests.TestRunner;
 
 	import org.flexunit.assertThat;
@@ -14,9 +14,9 @@ package com.burninghead.tests.unit.view.stage2d
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class Stage2DViewTests
+	public class DisplayListViewTests
 	{
-		private var _view:Stage2DView;
+		private var _view:DisplayListView;
 		
 		[Before]
 		public function runBeforeEveryTest():void
@@ -24,7 +24,7 @@ package com.burninghead.tests.unit.view.stage2d
 			var msgHandler:IMessageHandler = new SignalMessageHandler();
 			var model:IModel = new BaseModel(msgHandler);
 			
-			_view = new Stage2DView(model, msgHandler);
+			_view = new DisplayListView(model, msgHandler);
 		}
 		
 		[After]

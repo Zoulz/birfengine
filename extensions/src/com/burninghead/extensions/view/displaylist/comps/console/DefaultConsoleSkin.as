@@ -1,4 +1,4 @@
-package com.burninghead.extensions.view.stage2d.comps.console
+package com.burninghead.extensions.view.displaylist.comps.console
 {
 	import flash.text.TextFormat;
 	import mx.core.FontAsset;
@@ -22,7 +22,7 @@ package com.burninghead.extensions.view.stage2d.comps.console
 		private var _outputField:TextField;
 		
 		[Embed(systemFont="Courier New", mimeType="application/x-font", fontName="birfConsoleFont", unicodeRange="U+0020-U+002F,U+0030-U+0039,U+003A-U+0040,U+0041-U+005A,U+005B-U+0060,U+0061-U+007A,U+007B-U+007E,U+02C6,U+02DC,U+2013-U+2014,U+2018-U+201A,U+201C-U+201E,U+2020-U+2022,U+2026,U+2030,U+2039-U+203A,U+20AC,U+2122", embedAsCFF="false")] // Uppercase [A..Z] ; Lowercase [a..z] ; Numerals [0..9] ; Punctuation [!@#%...] ; chars=""
-		public  var consoleFont:Class;
+		public var consoleFont:Class;
 		
 		public function DefaultConsoleSkin()
 		{

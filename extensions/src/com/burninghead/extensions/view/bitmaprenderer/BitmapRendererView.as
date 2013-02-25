@@ -1,5 +1,6 @@
 package com.burninghead.extensions.view.bitmaprenderer
 {
+	import flash.display.DisplayObjectContainer;
 	import com.burninghead.birf.audio.BaseSoundManager;
 	import com.burninghead.birf.audio.ISoundManager;
 	import com.burninghead.birf.messaging.IMessageHandler;
@@ -10,7 +11,7 @@ package com.burninghead.extensions.view.bitmaprenderer
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.extensions.states.InjectedStateMachine;
 	import com.burninghead.extensions.utils.net.assets.BaseAssetLoader;
-	import com.burninghead.extensions.view.IViewStateDriven;
+	import com.burninghead.extensions.view.IStateMachineDrivenView;
 
 	import org.osflash.signals.natives.NativeSignal;
 
@@ -20,7 +21,7 @@ package com.burninghead.extensions.view.bitmaprenderer
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class BitmapRendererView extends BaseView implements IView, IViewStateDriven
+	public class BitmapRendererView extends BaseView implements IView, IStateMachineDrivenView
 	{
 		private var _container:Bitmap;
 		private var _bmpData:BitmapData;
@@ -50,7 +51,7 @@ package com.burninghead.extensions.view.bitmaprenderer
 			_addedToStage.addOnce(onAddedToStage);
 			
 			//	Attach renderer bitmap to stage.
-			stageObject.addChild(_container);
+			(stageObject as DisplayObjectContainer).addChild(_container);
 			
 			//	Inject dependencies.
 			injectStateMachine();
@@ -58,7 +59,7 @@ package com.burninghead.extensions.view.bitmaprenderer
 			injectAdditionalDependencies();
 			
 			//	Initialize view states.
-			initViewStates();
+			initStateMachine();
 		}
 		
 		protected function getRenderClearColor():uint
@@ -66,7 +67,7 @@ package com.burninghead.extensions.view.bitmaprenderer
 			return 0x49af00;
 		}
 		
-		public function initViewStates():void
+		public function initStateMachine():void
 		{
 		}
 		

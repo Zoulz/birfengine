@@ -1,4 +1,4 @@
-package com.burninghead.extensions.view.stage2d.states
+package com.burninghead.extensions.view.displaylist.states
 {
 	import com.burninghead.birf.states.IState;
 
@@ -8,7 +8,7 @@ package com.burninghead.extensions.view.stage2d.states
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public interface IStage2DViewState extends IState
+	public interface IDisplayListViewState extends IState
 	{
 		/**
 		 * Return the display object container for the view state.

@@ -1,7 +1,7 @@
 package com.burninghead.birf.controller
 {
 	/**
-	 * @author BigZoulz
+	 * @author tomas.augustinovic
 	 */
 	public interface ICommand
 	{

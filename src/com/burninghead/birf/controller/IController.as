@@ -2,8 +2,6 @@ package com.burninghead.birf.controller
 {
 	/**
 	 * @author tomas.augustinovic
-	 * 
-	 * TODO add commands? To not bloat the controller...
 	 */
 	public interface IController
 	{

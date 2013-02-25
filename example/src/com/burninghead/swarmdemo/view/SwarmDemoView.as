@@ -16,7 +16,7 @@ package com.burninghead.swarmdemo.view
 			super(model, msgHandler);
 		}
 		
-		override public function initViewStates():void
+		override public function initStateMachine():void
 		{
 			var stateMachine:IStateMachine = _injector.getInstance(IStateMachine);
 			

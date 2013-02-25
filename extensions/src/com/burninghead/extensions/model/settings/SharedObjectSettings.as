@@ -2,7 +2,7 @@ package com.burninghead.extensions.model.settings
 {
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.model.BaseModelMsgType;
-	import com.burninghead.birf.model.BaseModelPart;
+	import com.burninghead.birf.model.BaseProxyImpl;
 	import com.burninghead.extensions.model.language.LanguageEnum;
 
 	import flash.net.SharedObject;
@@ -10,7 +10,7 @@ package com.burninghead.extensions.model.settings
 	/**
 	 * @author BigZoulz
 	 */
-	public class SharedObjectSettings extends BaseModelPart implements ISettings
+	public class SharedObjectSettings extends BaseProxyImpl implements ISettings
 	{
 		private var _sharedObject:SharedObject;
 		

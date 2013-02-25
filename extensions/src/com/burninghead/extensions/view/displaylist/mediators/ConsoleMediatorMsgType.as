@@ -1,4 +1,4 @@
-package com.burninghead.extensions.view.stage2d.mediators
+package com.burninghead.extensions.view.displaylist.mediators
 {
 	/**
 	 * @author tomas.augustinovic

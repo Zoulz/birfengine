@@ -1,16 +1,16 @@
-package com.burninghead.extensions.view.stage2d.mediators
+package com.burninghead.extensions.view.displaylist.mediators
 {
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.view.IMediator;
-	import com.burninghead.extensions.view.stage2d.Stage2DMediator;
-	import com.burninghead.extensions.view.stage2d.comps.console.Stage2DConsoleView;
+	import com.burninghead.extensions.view.displaylist.DisplayListMediator;
+	import com.burninghead.extensions.view.displaylist.comps.console.Stage2DConsoleView;
 
 	import flash.events.KeyboardEvent;
 	import flash.utils.Dictionary;
 	/**
 	 * @author BigZoulz
 	 */
-	public class ConsoleMediator extends Stage2DMediator implements IMediator
+	public class ConsoleMediator extends DisplayListMediator implements IMediator
 	{
 		private var _console:Stage2DConsoleView;
 		private var _mapping:Dictionary;

@@ -19,19 +19,22 @@ package com.burninghead.swarmdemo.view.mediators
 		{
 			switch (msg.type)
 			{
-				
+				case SwarmMediatorMsgType.CREATE_ROBINS:
+				{
+					_swarm.createRobins();
+					break;
+				}
 			}
 		}
 		
 		override public function registerView(value:*):void
 		{
 			_swarm = value;
-			
-			_swarm.createRobins();
 		}
 
 		override public function dispose():void
 		{
+			_swarm.dispose();
 		}
 	}
 }

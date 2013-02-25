@@ -1,4 +1,4 @@
-package com.burninghead.extensions.view.stage2d.comps.ui
+package com.burninghead.extensions.view.displaylist.comps.ui
 {
 	import com.burninghead.extensions.audio.groups.IUISoundGroup;
 	import com.greensock.OverwriteManager;

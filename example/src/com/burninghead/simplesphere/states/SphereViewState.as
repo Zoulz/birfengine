@@ -5,19 +5,19 @@ package com.burninghead.simplesphere.states
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.skinning.ISkinManager;
 	import com.burninghead.extensions.controller.cmds.ConsoleFilterCategoryCmd;
-	import com.burninghead.extensions.view.stage2d.comps.console.AzureConsoleSkin;
-	import com.burninghead.extensions.view.stage2d.comps.console.Stage2DConsoleView;
-	import com.burninghead.extensions.view.stage2d.mediators.ConsoleMediator;
-	import com.burninghead.extensions.view.stage2d.mediators.ConsoleMediatorMsgType;
-	import com.burninghead.extensions.view.stage2d.states.IStage2DViewState;
-	import com.burninghead.extensions.view.stage2d.states.Stage2DViewState;
+	import com.burninghead.extensions.view.displaylist.comps.console.AzureConsoleSkin;
+	import com.burninghead.extensions.view.displaylist.comps.console.Stage2DConsoleView;
+	import com.burninghead.extensions.view.displaylist.mediators.ConsoleMediator;
+	import com.burninghead.extensions.view.displaylist.mediators.ConsoleMediatorMsgType;
+	import com.burninghead.extensions.view.displaylist.states.IDisplayListViewState;
+	import com.burninghead.extensions.view.displaylist.states.DisplayListViewState;
 	import com.burninghead.simplesphere.controller.ConsoleChangeSkinCmd;
 	import com.burninghead.simplesphere.view.comps.SphereView;
 	import com.burninghead.simplesphere.view.mediators.SphereMediator;
 	/**
 	 * @author Zoulz
 	 */
-	public class SphereViewState extends Stage2DViewState implements IState, IStage2DViewState
+	public class SphereViewState extends DisplayListViewState implements IState, IDisplayListViewState
 	{
 		private var _console:Stage2DConsoleView;
 		private var _sphereView:SphereView;
@@ -41,6 +41,13 @@ package com.burninghead.simplesphere.states
 			//	Map commands for the console.
 			messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.MAP_COMMAND, this, { id: "filter", classDef: ConsoleFilterCategoryCmd }));
 			messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.MAP_COMMAND, this, { id: "changeskin", classDef: ConsoleChangeSkinCmd }));
+			
+			//	Register views with their respective mediators.
+			_sphereMediator.registerView(_sphereView);
+			_consoleMediator.registerView(_console);
+			
+			//	Apply console skin.
+			skinManager.setSkin(new AzureConsoleSkin(), Stage2DConsoleView);
 		}
 		
 		override protected function containerAdded():void
@@ -57,13 +64,6 @@ package com.burninghead.simplesphere.states
 			_sphereView.x = 50;
 			_sphereView.y = 50;
 			container.addChild(_sphereView);
-			
-			//	Register views with their respective mediators.
-			_sphereMediator.registerView(_sphereView);
-			_consoleMediator.registerView(_console);
-			
-			//	Apply console skin.
-			skinManager.setSkin(new AzureConsoleSkin(), Stage2DConsoleView);
 		}
 
 		/**

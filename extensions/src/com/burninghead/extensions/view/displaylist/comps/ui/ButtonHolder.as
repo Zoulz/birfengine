@@ -1,4 +1,4 @@
-package com.burninghead.extensions.view.stage2d.comps.ui
+package com.burninghead.extensions.view.displaylist.comps.ui
 {
 	import com.burninghead.birf.utils.DisplayObjectUtil;
 	import com.burninghead.birf.utils.IDisposable;

@@ -2,7 +2,7 @@ package com.burninghead.birf.view
 {
 	import org.osflash.signals.ISignal;
 
-	import flash.display.Sprite;
+	import flash.display.DisplayObject;
 
 	/**
 	 * @author tomas.augustinovic
@@ -40,11 +40,13 @@ package com.burninghead.birf.view
 		function get initialized():ISignal;
 		/**
 		 * Get the actual game root stage display object.
+		 * @return Sprite
 		 */
-		function get stageObject():Sprite;
+		function get stageObject():DisplayObject;
 		/**
 		 * Set the actual game root stage display object.
+		 * @param value Sprite
 		 */
-		function set stageObject(value:Sprite):void;
+		function set stageObject(value:DisplayObject):void;
 	}
 }

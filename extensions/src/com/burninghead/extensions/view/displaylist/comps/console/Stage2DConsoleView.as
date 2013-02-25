@@ -1,4 +1,4 @@
-package com.burninghead.extensions.view.stage2d.comps.console
+package com.burninghead.extensions.view.displaylist.comps.console
 {
 	import com.burninghead.birf.utils.IDisposable;
 	import com.burninghead.birf.view.skinning.ISkinnable;
