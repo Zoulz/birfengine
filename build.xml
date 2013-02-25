@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="birf" default="compile-birfcore-release">
+<project name="birf" default="compile">
 	<property file="build.properties" />
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	<taskdef resource="flexUnitTasks.tasks" classpath="${FLEXUNIT_HOME}/lib/flexUnitTasks-4.1.0-9.jar" />
 
-	<target name="compile" depends="compile-birfcore,compile-birfex">
-	</target>
+	<target name="compile" depends="compile-birfcore,compile-birfext" />
 	
-	<target name="compile-birfcore-release" depends="run-unittests">
+	<target name="compile-release" depends="compile-birfcore-release,compile-birfext-release" />
+	
+	<target name="compile-birfcore-release" depends="run-testsuite">
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}.swc"
 				optimize="true"
 				debug="false"
@@ -31,7 +32,7 @@
 		</compc>
 	</target>
 	
-	<target name="compile-birfcore" depends="run-unittests">
+	<target name="compile-birfcore" depends="run-testsuite">
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-debug.swc"
 				optimize="false"
 				debug="true"
@@ -54,7 +55,7 @@
 		</compc>
 	</target>
 	
-	<target name="compile-birfex" depends="run-unittests">
+	<target name="compile-birfext" depends="run-testsuite">
 		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}-debug.swc"
 				optimize="false"
 				debug="true"
@@ -78,7 +79,31 @@
 		</compc>
 	</target>
 	
-	<target name="run-unittests">
+	<target name="compile-birfext-release" depends="run-testsuite">
+		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}.swc"
+				optimize="true"
+				debug="false"
+				compiler.as3="true"
+				incremental="true"
+				maxmemory="512m"
+				compiler.show-deprecation-warnings="true"
+				swf-version="14"
+				target-player="11.1.0">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${EX_SRC_DIR}" />
+			<include-sources dir="${EX_SRC_DIR}" includes="*" />
+			<external-library-path dir="${OUT_DIR}" append="true">
+				<include name="birf-v${BUILD_VERSION}-debug.swc" />
+			</external-library-path>
+			<compiler.include-libraries dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</compiler.include-libraries>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="false" />
+		</compc>
+	</target>
+	
+	<target name="run-testsuite">
 		<mxmlc output="${OUT_DIR}/TestRunner.swf"
 				file="${TESTRUNNER_FILE}"
 				optimize="false"

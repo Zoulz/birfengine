@@ -27,6 +27,7 @@ package com.burninghead.birf.utils.list
 			_complete = new Signal();
 			_aborted = new Signal();
 			_itemComplete = new Signal();
+			
 			clear();
 		}
 		
@@ -36,7 +37,10 @@ package com.burninghead.birf.utils.list
 		 */
 		public function addItem(item:IListItem):void
 		{
-			_list.push(item);
+			if (item != null)
+			{
+				_list.push(item);
+			}
 		}
 
 		/**

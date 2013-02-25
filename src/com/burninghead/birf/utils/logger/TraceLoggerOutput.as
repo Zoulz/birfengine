@@ -7,7 +7,8 @@ package com.burninghead.birf.utils.logger
 	{
 		public function handleLog(message:String, type:String):void
 		{
-			trace("[" + type + "] " + message);
+			var time:String = new Date().toTimeString();
+			trace("[" + type + " " + time + "] " + message);
 		}
 	}
 }

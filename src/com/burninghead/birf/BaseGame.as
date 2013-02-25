@@ -56,17 +56,29 @@ package com.burninghead.birf
 				removeEventListener(Event.ADDED_TO_STAGE, onGameAddedToStage);
 			}
 
-			init();
+			preInit();
 			
 			initializeMVC();
+			
+			postInit();
 		}
 		
 		/**
 		 * Called when the game is ADDED_TO_STAGE before the MVC is initialized.
 		 */
-		protected function init():void
+		protected function preInit():void
 		{
 			//	No-op
+		}
+		
+		protected function postInit():void
+		{
+			//	No-op
+		}
+		
+		protected function viewInitialized():void
+		{
+			//	Abstract
 		}
 		
 		/**
@@ -76,11 +88,11 @@ package com.burninghead.birf
 		private function initializeMVC():void
 		{
 			//	Create MVC.
+			_logger = createLogger();
 			_messageHandler = createMessageHandler();
 			_model = createModel();
 			_view = createView();
 			_controller = createController();
-			_logger = createLogger();
 			
 			//	Register logger outputs.
 			registerLoggerOutput();
@@ -127,8 +139,9 @@ package com.burninghead.birf
 		/**
 		 * Signal handler for when the view is initialized.
 		 */
-		protected function onViewInitialized():void
+		private function onViewInitialized():void
 		{
+			viewInitialized();
 		}
 		
 		protected function registerLoggerOutput():void

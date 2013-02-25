@@ -35,7 +35,10 @@ package com.burninghead.birf.utils.list
 		 */
 		public function addItem(item:IListItem):void
 		{
-			_list.push(item);
+			if (item != null)
+			{
+				_list.push(item);
+			}
 		}
 
 		/**
