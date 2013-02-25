@@ -1,6 +1,6 @@
-# birf Engine for Actionscript 3
+# birfEngine for Actionscript 3
 
-A general game creation library based on a variant of the MVP design pattern. Inspired by modern frameworks such as: RobotLegs and PureMVC.
+A general game creation library based on a variant of the MVC/MVP design pattern. Inspired by modern frameworks such as: RobotLegs and PureMVC.
 
 ## F.A.Q.
 
