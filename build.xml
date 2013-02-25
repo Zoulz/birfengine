@@ -144,7 +144,6 @@
 		<mkdir dir="${DOCS_DIR}" />
 		
 		<asdoc output="${DOCS_DIR}" lenient="true" failonerror="true">
-			<path path-element="${SRC_DIR}" />
 			<doc-sources path-element="${SRC_DIR}" />
 			<doc-sources path-element="${EXT_SRC_DIR}" />
 			<external-library-path dir="${LIB_DIR}" append="true">
