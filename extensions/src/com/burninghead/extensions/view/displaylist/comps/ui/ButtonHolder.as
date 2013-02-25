@@ -33,7 +33,7 @@ package com.burninghead.extensions.view.displaylist.comps.ui
 				skin.y = pos.y + (i * skin.height + spacing);
 				addChild(skin);
 
-				var btn:IButton = new Stage2DButton(skin, _uiSoundGroup);
+				var btn:IButton = new DisplayListButton(skin, _uiSoundGroup);
 				btn.caption = captions[i];
 				_buttons.push(btn);
 			}

@@ -5,6 +5,11 @@ package com.burninghead.birf.utils.net.assets
 	 */
 	public interface IAssetParser
 	{
+		/**
+		 * Parse the incomming data to a asset type.
+		 * @param input Data to process
+		 * @return IAsset
+		 */
 		function parse(input:*):IAsset;
 	}
 }

@@ -10,7 +10,7 @@ package com.burninghead.extensions.view.bitmaprenderer
 	import com.burninghead.birf.view.BaseView;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.extensions.states.InjectedStateMachine;
-	import com.burninghead.extensions.utils.net.assets.BaseAssetLoader;
+	import com.burninghead.extensions.utils.net.assets.GSAssetLoader;
 	import com.burninghead.extensions.view.IStateMachineDrivenView;
 
 	import org.osflash.signals.natives.NativeSignal;
@@ -73,7 +73,7 @@ package com.burninghead.extensions.view.bitmaprenderer
 		
 		protected function injectAdditionalDependencies():void
 		{
-			_injector.map(IAssetLoader).toSingleton(BaseAssetLoader);
+			_injector.map(IAssetLoader).toSingleton(GSAssetLoader);
 			_injector.map(ISoundManager).toSingleton(BaseSoundManager);
 		}
 

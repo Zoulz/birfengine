@@ -15,7 +15,7 @@ package com.burninghead.extensions.view.displaylist.comps.ui
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class Stage2DButton implements ISkinnable, IDisposable, IButton
+	public class DisplayListButton implements ISkinnable, IDisposable, IButton
 	{
 		public static const UP_STATE:String = "up";
 		public static const DOWN_STATE:String = "down";
@@ -28,7 +28,7 @@ package com.burninghead.extensions.view.displaylist.comps.ui
 		private var _click:Signal;
 		private var _soundGroup:IUISoundGroup;
 		
-		public function Stage2DButton(skin:MovieClip, sndGroup:IUISoundGroup = null)
+		public function DisplayListButton(skin:MovieClip, sndGroup:IUISoundGroup = null)
 		{
 			_click = new Signal();
 

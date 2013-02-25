@@ -2,7 +2,7 @@ package com.burninghead.extensions.utils.net.assets.parsers
 {
 	import com.burninghead.birf.utils.net.assets.IAsset;
 	import com.burninghead.birf.utils.net.assets.IAssetParser;
-	import com.burninghead.extensions.utils.net.assets.types.GenericAsset;
+	import com.burninghead.extensions.utils.net.assets.types.GSGenericAsset;
 	import com.greensock.loading.BinaryDataLoader;
 	import com.greensock.loading.CSSLoader;
 	import com.greensock.loading.DataLoader;
@@ -11,7 +11,7 @@ package com.burninghead.extensions.utils.net.assets.parsers
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class GenericAssetParser implements IAssetParser
+	public class GSGenericAssetParser implements IAssetParser
 	{
 		public function parse(input:*):IAsset
 		{
@@ -19,7 +19,7 @@ package com.burninghead.extensions.utils.net.assets.parsers
 			
 			if (input is BinaryDataLoader || input is DataLoader || input is CSSLoader || input is XMLLoader)
 			{
-				out = new GenericAsset(input as LoaderItem);
+				out = new GSGenericAsset(input as LoaderItem);
 			}
 			
 			return out;

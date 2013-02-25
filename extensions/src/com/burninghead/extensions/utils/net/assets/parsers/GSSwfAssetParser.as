@@ -2,12 +2,12 @@ package com.burninghead.extensions.utils.net.assets.parsers
 {
 	import com.burninghead.birf.utils.net.assets.IAsset;
 	import com.burninghead.birf.utils.net.assets.IAssetParser;
-	import com.burninghead.extensions.utils.net.assets.types.SwfAsset;
+	import com.burninghead.extensions.utils.net.assets.types.GSSwfAsset;
 	import com.greensock.loading.SWFLoader;
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class SwfAssetParser implements IAssetParser
+	public class GSSwfAssetParser implements IAssetParser
 	{
 		public function parse(input:*):IAsset
 		{
@@ -15,7 +15,7 @@ package com.burninghead.extensions.utils.net.assets.parsers
 			
 			if (input is SWFLoader)
 			{
-				out = new SwfAsset(input);
+				out = new GSSwfAsset(input);
 			}
 			
 			return out;

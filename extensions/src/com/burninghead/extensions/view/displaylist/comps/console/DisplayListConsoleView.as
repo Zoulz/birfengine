@@ -8,7 +8,7 @@ package com.burninghead.extensions.view.displaylist.comps.console
 	/**
 	 * @author Zoulz
 	 */
-	public class Stage2DConsoleView extends Sprite implements ISkinnable, IDisposable
+	public class DisplayListConsoleView extends Sprite implements ISkinnable, IDisposable
 	{
 		private var _skin:Sprite;
 		private var _categories:Vector.<Object>;
@@ -17,7 +17,7 @@ package com.burninghead.extensions.view.displaylist.comps.console
 		
 		private static const MAX_LINES:uint = 100;
 		
-		public function Stage2DConsoleView(skin:Sprite = null)
+		public function DisplayListConsoleView(skin:Sprite = null)
 		{
 			_filters = new Vector.<String>();
 			

@@ -1,5 +1,6 @@
 package com.burninghead.extensions.performance
 {
+	import flash.net.LocalConnection;
 	import flash.system.System;
 	import flash.utils.getTimer;
 	/**
@@ -20,9 +21,9 @@ package com.burninghead.extensions.performance
 			
 			for each (var test:Object in _tests)
 			{
-				System.gc();	//	TODO measure memory usage. This does not work.
+				runGC();
 				
-				var mem:uint = System.totalMemory;
+				var mem:int = System.totalMemory;
 				var testFunc:Function = test.func;
 				var testReport:PerfTestReport = new PerfTestReport();
 				var t:uint = getTimer();
@@ -34,15 +35,24 @@ package com.burninghead.extensions.performance
 				
 				testReport.executionTimeMs = getTimer() - t;
 				testReport.name = test.name;
-				
-				System.gc();
-				
-				testReport.memoryUsageBytes = mem - System.totalMemory;
+				testReport.memoryUsageBytes = System.totalMemory - mem;
 				
 				reports.push(testReport);
 			}
 			
 			return reports;
+		}
+		
+		private function runGC():void
+		{
+			try
+			{
+				new LocalConnection().connect("_FORCE_GC_");
+				new LocalConnection().connect("_FORCE_GC_");
+			}
+			catch(e:*)
+			{
+			}
 		}
 
 		public function get tests():Vector.<Object>

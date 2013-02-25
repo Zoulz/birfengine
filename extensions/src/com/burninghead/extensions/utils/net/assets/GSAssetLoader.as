@@ -4,9 +4,9 @@ package com.burninghead.extensions.utils.net.assets
 	import com.burninghead.birf.utils.net.assets.IAsset;
 	import com.burninghead.birf.utils.net.assets.IAssetLoader;
 	import com.burninghead.birf.utils.net.assets.IAssetParser;
-	import com.burninghead.extensions.utils.net.assets.parsers.GenericAssetParser;
-	import com.burninghead.extensions.utils.net.assets.parsers.Mp3AssetParser;
-	import com.burninghead.extensions.utils.net.assets.parsers.SwfAssetParser;
+	import com.burninghead.extensions.utils.net.assets.parsers.GSGenericAssetParser;
+	import com.burninghead.extensions.utils.net.assets.parsers.GSMp3AssetParser;
+	import com.burninghead.extensions.utils.net.assets.parsers.GSSwfAssetParser;
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.BinaryDataLoader;
 	import com.greensock.loading.CSSLoader;
@@ -26,7 +26,7 @@ package com.burninghead.extensions.utils.net.assets
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class BaseAssetLoader implements IAssetLoader
+	public class GSAssetLoader implements IAssetLoader
 	{
 		private var _totalComplete:Signal;
 		private var _totalProgress:Signal;
@@ -39,7 +39,7 @@ package com.burninghead.extensions.utils.net.assets
 		private var _assets:Vector.<IAsset>;
 		private var _parsers:Vector.<IAssetParser>;
 		
-		public function BaseAssetLoader()
+		public function GSAssetLoader()
 		{
 			_assets = new Vector.<IAsset>();
 			_parsers = new Vector.<IAssetParser>();
@@ -70,9 +70,9 @@ package com.burninghead.extensions.utils.net.assets
 		
 		protected function registerAssetParsers():void
 		{
-			registerAssetParser(new GenericAssetParser());
-			registerAssetParser(new SwfAssetParser());
-			registerAssetParser(new Mp3AssetParser());
+			registerAssetParser(new GSGenericAssetParser());
+			registerAssetParser(new GSSwfAssetParser());
+			registerAssetParser(new GSMp3AssetParser());
 		}
 		
 		public function registerAssetParser(parser:IAssetParser):void

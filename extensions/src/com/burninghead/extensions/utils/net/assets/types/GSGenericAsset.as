@@ -5,12 +5,12 @@ package com.burninghead.extensions.utils.net.assets.types
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class GenericAsset implements IAsset
+	public class GSGenericAsset implements IAsset
 	{
 		protected var _loader:LoaderItem;
 		private var _name:String;
 		
-		public function GenericAsset(loader:LoaderItem)
+		public function GSGenericAsset(loader:LoaderItem)
 		{
 			_name = loader.name;
 			_loader = loader;

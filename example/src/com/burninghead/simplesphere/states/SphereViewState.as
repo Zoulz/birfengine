@@ -6,7 +6,7 @@ package com.burninghead.simplesphere.states
 	import com.burninghead.birf.view.skinning.ISkinManager;
 	import com.burninghead.extensions.controller.cmds.ConsoleFilterCategoryCmd;
 	import com.burninghead.extensions.view.displaylist.comps.console.AzureConsoleSkin;
-	import com.burninghead.extensions.view.displaylist.comps.console.Stage2DConsoleView;
+	import com.burninghead.extensions.view.displaylist.comps.console.DisplayListConsoleView;
 	import com.burninghead.extensions.view.displaylist.mediators.ConsoleMediator;
 	import com.burninghead.extensions.view.displaylist.mediators.ConsoleMediatorMsgType;
 	import com.burninghead.extensions.view.displaylist.states.IDisplayListViewState;
@@ -19,7 +19,7 @@ package com.burninghead.simplesphere.states
 	 */
 	public class SphereViewState extends DisplayListViewState implements IState, IDisplayListViewState
 	{
-		private var _console:Stage2DConsoleView;
+		private var _console:DisplayListConsoleView;
 		private var _sphereView:SphereView;
 		private var _consoleMediator:ConsoleMediator;
 		private var _sphereMediator:SphereMediator;
@@ -47,13 +47,13 @@ package com.burninghead.simplesphere.states
 			_consoleMediator.registerView(_console);
 			
 			//	Apply console skin.
-			skinManager.setSkin(new AzureConsoleSkin(), Stage2DConsoleView);
+			skinManager.setSkin(new AzureConsoleSkin(), DisplayListConsoleView);
 		}
 		
 		override protected function containerAdded():void
 		{
 			//	Create instance of console view.
-			_console = new Stage2DConsoleView();
+			_console = new DisplayListConsoleView();
 			container.addChild(_console);
 			
 			//	Register console with skin manager.

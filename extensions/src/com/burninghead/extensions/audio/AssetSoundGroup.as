@@ -3,7 +3,7 @@ package com.burninghead.extensions.audio
 	import com.burninghead.birf.audio.BaseSoundGroup;
 	import com.burninghead.birf.audio.ISoundGroup;
 	import com.burninghead.birf.utils.ReflectionUtil;
-	import com.burninghead.extensions.utils.net.assets.types.SwfAsset;
+	import com.burninghead.extensions.utils.net.assets.types.GSSwfAsset;
 
 	import flash.media.Sound;
 
@@ -12,13 +12,13 @@ package com.burninghead.extensions.audio
 	 */
 	public class AssetSoundGroup extends BaseSoundGroup implements ISoundGroup
 	{
-		private var _asset:SwfAsset;
+		private var _asset:GSSwfAsset;
 		
 		/**
 		 * Constructor.
 		 * @param asset Swf asset to use when creating the sounds.
 		 */
-		public function AssetSoundGroup(asset:SwfAsset = null)
+		public function AssetSoundGroup(asset:GSSwfAsset = null)
 		{
 			_asset = asset;
 			

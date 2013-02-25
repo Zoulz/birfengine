@@ -3,7 +3,7 @@ package com.burninghead.extensions.view.displaylist.mediators
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.view.IMediator;
 	import com.burninghead.extensions.view.displaylist.DisplayListMediator;
-	import com.burninghead.extensions.view.displaylist.comps.console.Stage2DConsoleView;
+	import com.burninghead.extensions.view.displaylist.comps.console.DisplayListConsoleView;
 
 	import flash.events.KeyboardEvent;
 	import flash.utils.Dictionary;
@@ -12,7 +12,7 @@ package com.burninghead.extensions.view.displaylist.mediators
 	 */
 	public class ConsoleMediator extends DisplayListMediator implements IMediator
 	{
-		private var _console:Stage2DConsoleView;
+		private var _console:DisplayListConsoleView;
 		private var _mapping:Dictionary;
 		
 		override protected function init():void
@@ -62,7 +62,7 @@ package com.burninghead.extensions.view.displaylist.mediators
 		{
 			super.registerView(value);
 			
-			_console = Stage2DConsoleView(displayObject);
+			_console = DisplayListConsoleView(displayObject);
 			
 			_console.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyPressed);
 		}

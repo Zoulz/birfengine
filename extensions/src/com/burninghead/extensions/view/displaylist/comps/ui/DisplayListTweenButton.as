@@ -8,14 +8,14 @@ package com.burninghead.extensions.view.displaylist.comps.ui
 	/**
 	 * @author BigZoulz
 	 */
-	public class Stage2DTweenButton extends Stage2DButton implements IButton
+	public class DisplayListTweenButton extends DisplayListButton implements IButton
 	{
 		private var _upAnim:TweenCore;
 		private var _downAnim:TweenCore;
 		private var _overAnim:TweenCore;
 		private var _disabledAnim:TweenCore;
 		
-		public function Stage2DTweenButton(skin:MovieClip, sndGroup:IUISoundGroup = null)
+		public function DisplayListTweenButton(skin:MovieClip, sndGroup:IUISoundGroup = null)
 		{
 			super(skin, sndGroup);
 			

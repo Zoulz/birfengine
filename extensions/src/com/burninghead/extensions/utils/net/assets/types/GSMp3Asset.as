@@ -1,37 +1,46 @@
 package com.burninghead.extensions.utils.net.assets.types
 {
 	import com.burninghead.birf.utils.net.assets.IAsset;
-	import com.greensock.loading.SWFLoader;
+	import com.greensock.loading.MP3Loader;
 
-	import flash.display.DisplayObject;
-
+	import flash.media.SoundChannel;
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class SwfAsset implements IAsset
+	public class GSMp3Asset implements IAsset
 	{
-		private var _loader:SWFLoader;
+		private var _loader:MP3Loader;
 		private var _name:String;
 		
-		public function SwfAsset(loader:SWFLoader)
+		public function GSMp3Asset(loader:MP3Loader)
 		{
-			_name = loader.name;
 			_loader = loader;
+			_name = loader.name;
 		}
 		
-		public function getClass(name:String):Class
+		public function play():SoundChannel
 		{
-			return _loader.getClass(name);
+			return _loader.playSound();
 		}
 		
-		public function getDisplayObject():DisplayObject
+		public function paused():Boolean
 		{
-			return _loader.content;
+			return _loader.soundPaused;
+		}
+		
+		public function get playProgress():Number
+		{
+			return _loader.playProgress;
 		}
 		
 		public function get url():String
 		{
 			return _loader.url;
+		}
+
+		public function get size():uint
+		{
+			return _loader.bytesTotal;
 		}
 
 		public function get name():String
@@ -42,11 +51,6 @@ package com.burninghead.extensions.utils.net.assets.types
 		public function set name(value:String):void
 		{
 			_name = value;
-		}
-		
-		public function get size():uint
-		{
-			return _loader.bytesTotal;
 		}
 
 		public function get data():*
