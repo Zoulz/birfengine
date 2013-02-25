@@ -30,13 +30,13 @@ package com.burninghead.starlingdemo
 		 */
 		override protected function registerMediators():void
 		{
-			//view.registerMediator(SwarmMediator);
+
 		}
 		
 		/**
 		 * Register model parts needed for this project.
 		 */
-		override protected function registerModelParts():void
+		override protected function registerModelProxies():void
 		{
 		}
 	}

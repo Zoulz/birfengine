@@ -2,7 +2,7 @@ package com.burninghead.extensions.controller.cmds
 {
 	import com.burninghead.birf.controller.BaseCommand;
 	import com.burninghead.birf.controller.ICommand;
-	import com.burninghead.extensions.view.stage2d.mediators.ConsoleMediatorMsgType;
+	import com.burninghead.extensions.view.displaylist.mediators.ConsoleMediatorMsgType;
 	/**
 	 * @author tomas.augustinovic
 	 */

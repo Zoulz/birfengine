@@ -13,8 +13,11 @@ package com.burninghead.birf.view
 		
 		protected var _messenger:Messenger;
 		
-		[PostConstruct]
-		public function postConstruct():void
+		/**
+		 * Post dependency injection constructor. Setup message handler
+		 * and messenger. Perform custom init afterwards.
+		 */
+		[PostConstruct] public function postConstruct():void
 		{
 			messageHandler.addListener(onMessageReceived);
 			_messenger = new Messenger(messageHandler, this);
@@ -22,23 +25,40 @@ package com.burninghead.birf.view
 			init();
 		}
 		
+		/**
+		 * Perform any initialization of the mediator here.
+		 */
 		protected function init():void
 		{
 		}
 		
+		/**
+		 * Handler for messages.
+		 */
 		protected function onMessageReceived(msg:IMessage):void
 		{
 		}
 		
+		/**
+		 * Turbosignal message handler. Simply pass the message to the
+		 * ordinary message handler.
+		 * @param arg Message
+		 */
 		public function onSignal1(arg:*):void
 		{
 			onMessageReceived(arg as IMessage);
 		}
 		
+		/**
+		 * @inheritDoc
+		 */
 		public function registerView(value:*):void
 		{
 		}
 
+		/**
+		 * Perform any cleanup of the mediator here.
+		 */
 		public function dispose():void
 		{
 		}

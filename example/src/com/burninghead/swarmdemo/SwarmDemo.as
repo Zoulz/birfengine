@@ -37,7 +37,7 @@ package com.burninghead.swarmdemo
 		/**
 		 * Register model parts needed for this project.
 		 */
-		override protected function registerModelParts():void
+		override protected function registerModelProxies():void
 		{
 		}
 	}

@@ -1,9 +1,10 @@
 package com.burninghead.simplesphere
 {
+	import com.burninghead.extensions.utils.logger.ConsoleLoggerOutput;
 	import com.burninghead.birf.BaseGame;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.extensions.controller.cmds.ConsoleFilterCategoryCmd;
-	import com.burninghead.extensions.view.stage2d.mediators.ConsoleMediator;
+	import com.burninghead.extensions.view.displaylist.mediators.ConsoleMediator;
 	import com.burninghead.simplesphere.controller.ConsoleChangeSkinCmd;
 	import com.burninghead.simplesphere.controller.SphereChangeColorCmd;
 	import com.burninghead.simplesphere.model.ISphereModel;
@@ -51,9 +52,19 @@ package com.burninghead.simplesphere
 		/**
 		 * Register model parts needed for this project.
 		 */
-		override protected function registerModelParts():void
+		override protected function registerModelProxies():void
 		{
 			model.registerProxy(ISphereModel, SphereModel);
+		}
+		
+		/**
+		 * Register additional logger outputs.
+		 */
+		override protected function registerLoggerOutput():void
+		{
+			super.registerLoggerOutput();
+			
+			logger.registerOutput(new ConsoleLoggerOutput(messageHandler));
 		}
 	}
 }

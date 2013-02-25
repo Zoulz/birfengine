@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="birf" default="compile">
+<project name="birf" default="compile-birfcore-release">
 	<property file="build.properties" />
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
-	<taskdef resource="flexUnitTasks.tasks" classpath="${FLEXUNIT_HOME}/lib/flexUnitTasks-4.1.0-9.jar" />
+	<taskdef resource="flexUnitTasks.tasks" classpath="${JAR_HOME}/lib/flexUnitTasks-4.1.0-9.jar" />
 
-	<target name="compile" depends="compile-birfcore,compile-birfext" />
+	<target name="compile" depends="run-unit-tests,compile-birfcore,compile-birfext">
+	</target>
 	
-	<target name="compile-release" depends="compile-birfcore-release,compile-birfext-release" />
+	<target name="compile-release" depends="run-unit-tests,compile-birfcore-release,compile-birfext-release">
+	</target>
 	
-	<target name="compile-birfcore-release" depends="run-testsuite">
+	<target name="clean">
+		<delete dir="${OUT_DIR}" />
+		<mkdir dir="${OUT_DIR}" />
+		<delete dir="${DOCS_DIR}" />
+		<mkdir dir="${DOCS_DIR}" />
+	</target>
+	
+	<target name="compile-birfcore-release">
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}.swc"
 				optimize="true"
 				debug="false"
@@ -22,17 +31,15 @@
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<source-path path-element="${SRC_DIR}" />
 			<include-sources dir="${SRC_DIR}" includes="*" />
-			<compiler.include-libraries dir="${LIB_DIR}" append="true">
-				<include name="as3-signals-v0.8.swc" />
-				<include name="Swiftsuspenders-v2.0.0rc2stray2.swc" />
-				<include name="TurboSignals.swc" />
-			</compiler.include-libraries>
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="false" />
 		</compc>
 	</target>
 	
-	<target name="compile-birfcore" depends="run-testsuite">
+	<target name="compile-birfcore">
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-debug.swc"
 				optimize="false"
 				debug="true"
@@ -45,17 +52,15 @@
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<source-path path-element="${SRC_DIR}" />
 			<include-sources dir="${SRC_DIR}" includes="*" />
-			<compiler.include-libraries dir="${LIB_DIR}" append="true">
-				<include name="as3-signals-v0.8.swc" />
-				<include name="Swiftsuspenders-v2.0.0rc2stray2.swc" />
-				<include name="TurboSignals.swc" />
-			</compiler.include-libraries>
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="true" />
 		</compc>
 	</target>
 	
-	<target name="compile-birfext" depends="run-testsuite">
+	<target name="compile-birfext">
 		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}-debug.swc"
 				optimize="false"
 				debug="true"
@@ -66,20 +71,20 @@
 				swf-version="14"
 				target-player="11.1.0">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${EX_SRC_DIR}" />
-			<include-sources dir="${EX_SRC_DIR}" includes="*" />
+			<source-path path-element="${EXT_SRC_DIR}" />
+			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
 			<external-library-path dir="${OUT_DIR}" append="true">
 				<include name="birf-v${BUILD_VERSION}-debug.swc" />
 			</external-library-path>
-			<compiler.include-libraries dir="${LIB_DIR}" append="true">
+			<external-library-path dir="${LIB_DIR}" append="true">
 				<include name="*.swc" />
-			</compiler.include-libraries>
+			</external-library-path>
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="true" />
 		</compc>
 	</target>
 	
-	<target name="compile-birfext-release" depends="run-testsuite">
+	<target name="compile-birfext-release">
 		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}.swc"
 				optimize="true"
 				debug="false"
@@ -90,20 +95,20 @@
 				swf-version="14"
 				target-player="11.1.0">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${EX_SRC_DIR}" />
-			<include-sources dir="${EX_SRC_DIR}" includes="*" />
+			<source-path path-element="${EXT_SRC_DIR}" />
+			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
 			<external-library-path dir="${OUT_DIR}" append="true">
-				<include name="birf-v${BUILD_VERSION}-debug.swc" />
+				<include name="birf-v${BUILD_VERSION}.swc" />
 			</external-library-path>
-			<compiler.include-libraries dir="${LIB_DIR}" append="true">
+			<external-library-path dir="${LIB_DIR}" append="true">
 				<include name="*.swc" />
-			</compiler.include-libraries>
+			</external-library-path>
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="false" />
 		</compc>
 	</target>
 	
-	<target name="run-testsuite">
+	<target name="run-unit-tests">
 		<mxmlc output="${OUT_DIR}/TestRunner.swf"
 				file="${TESTRUNNER_FILE}"
 				optimize="false"
@@ -118,7 +123,7 @@
 			<static-link-runtime-shared-libraries />
 			<source-path path-element="${SRC_DIR}" />
 			<source-path path-element="${TESTS_SRC_DIR}" />
-			<source-path path-element="${EX_SRC_DIR}" />
+			<source-path path-element="${EXT_SRC_DIR}" />
 			<compiler.include-libraries dir="${LIB_DIR}" append="true">
 				<include name="*.swc" />
 			</compiler.include-libraries>
@@ -132,5 +137,20 @@
             haltonfailure="false"
             verbose="true"
             localTrusted="true" />
+	</target>
+	
+	<target name="generate-docs">
+		<delete dir="${DOCS_DIR}" />
+		<mkdir dir="${DOCS_DIR}" />
+		
+		<asdoc output="${DOCS_DIR}" lenient="true" failonerror="true">
+			<path path-element="${SRC_DIR}" />
+			<doc-sources path-element="${SRC_DIR}" />
+			<doc-sources path-element="${EXT_SRC_DIR}" />
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+		</asdoc>
 	</target>
 </project>

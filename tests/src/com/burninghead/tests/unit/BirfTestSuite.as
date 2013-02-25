@@ -1,13 +1,13 @@
 package com.burninghead.tests.unit
 {
-	import com.burninghead.tests.unit.utils.ObjectUtilTests;
 	import com.burninghead.tests.unit.messaging.SignalMessageHandlerTests;
 	import com.burninghead.tests.unit.states.BaseStateMachineTests;
 	import com.burninghead.tests.unit.utils.AntiCheatNumberTests;
 	import com.burninghead.tests.unit.utils.MathUtilTests;
+	import com.burninghead.tests.unit.utils.ObjectUtilTests;
 	import com.burninghead.tests.unit.utils.StringUtilTests;
 	import com.burninghead.tests.unit.view.BaseViewTests;
-	import com.burninghead.tests.unit.view.stage2d.Stage2DViewTests;
+	import com.burninghead.tests.unit.view.displaylist.DisplayListViewTests;
 	/**
 	 * @author tomas.augustinovic
 	 */
@@ -19,7 +19,7 @@ package com.burninghead.tests.unit
 		
 		//	VIEW
 		public var viewTests:BaseViewTests;
-		public var stage2dViewTests:Stage2DViewTests;
+		public var displayListViewTests:DisplayListViewTests;
 		
 		//	STATES
 		public var stateMachineTests:BaseStateMachineTests;

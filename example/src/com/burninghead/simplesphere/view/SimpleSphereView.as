@@ -7,13 +7,13 @@ package com.burninghead.simplesphere.view
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.birf.view.skinning.BaseSkinManager;
 	import com.burninghead.birf.view.skinning.ISkinManager;
-	import com.burninghead.extensions.view.stage2d.Stage2DView;
+	import com.burninghead.extensions.view.displaylist.DisplayListView;
 	import com.burninghead.simplesphere.states.SphereViewState;
 
 	/**
 	 * @author Zoulz
 	 */
-	public class SimpleSphereView extends Stage2DView implements IView
+	public class SimpleSphereView extends DisplayListView implements IView
 	{
 		/**
 		 * Constructor.
@@ -27,7 +27,7 @@ package com.burninghead.simplesphere.view
 		 * Register the required view states and change to the initial
 		 * state the app starts in.
 		 */
-		override public function initViewStates():void
+		override public function initStateMachine():void
 		{
 			var stateMachine:IStateMachine = _injector.getInstance(IStateMachine);
 			

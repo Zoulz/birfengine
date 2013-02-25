@@ -2,6 +2,8 @@ package com.burninghead.birf.messaging.messages
 {
 	import com.burninghead.birf.messaging.IMessage;
 	/**
+	 * Base message class.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public class BaseMessage implements IMessage
@@ -10,6 +12,9 @@ package com.burninghead.birf.messaging.messages
 		private var _sender:*;
 		private var _payload:*;
 		
+		/**
+		 * Setup references to supplied parameters.
+		 */
 		public function BaseMessage(type:String, sender:*, payload:* = null)
 		{
 			_type = type;
@@ -17,16 +22,25 @@ package com.burninghead.birf.messaging.messages
 			_payload = payload;
 		}
 		
+		/**
+		 * @inheritDoc
+		 */
 		public function get type():String
 		{
 			return _type;
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		public function get sender():*
 		{
 			return _sender;
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		public function get payload():*
 		{
 			return _payload;

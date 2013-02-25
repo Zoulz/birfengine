@@ -66,6 +66,10 @@ package com.burninghead.birf.utils.security
 			return _num[Math.floor(_num.length / 2)] - _offset - SALT;
 		}
 
+		/**
+		 * Signal is dispatched if a cheater is detected.
+		 * @return ISignal
+		 */
 		public function get cheater():ISignal
 		{
 			return _cheatSignal;

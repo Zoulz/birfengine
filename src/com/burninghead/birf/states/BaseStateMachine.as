@@ -90,10 +90,7 @@ package com.burninghead.birf.states
 
 		public function update():void
 		{
-			for each (var state:IState in _states)
-			{
-				state.update();
-			}
+			_currentState.update();
 		}
 
 		public function get stateChanged():ISignal

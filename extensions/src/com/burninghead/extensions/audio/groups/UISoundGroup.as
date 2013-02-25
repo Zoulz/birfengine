@@ -2,7 +2,7 @@ package com.burninghead.extensions.audio.groups
 {
 	import com.burninghead.birf.audio.ISoundGroup;
 	import com.burninghead.extensions.audio.AssetSoundGroup;
-	import com.burninghead.extensions.utils.net.assets.types.SwfAsset;
+	import com.burninghead.extensions.utils.net.assets.types.GSSwfAsset;
 	/**
 	 * @author tomas.augustinovic
 	 */
@@ -10,7 +10,7 @@ package com.burninghead.extensions.audio.groups
 	{
 		private var _sndPackage:String;
 		
-		public function UISoundGroup(soundPackage:String, asset:SwfAsset = null)
+		public function UISoundGroup(soundPackage:String, asset:GSSwfAsset = null)
 		{
 			super(asset);
 			

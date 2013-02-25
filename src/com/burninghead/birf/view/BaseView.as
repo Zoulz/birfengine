@@ -13,7 +13,7 @@ package com.burninghead.birf.view
 	import org.osflash.signals.Signal;
 	import org.swiftsuspenders.Injector;
 
-	import flash.display.Sprite;
+	import flash.display.DisplayObject;
 
 	/**
 	 * @author tomas.augustinovic
@@ -25,12 +25,12 @@ package com.burninghead.birf.view
 		protected var _injector:Injector;
 		
 		private var _model:IModel;
-		private var _stageObject:Sprite;
+		private var _stageObject:DisplayObject;
 		private var _messageHandler:IMessageHandler;
 		private var _logger:ILogger;
 		
 		/**
-		 * Maps injections for the mediators.
+		 * Sets default member values.
 		 */
 		public function BaseView(model:IModel, msgHandler:IMessageHandler, logger:ILogger = null):void
 		{
@@ -38,22 +38,34 @@ package com.burninghead.birf.view
 			_messageHandler = msgHandler;
 			_messageHandler.addListener(onMessageReceived);
 			_logger = logger;
-			
 			_stageObject = null;
 			_initialized = new Signal();
 			_injector = new Injector();
 			_isInit = false;
 		}
 		
+		/**
+		 * Handles received messages.
+		 * @param msg Message
+		 */
 		protected function onMessageReceived(msg:IMessage):void
 		{
 		}
 		
+		/**
+		 * Turbosignal message handler. Reroutes to the
+		 * ordinary message handler method.
+		 * @param arg Message
+		 */
 		public function onSignal1(arg:*):void
 		{
 			onMessageReceived(arg as IMessage);
 		}
 
+		/**
+		 * Initializes the view after a stage object has been set. Must
+		 * dispatch the initialized signal upon completion.
+		 */
 		protected function init():void
 		{
 			_initialized.dispatch();
@@ -94,7 +106,7 @@ package com.burninghead.birf.view
 			}
 			else
 			{
-				throw new Error("Must implement IMediator interface.");
+				_logger.log("Must implement 'IMediator' interface.", LogType.FATAL);
 			}
 		}
 		
@@ -124,12 +136,20 @@ package com.burninghead.birf.view
 			return _isInit;
 		}
 
-		public function get stageObject():Sprite
+		/**
+		 * @inheritDoc
+		 */
+		public function get stageObject():DisplayObject
 		{
 			return _stageObject;
 		}
 
-		public function set stageObject(value:Sprite):void
+		/**
+		 * Set reference to stage object. Maps all the dependencies to the injector
+		 * and the runs the init()-method.
+		 * @param value Reference to stage holder
+		 */
+		public function set stageObject(value:DisplayObject):void
 		{
 			if (_isInit == false)
 			{
@@ -141,15 +161,15 @@ package com.burninghead.birf.view
 				_injector.map(IMessageHandler).toValue(_messageHandler);
 				_injector.map(ILogger).toValue(_logger);
 				
-				//	Flag that we are initialized.
-				_isInit = true;
-				
 				//	Perform any initialization.
 				init();
+				
+				//	Flag that we are initialized.
+				_isInit = true;
 			}
 			else
 			{
-				throw new Error("Cannot change stage instance. View is already initialized.");
+				_logger.log("Cannot change stage instance. View is already initialized.", LogType.ERROR);
 			}
 		}
 	}

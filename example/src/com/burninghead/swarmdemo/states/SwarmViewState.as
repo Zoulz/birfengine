@@ -1,5 +1,8 @@
 package com.burninghead.swarmdemo.states
 {
+	import com.burninghead.swarmdemo.view.mediators.SwarmMediatorMsgType;
+	import com.burninghead.birf.messaging.messages.BaseMessage;
+	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.states.BaseState;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.IView;
@@ -13,6 +16,7 @@ package com.burninghead.swarmdemo.states
 	{
 		[Inject] public var renderer:IBitmapRenderer;
 		[Inject] public var view:IView;
+		[Inject] public var messageHandler:IMessageHandler;
 		
 		private var _swarm:SwarmView;
 		private var _swarmMediator:SwarmMediator;
@@ -27,6 +31,8 @@ package com.burninghead.swarmdemo.states
 			
 			_swarmMediator = view.getMediator(SwarmMediator) as SwarmMediator;
 			_swarmMediator.registerView(_swarm);
+			
+			messageHandler.send(new BaseMessage(SwarmMediatorMsgType.CREATE_ROBINS, this));
 		}
 		
 		override public function exit():void

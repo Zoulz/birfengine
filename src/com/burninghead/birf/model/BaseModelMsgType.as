@@ -1,7 +1,7 @@
 package com.burninghead.birf.model
 {
 	/**
-	 * @author BigZoulz
+	 * @author tomas.augustinovic
 	 */
 	public class BaseModelMsgType
 	{

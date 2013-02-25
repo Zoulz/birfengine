@@ -7,7 +7,7 @@ package com.burninghead.birf.view
 	public interface IMediator extends IDisposable
 	{
 		/**
-		 * Register view object associated which this mediator will operate on.
+		 * Register view object which this mediator will operate on.
 		 * @param value View object
 		 */
 		function registerView(value:*):void;

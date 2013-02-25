@@ -2,14 +2,14 @@ package com.burninghead.extensions.model.language
 {
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.model.BaseModelMsgType;
-	import com.burninghead.birf.model.BaseModelPart;
+	import com.burninghead.birf.model.BaseProxyImpl;
 
 	import flash.utils.Dictionary;
 
 	/**
 	 * @author BigZoulz
 	 */
-	public class LanguageModel extends BaseModelPart implements ILanguageModel
+	public class LanguageModel extends BaseProxyImpl implements ILanguageModel
 	{
 		private var _strings:Dictionary;
 		private var _currentLanguage:String;

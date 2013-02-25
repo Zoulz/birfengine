@@ -90,6 +90,7 @@ package com.burninghead.birf
 			//	Create MVC.
 			_logger = createLogger();
 			_messageHandler = createMessageHandler();
+			_logger = createLogger();
 			_model = createModel();
 			_view = createView();
 			_controller = createController();
@@ -100,7 +101,7 @@ package com.burninghead.birf
 			//	Register everything.
 			registerCommands();
 			registerMediators();
-			registerModelParts();
+			registerModelProxies();
 
 			//	Initialize view.
 			_view.initialized.addOnce(onViewInitialized);
@@ -131,7 +132,7 @@ package com.burninghead.birf
 		/**
 		 * Registers all the game modelparts.
 		 */
-		protected function registerModelParts():void
+		protected function registerModelProxies():void
 		{
 			//	No-op
 		}

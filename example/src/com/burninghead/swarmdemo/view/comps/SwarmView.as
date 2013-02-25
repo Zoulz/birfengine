@@ -20,16 +20,6 @@ package com.burninghead.swarmdemo.view.comps
 			_renderer = renderer;
 			_robins = new Vector.<RobinView>();
 			
-			//	Create the frame definitions for the sheet.
-//			var frames:Vector.<Rectangle> = new Vector.<Rectangle>();
-//			for (var x:uint = 0; x < 5; x++)
-//			{
-//				for (var y:uint = 0; y < 5; y++)
-//				{
-//					frames.push(new Rectangle(x * 240, y * 314, 240, 314));
-//				}
-//			}
-			
 			//	Create bitmap sheet.
 			_sheet = BitmapSheet.fromBitmapData(new RobinBitmapSheet(), <frames><frame x="0" y="0" width="240" height="314" /></frames>);
 		}
@@ -47,6 +37,11 @@ package com.burninghead.swarmdemo.view.comps
 
 		public function dispose():void
 		{
+			var len:uint = _robins.length;
+			for (var i:uint = 0; i < len; i++)
+			{
+				_renderer.removeChild(_robins[i]);
+			}
 		}
 	}
 }
