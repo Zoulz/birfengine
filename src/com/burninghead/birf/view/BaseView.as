@@ -152,6 +152,9 @@ package com.burninghead.birf.view
 			{
 				_stageObject = value;
 				
+				//	Flag that we are initialized.
+				_isInit = true;
+				
 				//	Create dependency injector and add the standard dependencies.
 				_injector.map(IView).toValue(this);
 				_injector.map(IModel).toValue(_model);
@@ -160,9 +163,6 @@ package com.burninghead.birf.view
 				
 				//	Perform any initialization.
 				init();
-				
-				//	Flag that we are initialized.
-				_isInit = true;
 			}
 			else
 			{

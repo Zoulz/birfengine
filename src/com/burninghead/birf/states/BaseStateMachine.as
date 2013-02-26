@@ -97,7 +97,10 @@ package com.burninghead.birf.states
 
 		public function update():void
 		{
-			_currentState.update();
+			if (_currentState != null)
+			{
+				_currentState.update();
+			}
 		}
 
 		public function get stateChanged():ISignal
