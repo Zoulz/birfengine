@@ -11,7 +11,10 @@ package com.burninghead.birf.utils.net.rpc
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	/**
-	 * Abstract class implementing a basic RPC service.
+	 * Abstract class implementing barebones of a RPC service. Handles
+	 * web request/response.
+	 * 
+	 * @see AbstractMethodError
 	 * 
 	 * @author tomas.augustinovic
 	 */
@@ -25,6 +28,10 @@ package com.burninghead.birf.utils.net.rpc
 		private var _loader:URLLoader;
 		private var _complete:Signal;
 		
+		/**
+		 * Setup default member values.
+		 * @param url URL for the remote web service to communicate with.
+		 */
 		public function BaseRPCService(url:String)
 		{
 			_url = url;
@@ -33,6 +40,9 @@ package com.burninghead.birf.utils.net.rpc
 			cleanUp();
 		}
 		
+		/**
+		 * Clean up the service by resetting member variables.
+		 */
 		protected function cleanUp():void
 		{
 			_currentId = 0;
@@ -40,12 +50,20 @@ package com.burninghead.birf.utils.net.rpc
 			_requests = new Vector.<RequestItem>();
 		}
 		
+		/**
+		 * Return the next request id. Simply increments a counter for each call.
+		 * @return String containing next id.
+		 */
 		protected function getNextId():String
 		{
 			return (++_currentId).toString();
 		}
 		
-		protected function findRequestById(id:int):Object
+		/**
+		 * Get request item by it's id.
+		 * @param id id of item to find and return.
+		 */
+		protected function findRequestById(id:int):RequestItem
 		{
 			for each (var reqObj:RequestItem in _requests)
 			{
@@ -58,18 +76,27 @@ package com.burninghead.birf.utils.net.rpc
 			return null;
 		}
 		
+		/**
+		 * @inheritDoc
+		 */
 		public function addMethodCall(method:String, params:Array = null, callback:Function = null):void
 		{
 			var req:IRPCRequest = createRequest(getNextId(), method, params);
 			_requests.push(new RequestItem(req, callback));
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		public function addNotification(method:String, params:Array = null):void
 		{
 			var req:IRPCRequest = createRequest(null, method, params);
 			_requests.push(new RequestItem(req));
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		public function flush():void
 		{
 			if (_requests.length == 0)
@@ -102,6 +129,10 @@ package com.burninghead.birf.utils.net.rpc
 			_loader.load(req);
 		}
 		
+		/**
+		 * Event handler for if a request fails. Cleans up the service and
+		 * dispatches completion signal with fail-flag set.
+		 */
 		private function onMethodCallFailed(event:IOErrorEvent):void
 		{
 			cleanUp();
@@ -109,6 +140,10 @@ package com.burninghead.birf.utils.net.rpc
 			_complete.dispatch(false);
 		}
 		
+		/**
+		 * Event handler for when a request is successful. Iterates
+		 * through the resulting response.
+		 */
 		private function onMethodCallComplete(event:Event):void
 		{
 			parseResponse(_loader.data as String);
@@ -141,31 +176,60 @@ package com.burninghead.birf.utils.net.rpc
 			_complete.dispatch(true);
 		}
 		
+		/**
+		 * Abstract method that must be overriden in sub class. Creates a RPC response object using the
+		 * initializer as data.
+		 * @param initializer Data that the response object will parse to populate itself.
+		 */
 		protected function createResponse(initializer:Object):IRPCResponse
 		{
 			throw new AbstractMethodError();
 		}
 		
+		/**
+		 * Abstract method that must be overriden in sub class. Creates a RPC request object using
+		 * the supplied standard parameters.
+		 * @param id Id of the request.
+		 * @param method Method name.
+		 * @param params Parameters for the method.
+		 */
 		protected function createRequest(id:String, method:String, params:Array = null):IRPCRequest
 		{
 			throw new AbstractMethodError();
 		}
 		
+		/**
+		 * Abstract method that must be overriden in sub class. Returns a string containing the
+		 * desired MIME-type the request will be posted in. <b>Example:</b> application/json
+		 */
 		protected function getRequestContentType():String
 		{
 			throw new AbstractMethodError();
 		}
 		
+		/**
+		 * Abstract method that must be overriden in sub class. Encodes the requests using the
+		 * desired encoding technique (json, xml etc).
+		 * @param reqs Holds the requests.
+		 */
 		protected function encodeRequests(reqs:Array):String
 		{
 			throw new AbstractMethodError();
 		}
 		
+		/**
+		 * Abstract method that must be overriden in sub class. Parse the response object using
+		 * the desired decoding technique (json, xml etc).
+		 * @param resp The response in string format.
+		 */
 		protected function parseResponse(resp:String):void
 		{
 			throw new AbstractMethodError();
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		public function abort():void
 		{
 			if (_loader != null)
@@ -174,6 +238,9 @@ package com.burninghead.birf.utils.net.rpc
 			}
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		public function get complete():ISignal
 		{
 			return _complete;

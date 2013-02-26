@@ -7,7 +7,6 @@ package com.burninghead.birf.view
 	import com.burninghead.birf.utils.ReflectionUtil;
 	import com.burninghead.birf.utils.logger.ILogger;
 	import com.burninghead.birf.utils.logger.LogType;
-	import com.jacksondunstan.signals.Slot1;
 
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
@@ -16,9 +15,14 @@ package com.burninghead.birf.view
 	import flash.display.DisplayObject;
 
 	/**
+	 * Base implementation of View. Handles injection of mediators.
+	 * 
+	 * @see IView
+	 * @see IMediator
+	 * 
 	 * @author tomas.augustinovic
 	 */
-	public class BaseView implements IView, Slot1
+	public class BaseView implements IView
 	{
 		protected var _initialized:Signal;
 		protected var _isInit:Boolean;
@@ -31,6 +35,9 @@ package com.burninghead.birf.view
 		
 		/**
 		 * Sets default member values.
+		 * @param model Reference to model.
+		 * @param msgHandler Reference to message handler.
+		 * @param logger Reference to logger.
 		 */
 		public function BaseView(model:IModel, msgHandler:IMessageHandler, logger:ILogger = null):void
 		{
@@ -45,21 +52,11 @@ package com.burninghead.birf.view
 		}
 		
 		/**
-		 * Handles received messages.
-		 * @param msg Message
+		 * Override to handle received messages.
+		 * @param msg Message.
 		 */
 		protected function onMessageReceived(msg:IMessage):void
 		{
-		}
-		
-		/**
-		 * Turbosignal message handler. Reroutes to the
-		 * ordinary message handler method.
-		 * @param arg Message
-		 */
-		public function onSignal1(arg:*):void
-		{
-			onMessageReceived(arg as IMessage);
 		}
 
 		/**
@@ -147,7 +144,7 @@ package com.burninghead.birf.view
 		/**
 		 * Set reference to stage object. Maps all the dependencies to the injector
 		 * and the runs the init()-method.
-		 * @param value Reference to stage holder
+		 * @param value Reference to stage holder.
 		 */
 		public function set stageObject(value:DisplayObject):void
 		{

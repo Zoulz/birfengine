@@ -2,7 +2,7 @@ package com.burninghead.birf.messaging.messages
 {
 	import com.burninghead.birf.messaging.IMessage;
 	/**
-	 * Base message class.
+	 * Base message class. Implements the barebones of a message.
 	 * 
 	 * @author tomas.augustinovic
 	 */

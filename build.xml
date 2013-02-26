@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="birf" default="compile-birfcore-release">
+<project name="birf" default="compile">
 	<property file="build.properties" />
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	<taskdef resource="flexUnitTasks.tasks" classpath="${JAR_HOME}/lib/flexUnitTasks-4.1.0-9.jar" />
@@ -10,14 +10,25 @@
 	<target name="compile-release" depends="run-unit-tests,compile-birfcore-release,compile-birfext-release">
 	</target>
 	
-	<target name="clean">
-		<delete dir="${OUT_DIR}" />
+	<target name="clean" depends="clean-output,clean-docs">
+	</target>
+	
+	<target name="clean-output">
+		<echo message="__[ CLEANING OUTPUT ]__" />
+		<delete dir="${OUT_DIR}" includeemptydirs="true" deleteonexit="true" failonerror="true" />
+		<sleep seconds="2" />
 		<mkdir dir="${OUT_DIR}" />
-		<delete dir="${DOCS_DIR}" />
+	</target>
+	
+	<target name="clean-docs">
+		<echo message="__[ CLEANING DOCS ]__" />
+		<delete dir="${DOCS_DIR}" includeemptydirs="true" deleteonexit="true" failonerror="true" />
+		<sleep seconds="2" />
 		<mkdir dir="${DOCS_DIR}" />
 	</target>
 	
 	<target name="compile-birfcore-release">
+		<echo message="__[ COMPILING CORE RELEASE SWC ]__" />
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}.swc"
 				optimize="true"
 				debug="false"
@@ -40,6 +51,7 @@
 	</target>
 	
 	<target name="compile-birfcore">
+		<echo message="__[ COMPILING CORE DEBUG SWC ]__" />
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-debug.swc"
 				optimize="false"
 				debug="true"
@@ -61,6 +73,7 @@
 	</target>
 	
 	<target name="compile-birfext">
+		<echo message="__[ COMPILING EXTENSIONS DEBUG SWC ]__" />
 		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}-debug.swc"
 				optimize="false"
 				debug="true"
@@ -85,6 +98,7 @@
 	</target>
 	
 	<target name="compile-birfext-release">
+		<echo message="__[ COMPILING EXTENSIONS RELEASE SWC ]__" />
 		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}.swc"
 				optimize="true"
 				debug="false"
@@ -107,10 +121,84 @@
 			<compiler.define name="CONFIG::DEBUG" value="false" />
 		</compc>
 	</target>
+
+	<target name="compile-all" depends="run-unit-tests">
+		<echo message="__[ COMPILING CORE AND EXTENSIONS DEBUG SWC ]__" />
+		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-all-debug.swc"
+				optimize="false"
+				debug="true"
+				compiler.as3="true"
+				incremental="true"
+				maxmemory="512m"
+				strict="true"
+				compiler.show-deprecation-warnings="false"
+				swf-version="14"
+				target-player="11.1.0">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${SRC_DIR}" />
+			<include-sources dir="${SRC_DIR}" includes="*" />
+			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="true" />
+		</compc>
+	</target>
+
+	<target name="compile-all-release" depends="run-unit-tests">
+		<echo message="__[ COMPILING CORE AND EXTENSIONS RELEASE SWC ]__" />
+		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-all.swc"
+				optimize="true"
+				debug="false"
+				compiler.as3="true"
+				incremental="true"
+				maxmemory="512m"
+				strict="true"
+				compiler.show-deprecation-warnings="false"
+				swf-version="14"
+				target-player="11.1.0">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${SRC_DIR}" />
+			<include-sources dir="${SRC_DIR}" includes="*" />
+			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="true" />
+		</compc>
+	</target>
 	
+	<target name="compile-baked" depends="run-unit-tests">
+		<echo message="__[ COMPILING CORE AND EXTENSIONS DEBUG BAKED SWC ]__" />
+		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-baked-debug.swc"
+				optimize="false"
+				debug="true"
+				compiler.as3="true"
+				incremental="true"
+				maxmemory="512m"
+				strict="true"
+				compiler.show-deprecation-warnings="false"
+				swf-version="14"
+				target-player="11.1.0">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<static-link-runtime-shared-libraries />
+			<source-path path-element="${SRC_DIR}" />
+			<include-sources dir="${SRC_DIR}" includes="*" />
+			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
+			<compiler.library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</compiler.library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="true" />
+		</compc>
+	</target>
+
 	<target name="run-unit-tests">
+		<echo message="__[ COMPILING FLEXUNIT TESTRUNNER SWF ]__" />
 		<mxmlc output="${OUT_DIR}/TestRunner.swf"
-				file="${TESTRUNNER_FILE}"
+				file="${TESTRUNNER_CLASS}"
 				optimize="false"
 				debug="true"
 				compiler.as3="true"
@@ -130,20 +218,39 @@
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="true" />
 		</mxmlc>
-	
+
+		<echo message="__[ RUNNING TESTRUNNER SWF ]__" />
 		<flexunit swf="${OUT_DIR}/TestRunner.swf"
-			command="${FLASH_PLAYER_FILE}"
+			command="${FLASH_PLAYER_EXE}"
             toDir="${OUT_DIR}"
-            haltonfailure="false"
-            verbose="true"
+            haltonfailure="true"
+            verbose="false"
             localTrusted="true" />
+		
+		<echo message="__[ GENERATE REPORT ]__" />
+		<junitreport todir="${OUT_DIR}">
+            <fileset dir="${OUT_DIR}">
+                <include name="TEST*.xml"/>
+            </fileset>
+            <report format="frames" todir="${OUT_DIR}/html"/>
+        </junitreport>
+		
+		<echo message="__[ CLEAN UP AFTER UNIT TESTS ]__" />
+		<delete>
+			<fileset dir="${OUT_DIR}">
+				<include name="TEST*.xml" />
+			</fileset>
+		</delete>
 	</target>
 	
-	<target name="generate-docs">
-		<delete dir="${DOCS_DIR}" />
-		<mkdir dir="${DOCS_DIR}" />
-		
-		<asdoc output="${DOCS_DIR}" lenient="true" failonerror="true">
+	<target name="generate-docs" depends="clean-docs">
+		<echo message="__[ GENERATING DOCUMENTATION ]__" />
+		<asdoc output="${DOCS_DIR}"
+				lenient="true"
+				failonerror="true"
+				window-title="BiRF Engine v${BUILD_VERSION} Documentation"
+				main-title="BiRF Engine v${BUILD_VERSION} Documentation"
+				footer="Copyright (c) Tomas Augustinovic 2012-2013 | BiRF Engine | http://www.github.com/Zoulz/birfengine">
 			<doc-sources path-element="${SRC_DIR}" />
 			<doc-sources path-element="${EXT_SRC_DIR}" />
 			<external-library-path dir="${LIB_DIR}" append="true">

@@ -1,14 +1,18 @@
 package com.burninghead.birf.utils.logger
 {
 	/**
+	 * Basic trace output for the logger.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public class TraceLoggerOutput implements ILoggerOutput
 	{
-		public function handleLog(message:String, type:String):void
+		/**
+		 * Trace the message with time stamp and message type.
+		 */
+		public function handleLog(message:String, type:String, time:String = ""):void
 		{
-			var time:String = new Date().toTimeString();
-			trace("[" + type + " " + time + "] " + message);
+			trace("[" + time + "|" + type + "] " + message);
 		}
 	}
 }

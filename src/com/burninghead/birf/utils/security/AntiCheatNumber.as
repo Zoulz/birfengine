@@ -9,18 +9,21 @@ package com.burninghead.birf.utils.security
 	 * a bit harder. Should only be used for critical numbers since it adds a bit of memory and
 	 * processing overhead.
 	 * 
-	 * @author BigZoulz
+	 * @author tomas.augustinovic
 	 */
 	public class AntiCheatNumber
 	{
-		private static var SALT:uint = 526;
+		/**
+		 * A salt constant used to spice up the obfuscation.
+		 */
+		private static const SALT:uint = 526;
 		
 		private var _offset:Number;
 		private var _num:Vector.<Number>;
 		private var _cheatSignal:Signal;
 		
 		/**
-		 * Constructor. Randomizes a offset value used to alter the stored value.
+		 * Randomizes a offset value used to alter the stored value.
 		 * @param num The real number to be stored.
 		 * @param multiInstance Indicates if we should hold multiple instances. Takes more memory and adds a bit of overhead, but is a bit harder to crack.
 		 */
@@ -59,7 +62,7 @@ package com.burninghead.birf.utils.security
 		
 		/**
 		 * Return the actual value.
-		 * @return Number
+		 * @return The stored number.
 		 */
 		public function get value():Number
 		{
@@ -68,7 +71,7 @@ package com.burninghead.birf.utils.security
 
 		/**
 		 * Signal is dispatched if a cheater is detected.
-		 * @return ISignal
+		 * @return Signal for cheaters.
 		 */
 		public function get cheater():ISignal
 		{

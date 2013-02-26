@@ -3,6 +3,9 @@ package com.burninghead.birf.states
 	import org.osflash.signals.ISignal;
 
 	/**
+	 * Describes a state machine. States and transitions can be registered
+	 * and removed. The state machine can also be updated.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public interface IStateMachine

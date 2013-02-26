@@ -1,21 +1,30 @@
 package com.burninghead.birf.model
 {
-	import com.jacksondunstan.signals.Slot1;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.messaging.Messenger;
 	/**
+	 * Base class for implementing a model/service proxy. Injects the message
+	 * handler and a messenger to easily allow sub class implementations to access
+	 * the central message handling.
+	 * 
+	 * @see IMessageHandler
+	 * @see Messenger
+	 * 
 	 * @author tomas.augustinovic
 	 */
-	public class BaseProxyImpl implements IProxy, Slot1
+	public class BaseProxyImpl implements IProxy
 	{
+		/**
+		 * <b>[Inject]</b>
+		 */
 		[Inject] public var messageHandler:IMessageHandler;
 		
 		protected var _messenger:Messenger;
 		
 		/**
-		 * Post dependency injection constructor. Setup message handler
-		 * and messenger. Perform custom init afterwards.
+		 * <b>[PostConstruct]</b> Post dependency injection constructor. Setup message
+		 * handler and messenger. Perform custom init afterwards.
 		 */
 		[PostConstruct] public function postConstruct():void
 		{
@@ -40,20 +49,11 @@ package com.burninghead.birf.model
 		}
 		
 		/**
-		 * Handler for messages.
+		 * Handler for messages. Override this in sub class to process
+		 * incoming messages.
 		 */
 		protected function onMessageReceived(msg:IMessage):void
 		{
-		}
-		
-		/**
-		 * Turbosignal message handler. Simply pass the message to the
-		 * ordinary message handler.
-		 * @param arg Message
-		 */
-		public function onSignal1(arg:*):void
-		{
-			onMessageReceived(arg as IMessage);
 		}
 	}
 }

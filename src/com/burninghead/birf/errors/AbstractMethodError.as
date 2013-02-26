@@ -10,8 +10,8 @@ package com.burninghead.birf.errors
 	{
 		/**
 		 * Supply constructor with a fixed error message.
-		 * @param message Ignored
-		 * @param id Id of error
+		 * @param message Ignored.
+		 * @param id Id of error.
 		 */
 		function AbstractMethodError(message:* = "", id:* = 0)
 		{

@@ -16,7 +16,7 @@ package com.burninghead.extensions.utils.logger
 			_msgHandler = msgHandler;
 		}
 		
-		public function handleLog(message:String, type:String):void
+		public function handleLog(message:String, type:String, time:String = ""):void
 		{
 			_msgHandler.send(new BaseMessage(ConsoleMediatorMsgType.PRINT_MESSAGE, this, { msg: message, category: type }));
 		}

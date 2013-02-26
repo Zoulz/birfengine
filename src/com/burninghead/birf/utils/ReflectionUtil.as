@@ -13,9 +13,9 @@ package com.burninghead.birf.utils
 	{
 		/**
 		 * Return the type name of the supplied object as a string.
-		 * 
 		 * @param obj Object to process.
-		 * @return String
+		 * @param nameOnly True if you only want the actual class name without the package.
+		 * @return Type name of the supplied object.
 		 */
 		public static function getNameOfObject(obj:*, nameOnly:Boolean = false):String
 		{
@@ -34,6 +34,12 @@ package com.burninghead.birf.utils
 			return objName;
 		}
 		
+		/**
+		 * Get name of function inside object.
+		 * @param obj Object that contains the function who's name you want.
+		 * @param f Function of the method inside the supplied object.
+		 * @return Name of the function.
+		 */
 		public static function getNameOfFunction(obj:*, f:Function):String
 		{
 			var functionName:String = "error!";
@@ -53,10 +59,9 @@ package com.burninghead.birf.utils
 		
 		/**
 		 * Determines if the supplied object implements the specified interface.
-		 * 
 		 * @param obj Object to process.
-		 * @param implementCls Interface definition to check for.
-		 * @return Boolean
+		 * @param type Type to check for.
+		 * @return True if the object implements the specified type.
 		 */
 		public static function isType(obj:*, type:Class):Boolean
 		{
@@ -74,10 +79,9 @@ package com.burninghead.birf.utils
 		/**
 		 * Search supplied object for member variables which have metadata and
 		 * return them as untyped objects in a array.
-		 * 
 		 * @param obj Object to search.
 		 * @param metaType Metadata type name to look for.
-		 * @return Array containing Object {name, type, ref, args}
+		 * @return Array containing Objects with the following definition: <b>{name, type, ref, args}</b>
 		 */
 		public static function findMetaData(obj:Object, metaType:String):Array
 		{
@@ -110,10 +114,9 @@ package com.burninghead.birf.utils
 		
 		/**
 		 * Extract the class definition by string representation.
-		 * 
 		 * @param className Name of the class to get.
 		 * @param appDomain ApplicationDomain to fetch the definition from.
-		 * @return Class
+		 * @return Class definition, or null if unable to get definition.
 		 */
 		public static function getClass(className:String, appDomain:ApplicationDomain = null):Class
 		{
@@ -136,7 +139,7 @@ package com.burninghead.birf.utils
 		/**
 		 * Simply return instance of class definition with parameterless constructor.
 		 * @param clazz Class to instantiate.
-		 * @return *
+		 * @return Instance of the supplied class.
 		 */
 		public static function getInstance(clazz:Class):*
 		{
@@ -148,7 +151,7 @@ package com.burninghead.birf.utils
 		 * parameterless.
 		 * @param className Name of the class to instantiate.
 		 * @param appDomain Application domain that contains the class.
-		 * @return *
+		 * @return Instance of the specified class.
 		 */
 		public static function getInstanceByName(className:String, appDomain:ApplicationDomain = null):*
 		{

@@ -1,6 +1,9 @@
 package com.burninghead.birf.audio
 {
 	/**
+	 * Base class implementation of sound manager. Contains a list of
+	 * all the registered sound groups.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public class BaseSoundManager implements ISoundManager

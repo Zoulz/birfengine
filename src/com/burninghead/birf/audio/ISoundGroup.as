@@ -6,28 +6,30 @@ package com.burninghead.birf.audio {
 	 * make logical distinctions between certain sounds. For instance, a group
 	 * dedicated to all UI sound effects, or one for all the music.
 	 * 
+	 * @see ISoundManager
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public interface ISoundGroup
 	{
 		/**
 		 * Play a specific sound by it's id (probably library linkage id).
-		 * @param id string identifier of the sound to play
-		 * @param loops how many times will the sound be repeated
-		 * @param sndTransform Custom transformation
-		 * @param offset offset from start
-		 * @return index of the playing sound
+		 * @param id string identifier of the sound to play.
+		 * @param loops how many times will the sound be repeated.
+		 * @param sndTransform Custom transformation.
+		 * @param offset offset from start.
+		 * @return index of the playing sound.
 		 */
 		function playSound(id:String, loops:uint = 0, sndTransform:SoundTransform = null, offset:Number = 0):int;
 		/**
 		 * Get a playing sound by it's index.
-		 * @param index index of sound to get
-		 * @return SoundChannel instance of playing sound
+		 * @param index index of sound to get.
+		 * @return SoundChannel instance of playing sound.
 		 */
 		function getPlayingSound(index:int):SoundChannel;
 		/**
 		 * Stop a playing sound by it's index.
-		 * @param index index of sound to stop
+		 * @param index index of sound to stop.
 		 */
 		function stopSound(index:int):void;
 		/**
@@ -49,7 +51,7 @@ package com.burninghead.birf.audio {
 		function set isMute(value:Boolean):void;
 		/**
 		 * Return if the group is currently muted or not.
-		 * @return Boolean
+		 * @return True if sound group is muted.
 		 */
 		function get isMute():Boolean;
 	}

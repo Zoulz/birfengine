@@ -1,6 +1,8 @@
 package com.burninghead.birf.states
 {
 	/**
+	 * Describes a simple transition between two states.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public interface IStateTransition

@@ -1,6 +1,5 @@
 package com.burninghead.extensions.view.displaylist.comps.console
 {
-	import flash.text.TextFormat;
 	import mx.core.FontAsset;
 
 	import flash.display.Sprite;
@@ -11,6 +10,7 @@ package com.burninghead.extensions.view.displaylist.comps.console
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
+	import flash.text.TextFormat;
 	import flash.utils.describeType;
 	/**
 	 * @author tomas.augustinovic

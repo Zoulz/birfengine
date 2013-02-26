@@ -8,6 +8,11 @@ package com.burninghead.birf.audio
 	import flash.media.SoundTransform;
 	import flash.utils.Dictionary;
 	/**
+	 * Base class implementation for sound group. Allows sound
+	 * playback, stopping, muting, pausing (at the current position) and
+	 * resuming. Creates sounds by their library linkage name through
+	 * reflection.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public class BaseSoundGroup implements ISoundGroup

@@ -8,6 +8,8 @@ package com.burninghead.birf.model
 	import org.swiftsuspenders.Injector;
 
 	/**
+	 * Base class implementation of model. Basically handles injection of proxies.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public class BaseModel implements IModel
@@ -18,8 +20,8 @@ package com.burninghead.birf.model
 		
 		/**
 		 * Set references to supplied objects. Create injector and map values to it.
-		 * @param logger Reference to logger
-		 * @param msgHandler Reference to message handler
+		 * @param logger Reference to logger.
+		 * @param msgHandler Reference to message handler.
 		 */
 		public function BaseModel(msgHandler:IMessageHandler, logger:ILogger = null)
 		{

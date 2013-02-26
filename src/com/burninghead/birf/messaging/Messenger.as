@@ -14,7 +14,7 @@ package com.burninghead.birf.messaging
 		
 		/**
 		 * Set references to supplied objects.
-		 * @param handler Message handler reference to use for messaging
+		 * @param handler Message handler reference to use for messaging.
 		 * @param sender Object that is the sender of messages.
 		 */
 		public function Messenger(handler:IMessageHandler, sender:*)
@@ -25,8 +25,8 @@ package com.burninghead.birf.messaging
 		
 		/**
 		 * Send a standard base message with a string type.
-		 * @param type String type name for the message
-		 * @param payload Payload object that is sent together with the message
+		 * @param type String type name for the message.
+		 * @param payload Payload object that is sent together with the message.
 		 */
 		public function sendMessage(type:String, payload:* = null):void
 		{
@@ -35,8 +35,8 @@ package com.burninghead.birf.messaging
 		
 		/**
 		 * Send a message that contains a command.
-		 * @param command Class of the command to execute
-		 * @param payload Payload object that is sent together with the message
+		 * @param command Class of the command to execute.
+		 * @param payload Payload object that is sent together with the message.
 		 */
 		public function sendCommandMessage(command:Class, payload:* = null):void
 		{

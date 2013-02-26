@@ -1,5 +1,7 @@
 package com.burninghead.birf.states
 {
+	import com.burninghead.birf.utils.logger.LogType;
+	import com.burninghead.birf.utils.logger.ILogger;
 	import org.osflash.signals.Signal;
 	import org.osflash.signals.ISignal;
 	import flash.utils.Dictionary;
@@ -14,14 +16,16 @@ package com.burninghead.birf.states
 		private var _currentState:IState;
 		private var _currentStateId:String;
 		private var _stateChanged:Signal;
+		private var _logger:ILogger;
 		
-		public function BaseStateMachine()
+		public function BaseStateMachine(logger:ILogger = null)
 		{
 			_states = new Dictionary();
 			_stateChanged = new Signal();
 			_transitions = new Dictionary();
 			_currentStateId = "";
 			_currentState = null;
+			_logger = logger;
 		}
 
 		public function changeState(id:String):void
@@ -47,7 +51,10 @@ package com.burninghead.birf.states
 			}
 			else
 			{
-				throw new Error("The target transition state is not valid.");
+				if (_logger)
+				{
+					_logger.log("The target transition state is not valid.", LogType.ERROR);
+				}
 			}
 		}
 

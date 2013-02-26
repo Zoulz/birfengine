@@ -1,6 +1,9 @@
 package com.burninghead.birf.messaging
 {
 	/**
+	 * Describes a simple message. Every message has a
+	 * type, sender and payload.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public interface IMessage
