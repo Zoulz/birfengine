@@ -1,8 +1,8 @@
-# birfEngine for Actionscript 3
+# BiRF Engine for Actionscript 3
 
 Authors: Tomas Augustinovic
 
-Copyright (c) Tomas Augustinovic 2012 - 2013
+Copyright (c) Tomas Augustinovic 2012-2013
 
 Licence Agreement (The MIT License)
 
