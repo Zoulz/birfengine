@@ -1,6 +1,6 @@
 # BiRF Engine for Actionscript 3
 
-A general game creation library based on a variant of the MVC/MVP design pattern. Inspired by modern frameworks such as: [RobotLegs](http://www.robotlegs.com) and [PureMVC](http://puremvc.org).
+A general game creation framework loosely based on the MVC design pattern. Inspired by modern frameworks such as: [RobotLegs](http://www.robotlegs.org) and [PureMVC](http://puremvc.org).
 
 ## F.A.Q.
 
