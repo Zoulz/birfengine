@@ -1,6 +1,6 @@
 package com.burninghead.birf.view
 {
-	import com.burninghead.birf.utils.IDisposable;
+	import com.burninghead.utils.IDisposable;
 	/**
 	 * Describes a mediator. Allows the mediator to register with a view 
 	 * component instance that it subsequently will use to operate upon.

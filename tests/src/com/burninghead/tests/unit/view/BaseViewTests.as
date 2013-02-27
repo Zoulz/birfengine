@@ -1,16 +1,15 @@
 package com.burninghead.tests.unit.view
 {
-	import flexunit.framework.Assert;
-
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.view.BaseMediator;
 	import com.burninghead.birf.view.BaseView;
-	import com.burninghead.extensions.messaging.handlers.SignalMessageHandler;
 	import com.burninghead.tests.TestRunner;
+	import com.burninghead.utils.messaging.handlers.SignalMessageHandler;
 
 	import org.flexunit.assertThat;
+	import org.hamcrest.object.equalTo;
 	import org.hamcrest.object.notNullValue;
 	import org.osflash.signals.utils.SignalAsyncEvent;
 	import org.osflash.signals.utils.handleSignal;
@@ -39,41 +38,52 @@ package com.burninghead.tests.unit.view
 		[Test(async)]
 		public function isInitializedTest():void
 		{
+			//	Listen for initialized signal.
 			handleSignal(this, _view.initialized, onViewInitialized);
 			
+			//	Set the stage container reference to allow view to initialize.
 			_view.stageObject = TestRunner.stageContainer;
 		}
 		
 		private function onViewInitialized(event:SignalAsyncEvent, data:Object):void
 		{
-			Assert.assertTrue(_view.isInitialized);
+			//	Assert if initialized flag has been set.
+			assertThat(_view.isInitialized, equalTo(true));
 		}
 		
 		[Test]
 		public function registerMediatorTest():void
 		{
+			//	Set the stage container reference to allow view to initialize.
 			_view.stageObject = TestRunner.stageContainer;
 			
+			//	Attempt to register a mediator.
 			_view.registerMediator(BaseMediator);
 		}
 		
 		[Test]
 		public function getMediatorTest():void
 		{
+			//	Set the stage container reference to allow view to initialize.
 			_view.stageObject = TestRunner.stageContainer;
 			
+			//	Register a mediator.
 			_view.registerMediator(BaseMediator);
 			
+			//	Assert that the mediator can be retrieved.
 			assertThat(_view.getMediator(BaseMediator), notNullValue());
 		}
 		
 		[Test]
 		public function unregisterMediatorTest():void
 		{
+			//	Set the stage container reference to allow view to initialize.
 			_view.stageObject = TestRunner.stageContainer;
-			
+
+			//	Register mediator.
 			_view.registerMediator(BaseMediator);
-				
+
+			//	Remove mediator.
 			_view.unregisterMediator(BaseMediator);
 		}
 	}

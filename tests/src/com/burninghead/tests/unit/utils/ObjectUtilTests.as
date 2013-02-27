@@ -1,10 +1,12 @@
 package com.burninghead.tests.unit.utils
 {
-	import flash.utils.Dictionary;
+	import com.burninghead.utils.ObjectUtil;
+
+	import org.flexunit.assertThat;
 	import org.hamcrest.object.equalTo;
 	import org.hamcrest.object.isNotNull;
-	import org.flexunit.assertThat;
-	import com.burninghead.birf.utils.ObjectUtil;
+
+	import flash.utils.Dictionary;
 	/**
 	 * @author tomas.augustinovic
 	 */

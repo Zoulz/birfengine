@@ -4,9 +4,9 @@ package com.burninghead.birf.view
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.states.IState;
-	import com.burninghead.birf.utils.ReflectionUtil;
-	import com.burninghead.birf.utils.logger.ILogger;
-	import com.burninghead.birf.utils.logger.LogType;
+	import com.burninghead.utils.ReflectionUtil;
+	import com.burninghead.utils.logger.ILogger;
+	import com.burninghead.utils.logger.LogType;
 
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;

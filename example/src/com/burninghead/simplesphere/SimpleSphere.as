@@ -1,10 +1,10 @@
 package com.burninghead.simplesphere
 {
-	import com.burninghead.extensions.utils.logger.ConsoleLoggerOutput;
 	import com.burninghead.birf.BaseGame;
 	import com.burninghead.birf.view.IView;
-	import com.burninghead.extensions.controller.cmds.ConsoleFilterCategoryCmd;
-	import com.burninghead.extensions.view.displaylist.mediators.ConsoleMediator;
+	import com.burninghead.extensions.console.ConsoleFilterCategoryCmd;
+	import com.burninghead.extensions.console.ConsoleLoggerOutput;
+	import com.burninghead.extensions.console.ConsoleMediator;
 	import com.burninghead.simplesphere.controller.ConsoleChangeSkinCmd;
 	import com.burninghead.simplesphere.controller.SphereChangeColorCmd;
 	import com.burninghead.simplesphere.model.ISphereModel;

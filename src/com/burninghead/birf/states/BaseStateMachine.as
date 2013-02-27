@@ -1,9 +1,11 @@
 package com.burninghead.birf.states
 {
-	import com.burninghead.birf.utils.logger.LogType;
-	import com.burninghead.birf.utils.logger.ILogger;
-	import org.osflash.signals.Signal;
+	import com.burninghead.utils.logger.ILogger;
+	import com.burninghead.utils.logger.LogType;
+
 	import org.osflash.signals.ISignal;
+	import org.osflash.signals.Signal;
+
 	import flash.utils.Dictionary;
 	/**
 	 * @author tomas.augustinovic

@@ -4,13 +4,13 @@ package com.burninghead.simplesphere.states
 	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.skinning.ISkinManager;
-	import com.burninghead.extensions.controller.cmds.ConsoleFilterCategoryCmd;
+	import com.burninghead.extensions.console.ConsoleFilterCategoryCmd;
+	import com.burninghead.extensions.console.ConsoleMediator;
+	import com.burninghead.extensions.console.ConsoleMediatorMsgType;
 	import com.burninghead.extensions.view.displaylist.comps.console.AzureConsoleSkin;
 	import com.burninghead.extensions.view.displaylist.comps.console.DisplayListConsoleView;
-	import com.burninghead.extensions.view.displaylist.mediators.ConsoleMediator;
-	import com.burninghead.extensions.view.displaylist.mediators.ConsoleMediatorMsgType;
-	import com.burninghead.extensions.view.displaylist.states.IDisplayListViewState;
 	import com.burninghead.extensions.view.displaylist.states.DisplayListViewState;
+	import com.burninghead.extensions.view.displaylist.states.IDisplayListViewState;
 	import com.burninghead.simplesphere.controller.ConsoleChangeSkinCmd;
 	import com.burninghead.simplesphere.view.comps.SphereView;
 	import com.burninghead.simplesphere.view.mediators.SphereMediator;

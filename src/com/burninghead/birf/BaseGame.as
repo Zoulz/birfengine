@@ -6,11 +6,11 @@ package com.burninghead.birf
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
-	import com.burninghead.birf.utils.logger.BaseLogger;
-	import com.burninghead.birf.utils.logger.ILogger;
-	import com.burninghead.birf.utils.logger.TraceLoggerOutput;
 	import com.burninghead.birf.view.BaseView;
 	import com.burninghead.birf.view.IView;
+	import com.burninghead.utils.logger.BaseLogger;
+	import com.burninghead.utils.logger.ILogger;
+	import com.burninghead.utils.logger.TraceLoggerOutput;
 
 	import flash.display.Sprite;
 	import flash.events.Event;

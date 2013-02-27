@@ -3,13 +3,13 @@ package com.burninghead.swarmdemo.view.mediators
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.view.BaseMediator;
 	import com.burninghead.birf.view.IMediator;
-	import com.burninghead.swarmdemo.view.comps.SwarmView;
+	import com.burninghead.swarmdemo.view.comps.ISwarmView;
 	/**
 	 * @author tomas.augustinovic
 	 */
 	public class SwarmMediator extends BaseMediator implements IMediator
 	{
-		private var _swarm:SwarmView;
+		private var _swarm:ISwarmView;
 		
 		override protected function init():void
 		{

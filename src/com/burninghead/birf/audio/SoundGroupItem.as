@@ -1,8 +1,9 @@
 package com.burninghead.birf.audio
 {
-	import com.burninghead.birf.utils.ICloneable;
-	import flash.media.SoundTransform;
+	import com.burninghead.utils.ICloneable;
+
 	import flash.media.SoundChannel;
+	import flash.media.SoundTransform;
 	/**
 	 * Holds information about a specific item inside a sound group. Used to
 	 * remember information about particular sounds when pausing/resuming.

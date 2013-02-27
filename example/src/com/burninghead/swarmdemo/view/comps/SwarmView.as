@@ -1,24 +1,23 @@
 package com.burninghead.swarmdemo.view.comps
 {
-	import com.burninghead.birf.utils.IDisposable;
-	import com.burninghead.birf.utils.MathUtil;
 	import com.burninghead.extensions.view.bitmaprenderer.BitmapSheet;
 	import com.burninghead.extensions.view.bitmaprenderer.IBitmapRenderer;
 	import com.burninghead.extensions.view.bitmaprenderer.renderables.Sprite;
 	import com.burninghead.swarmdemo.assets.RobinBitmapSheet;
+	import com.burninghead.utils.MathUtil;
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class SwarmView implements IDisposable
+	public class SwarmView implements ISwarmView
 	{
-		private var _robins:Vector.<RobinView>;
+		private var _robins:Vector.<Robin>;
 		private var _sheet:BitmapSheet;
 		private var _renderer:IBitmapRenderer;
 		
 		public function SwarmView(renderer:IBitmapRenderer)
 		{
 			_renderer = renderer;
-			_robins = new Vector.<RobinView>();
+			_robins = new Vector.<Robin>();
 			
 			//	Create bitmap sheet.
 			_sheet = BitmapSheet.fromBitmapData(new RobinBitmapSheet(), <frames><frame x="0" y="0" width="240" height="314" /></frames>);

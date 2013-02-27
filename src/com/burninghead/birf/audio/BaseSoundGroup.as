@@ -1,6 +1,6 @@
 package com.burninghead.birf.audio
 {
-	import com.burninghead.birf.utils.ReflectionUtil;
+	import com.burninghead.utils.ReflectionUtil;
 
 	import flash.events.Event;
 	import flash.media.Sound;

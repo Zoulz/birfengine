@@ -3,22 +3,23 @@ package com.burninghead.simplesphere.view.mediators
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.model.BaseModelMsgType;
 	import com.burninghead.birf.model.IModel;
+	import com.burninghead.birf.view.BaseMediator;
 	import com.burninghead.birf.view.IMediator;
-	import com.burninghead.extensions.view.displaylist.DisplayListMediator;
 	import com.burninghead.simplesphere.controller.SphereChangeColorCmd;
 	import com.burninghead.simplesphere.model.ISphereModel;
+	import com.burninghead.simplesphere.view.comps.ISphereView;
 	import com.burninghead.simplesphere.view.comps.SphereView;
 
 	import flash.events.MouseEvent;
 	/**
 	 * @author Zoulz
 	 */
-	public class SphereMediator extends DisplayListMediator implements IMediator
+	public class SphereMediator extends BaseMediator implements IMediator
 	{
 		[Inject] public var model:IModel;
 		
 		private var _sphere:ISphereModel;
-		private var _component:SphereView;
+		private var _component:ISphereView;
 		
 		/**
 		 * Initializes the mediator by saving a reference to the
@@ -57,10 +58,10 @@ package com.burninghead.simplesphere.view.mediators
 			super.registerView(value);
 			
 			//	Save casted reference to the view component.
-			_component = displayObject as SphereView;
+			_component = _view as SphereView;
 			
 			//	Add mouse click event listener.
-			displayObject.addEventListener(MouseEvent.CLICK, onClickEvent);
+			_component.click.add(onClickEvent);
 		}
 		
 		/**
@@ -78,7 +79,7 @@ package com.burninghead.simplesphere.view.mediators
 		 */
 		override public function dispose():void
 		{
-			displayObject.removeEventListener(MouseEvent.CLICK, onClickEvent);
+			_component.click.remove(onClickEvent);
 		}
 	}
 }

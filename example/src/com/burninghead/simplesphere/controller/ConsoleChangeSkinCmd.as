@@ -2,9 +2,9 @@ package com.burninghead.simplesphere.controller
 {
 	import com.burninghead.birf.controller.BaseCommand;
 	import com.burninghead.birf.controller.ICommand;
-	import com.burninghead.birf.utils.ReflectionUtil;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.simplesphere.view.SimpleSphereViewMsgType;
+	import com.burninghead.utils.ReflectionUtil;
 	/**
 	 * @author tomas.augustinovic
 	 */

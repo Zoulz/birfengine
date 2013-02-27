@@ -1,12 +1,13 @@
 package com.burninghead.tests.unit.utils
 {
-	import flash.geom.Point;
-	import org.hamcrest.object.equalTo;
-	import com.burninghead.birf.utils.MathUtil;
+	import com.burninghead.utils.MathUtil;
 
 	import org.flexunit.assertThat;
 	import org.hamcrest.number.greaterThanOrEqualTo;
 	import org.hamcrest.number.lessThanOrEqualTo;
+	import org.hamcrest.object.equalTo;
+
+	import flash.geom.Point;
 	/**
 	 * @author tomas.augustinovic
 	 */

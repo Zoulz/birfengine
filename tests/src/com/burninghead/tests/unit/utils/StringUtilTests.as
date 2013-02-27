@@ -1,8 +1,9 @@
 package com.burninghead.tests.unit.utils
 {
-	import org.hamcrest.object.equalTo;
+	import com.burninghead.utils.StringUtil;
+
 	import org.flexunit.assertThat;
-	import com.burninghead.birf.utils.StringUtil;
+	import org.hamcrest.object.equalTo;
 	/**
 	 * @author Zoulz
 	 */

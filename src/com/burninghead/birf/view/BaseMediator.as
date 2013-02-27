@@ -14,6 +14,7 @@ package com.burninghead.birf.view
 		[Inject] public var messageHandler:IMessageHandler;
 		
 		protected var _messenger:Messenger;
+		protected var _view:*;
 		
 		/**
 		 * <b>[PostConstruct]</b> Post dependency injection constructor. Setup message
@@ -47,6 +48,7 @@ package com.burninghead.birf.view
 		 */
 		public function registerView(value:*):void
 		{
+			_view = value;
 		}
 
 		/**

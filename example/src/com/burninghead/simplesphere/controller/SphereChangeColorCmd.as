@@ -2,8 +2,8 @@ package com.burninghead.simplesphere.controller
 {
 	import com.burninghead.birf.controller.BaseCommand;
 	import com.burninghead.birf.controller.ICommand;
-	import com.burninghead.birf.utils.MathUtil;
 	import com.burninghead.simplesphere.model.SimpleSphereModelMsgType;
+	import com.burninghead.utils.MathUtil;
 	/**
 	 * @author Zoulz
 	 */

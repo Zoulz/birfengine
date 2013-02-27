@@ -4,10 +4,10 @@ package com.burninghead.birf.controller
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.messaging.messages.CommandMessage;
 	import com.burninghead.birf.model.IModel;
-	import com.burninghead.birf.utils.ReflectionUtil;
-	import com.burninghead.birf.utils.logger.ILogger;
-	import com.burninghead.birf.utils.logger.LogType;
 	import com.burninghead.birf.view.IView;
+	import com.burninghead.utils.ReflectionUtil;
+	import com.burninghead.utils.logger.ILogger;
+	import com.burninghead.utils.logger.LogType;
 
 	import org.swiftsuspenders.Injector;
 

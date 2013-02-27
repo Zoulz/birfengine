@@ -1,9 +1,9 @@
 package com.burninghead.birf.model
 {
 	import com.burninghead.birf.messaging.IMessageHandler;
-	import com.burninghead.birf.utils.ReflectionUtil;
-	import com.burninghead.birf.utils.logger.ILogger;
-	import com.burninghead.birf.utils.logger.LogType;
+	import com.burninghead.utils.ReflectionUtil;
+	import com.burninghead.utils.logger.ILogger;
+	import com.burninghead.utils.logger.LogType;
 
 	import org.swiftsuspenders.Injector;
 

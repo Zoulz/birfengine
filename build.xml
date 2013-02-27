@@ -1,16 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="birf" default="compile">
+<project name="birf" default="help">
 	<property file="build.properties" />
+	
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	<taskdef resource="flexUnitTasks.tasks" classpath="${JAR_HOME}/lib/flexUnitTasks-4.1.0-9.jar" />
 
-	<target name="compile" depends="run-unit-tests,compile-birfcore,compile-birfext">
+	<include file="build-core.xml" as="core" />
+	<include file="build-extensions.xml" as="ext" />
+
+	<target name="help">
+		<echo message="*****************************************************************" />
+		<echo message=" compile:               Compile seperate debug builds of core and" />
+		<echo message="                        extensions." />
+		<echo message=" compile-core:          Compile debug build of core." />
+		<echo message=" compile-core-release:  Compile release build of core." />
+		<echo message=" compile-ext:           Compile debug build of extension SWCs." />
+		<echo message=" compile-ext-release:   Compile release build of extension SWCs." />
+		<echo message=" compile-baked:         Compile debug build of core and all" />
+		<echo message="                        extensions baked into one SWC." />
+		<echo message=" compile-baked-release: Compile release build of core and all" />
+		<echo message="                        extensions baked into one SWC." />
+		<echo message=" clean:                 Delete output folders." />
+		<echo message=" generate-docs:         Generate asdoc code documentation." />
+		<echo message="*****************************************************************" />
 	</target>
 	
-	<target name="compile-release" depends="run-unit-tests,compile-birfcore-release,compile-birfext-release">
+	<target name="compile" depends="run-unit-tests">
+		<antcall target="core.compile" />
+		<antcall target="ext.compile" />
 	</target>
 	
-	<target name="clean" depends="clean-output,clean-docs">
+	<target name="compile-release" depends="run-unit-tests">
+		<antcall target="core.compile-release" />
+		<antcall target="ext.compile-release" />
+	</target>
+	
+	<target name="clean">
+		<antcall target="clean-output" />
+		<antcall target="clean-docs" />
 	</target>
 	
 	<target name="clean-output">
@@ -26,152 +53,9 @@
 		<sleep seconds="2" />
 		<mkdir dir="${DOCS_DIR}" />
 	</target>
-	
-	<target name="compile-birfcore-release">
-		<echo message="__[ COMPILING CORE RELEASE SWC ]__" />
-		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}.swc"
-				optimize="true"
-				debug="false"
-				compiler.as3="true"
-				incremental="true"
-				maxmemory="512m"
-				strict="true"
-				compiler.show-deprecation-warnings="false"
-				swf-version="14"
-				target-player="11.1.0">
-			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${SRC_DIR}" />
-			<include-sources dir="${SRC_DIR}" includes="*" />
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
-			</external-library-path>
-			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
-			<compiler.define name="CONFIG::DEBUG" value="false" />
-		</compc>
-	</target>
-	
-	<target name="compile-birfcore">
-		<echo message="__[ COMPILING CORE DEBUG SWC ]__" />
-		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-debug.swc"
-				optimize="false"
-				debug="true"
-				compiler.as3="true"
-				incremental="true"
-				maxmemory="512m"
-				compiler.show-deprecation-warnings="true"
-				swf-version="14"
-				target-player="11.1.0">
-			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${SRC_DIR}" />
-			<include-sources dir="${SRC_DIR}" includes="*" />
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
-			</external-library-path>
-			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
-			<compiler.define name="CONFIG::DEBUG" value="true" />
-		</compc>
-	</target>
-	
-	<target name="compile-birfext">
-		<echo message="__[ COMPILING EXTENSIONS DEBUG SWC ]__" />
-		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}-debug.swc"
-				optimize="false"
-				debug="true"
-				compiler.as3="true"
-				incremental="true"
-				maxmemory="512m"
-				compiler.show-deprecation-warnings="true"
-				swf-version="14"
-				target-player="11.1.0">
-			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${EXT_SRC_DIR}" />
-			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
-			<external-library-path dir="${OUT_DIR}" append="true">
-				<include name="birf-v${BUILD_VERSION}-debug.swc" />
-			</external-library-path>
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
-			</external-library-path>
-			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
-			<compiler.define name="CONFIG::DEBUG" value="true" />
-		</compc>
-	</target>
-	
-	<target name="compile-birfext-release">
-		<echo message="__[ COMPILING EXTENSIONS RELEASE SWC ]__" />
-		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}.swc"
-				optimize="true"
-				debug="false"
-				compiler.as3="true"
-				incremental="true"
-				maxmemory="512m"
-				compiler.show-deprecation-warnings="true"
-				swf-version="14"
-				target-player="11.1.0">
-			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${EXT_SRC_DIR}" />
-			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
-			<external-library-path dir="${OUT_DIR}" append="true">
-				<include name="birf-v${BUILD_VERSION}.swc" />
-			</external-library-path>
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
-			</external-library-path>
-			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
-			<compiler.define name="CONFIG::DEBUG" value="false" />
-		</compc>
-	</target>
 
-	<target name="compile-all" depends="run-unit-tests">
-		<echo message="__[ COMPILING CORE AND EXTENSIONS DEBUG SWC ]__" />
-		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-all-debug.swc"
-				optimize="false"
-				debug="true"
-				compiler.as3="true"
-				incremental="true"
-				maxmemory="512m"
-				strict="true"
-				compiler.show-deprecation-warnings="false"
-				swf-version="14"
-				target-player="11.1.0">
-			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${SRC_DIR}" />
-			<include-sources dir="${SRC_DIR}" includes="*" />
-			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
-			</external-library-path>
-			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
-			<compiler.define name="CONFIG::DEBUG" value="true" />
-		</compc>
-	</target>
-
-	<target name="compile-all-release" depends="run-unit-tests">
-		<echo message="__[ COMPILING CORE AND EXTENSIONS RELEASE SWC ]__" />
-		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-all.swc"
-				optimize="true"
-				debug="false"
-				compiler.as3="true"
-				incremental="true"
-				maxmemory="512m"
-				strict="true"
-				compiler.show-deprecation-warnings="false"
-				swf-version="14"
-				target-player="11.1.0">
-			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${SRC_DIR}" />
-			<include-sources dir="${SRC_DIR}" includes="*" />
-			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
-			</external-library-path>
-			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
-			<compiler.define name="CONFIG::DEBUG" value="true" />
-		</compc>
-	</target>
-	
 	<target name="compile-baked" depends="run-unit-tests">
-		<echo message="__[ COMPILING CORE AND EXTENSIONS DEBUG BAKED SWC ]__" />
+		<echo message="__[ COMPILING BAKED DEBUG SWC ]__" />
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-baked-debug.swc"
 				optimize="false"
 				debug="true"
@@ -180,16 +64,39 @@
 				maxmemory="512m"
 				strict="true"
 				compiler.show-deprecation-warnings="false"
-				swf-version="14"
-				target-player="11.1.0">
+				swf-version="${EXT_SWF_VERSION}"
+				target-player="${TARGET_PLAYER_VERSION}">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<static-link-runtime-shared-libraries />
 			<source-path path-element="${SRC_DIR}" />
 			<include-sources dir="${SRC_DIR}" includes="*" />
-			<include-sources dir="${EXT_SRC_DIR}" includes="*" />
-			<compiler.library-path dir="${LIB_DIR}" append="true">
+			<include-sources dir="${EXT_DIR}/src" includes="*" />
+			<external-library-path dir="${LIB_DIR}" append="true">
 				<include name="*.swc" />
-			</compiler.library-path>
+			</external-library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="true" />
+		</compc>
+	</target>
+
+	<target name="compile-baked-release" depends="run-unit-tests">
+		<echo message="__[ COMPILING BAKED RELEASE SWC ]__" />
+		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-baked.swc"
+				optimize="true"
+				debug="false"
+				compiler.as3="true"
+				incremental="true"
+				maxmemory="512m"
+				strict="true"
+				compiler.show-deprecation-warnings="false"
+				swf-version="${EXT_SWF_VERSION}"
+				target-player="${TARGET_PLAYER_VERSION}">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${SRC_DIR}" />
+			<include-sources dir="${SRC_DIR}" includes="*" />
+			<include-sources dir="${EXT_DIR}/src" includes="*" />
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="true" />
 		</compc>
@@ -210,8 +117,13 @@
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<static-link-runtime-shared-libraries />
 			<source-path path-element="${SRC_DIR}" />
-			<source-path path-element="${TESTS_SRC_DIR}" />
-			<source-path path-element="${EXT_SRC_DIR}" />
+			<source-path path-element="${TESTS_DIR}/src" />
+			<source-path path-element="${EXT_DIR}/src" />
+			<source-path path-element="${EXT_DIR}/displaylistview/src" />
+			<source-path path-element="${EXT_DIR}/bitmaprendererview/src" />
+			<source-path path-element="${EXT_DIR}/starlingview/src" />
+			<source-path path-element="${EXT_DIR}/languagemodel/src" />
+			<source-path path-element="${EXT_DIR}/settingsmodel/src" />
 			<compiler.include-libraries dir="${LIB_DIR}" append="true">
 				<include name="*.swc" />
 			</compiler.include-libraries>
@@ -252,7 +164,12 @@
 				main-title="BiRF Engine v${BUILD_VERSION} Documentation"
 				footer="Copyright (c) Tomas Augustinovic 2012-2013 | BiRF Engine | http://www.github.com/Zoulz/birfengine">
 			<doc-sources path-element="${SRC_DIR}" />
-			<doc-sources path-element="${EXT_SRC_DIR}" />
+			<doc-sources path-element="${EXT_DIR}/src" />
+			<doc-sources path-element="${EXT_DIR}/displaylistview/src" />
+			<doc-sources path-element="${EXT_DIR}/bitmaprendererview/src" />
+			<doc-sources path-element="${EXT_DIR}/starlingview/src" />
+			<doc-sources path-element="${EXT_DIR}/languagemodel/src" />
+			<doc-sources path-element="${EXT_DIR}/settingsmodel/src" />
 			<external-library-path dir="${LIB_DIR}" append="true">
 				<include name="*.swc" />
 			</external-library-path>

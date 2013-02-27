@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="birf-build-extensions">
+	<property name="MAX_MEMORY" value="512m" />
+	<property name="STRICT" value="true" />
+	<property name="SHOW_DEPRECATION_WARNINGS" value="false" />
+	<property name="SWF_VERSION" value="14" />
+	<property name="TARGET_PLAYER_VERSION" value="11.1.0" />
+	
+	<target name="compile">
+		<echo message="__[ COMPILING EXTENSIONS DEBUG SWC ]__" />
+		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}-debug.swc"
+				optimize="false"
+				debug="true"
+				compiler.as3="true"
+				incremental="true"
+				strict="${STRICT}"
+				maxmemory="${MAX_MEMORY}"
+				compiler.show-deprecation-warnings="${SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${SWF_VERSION}"
+				target-player="${TARGET_PLAYER_VERSION}">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${EXT_DIR}/src" />
+			<include-sources dir="${EXT_DIR}/src" includes="*" />
+			<external-library-path dir="${OUT_DIR}" append="true">
+				<include name="birf-v${BUILD_VERSION}-debug.swc" />
+			</external-library-path>
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="true" />
+		</compc>
+	</target>
+	
+	<target name="compile-release">
+		<echo message="__[ COMPILING EXTENSIONS RELEASE SWC ]__" />
+		<compc output="${OUT_DIR}/birf-extensions-v${BUILD_VERSION}.swc"
+				optimize="true"
+				debug="false"
+				compiler.as3="true"
+				incremental="true"
+				strict="${STRICT}"
+				maxmemory="${MAX_MEMORY}"
+				compiler.show-deprecation-warnings="${SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${SWF_VERSION}"
+				target-player="${TARGET_PLAYER_VERSION}">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${EXT_DIR}/src" />
+			<include-sources dir="${EXT_DIR}/src" includes="*" />
+			<external-library-path dir="${OUT_DIR}" append="true">
+				<include name="birf-v${BUILD_VERSION}.swc" />
+			</external-library-path>
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="false" />
+		</compc>
+	</target>
+	
+	<target name="compile-displaylistview">
+		<echo message="__[ COMPILING DISPLAYLISTVIEW DEBUG SWC ]__" />
+		<compc output="${OUT_DIR}/birf-displaylistview-v${BUILD_VERSION}-debug.swc"
+				optimize="false"
+				debug="true"
+				compiler.as3="true"
+				incremental="true"
+				strict="${STRICT}"
+				maxmemory="${MAX_MEMORY}"
+				compiler.show-deprecation-warnings="${SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${SWF_VERSION}"
+				target-player="${TARGET_PLAYER_VERSION}">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<source-path path-element="${EXT_DIR}/displaylistview/src" />
+			<include-sources dir="${EXT_DIR}/displaylistview/src" includes="*" />
+			<external-library-path dir="${OUT_DIR}" append="true">
+				<include name="birf-v${BUILD_VERSION}-debug.swc" />
+				<include name="birf-extensions-v${BUILD_VERSION}-debug.swc" />
+			</external-library-path>
+			<external-library-path dir="${LIB_DIR}" append="true">
+				<include name="*.swc" />
+			</external-library-path>
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="true" />
+		</compc>
+	</target>
+</project>
