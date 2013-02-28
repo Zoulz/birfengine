@@ -1,6 +1,6 @@
 package com.burninghead.utils.net.assets
 {
-	import com.burninghead.utils.ObjectUtil;
+	import com.burninghead.utils.ObjectUtils;
 	import com.burninghead.utils.net.assets.parsers.GSGenericAssetParser;
 	import com.burninghead.utils.net.assets.parsers.GSMp3AssetParser;
 	import com.burninghead.utils.net.assets.parsers.GSSwfAssetParser;
@@ -92,7 +92,7 @@ package com.burninghead.utils.net.assets
 		{
 			LoaderMax.activate([ SWFLoader, XMLLoader, DataLoader, BinaryDataLoader, CSSLoader, ImageLoader, MP3Loader, VideoLoader ]);
 			
-			_loader = LoaderMax.parse(ObjectUtil.toArray(urls), _config);
+			_loader = LoaderMax.parse(ObjectUtils.toArray(urls), _config);
 			_loader.load(flushContent);
 		}
 		

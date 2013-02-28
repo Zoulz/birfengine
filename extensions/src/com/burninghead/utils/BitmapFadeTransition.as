@@ -34,7 +34,7 @@ package com.burninghead.utils
 				animVars = { };
 			}
 
-			TweenLite.from(bmp, delay, ObjectUtil.mergeObjects(vars, animVars));
+			TweenLite.from(bmp, delay, ObjectUtils.mergeObjects(vars, animVars));
 			
 			return bmp;
 		}
@@ -63,7 +63,7 @@ package com.burninghead.utils
 				animVars = { };
 			}
 			
-			TweenLite.to(bmp, delay, ObjectUtil.mergeObjects(vars, animVars));
+			TweenLite.to(bmp, delay, ObjectUtils.mergeObjects(vars, animVars));
 			
 			return bmp;
 		}

@@ -3,11 +3,11 @@ package com.burninghead.tests.performance.messaging
 	import com.burninghead.birf.messaging.BaseMessageHandler;
 	import com.burninghead.birf.messaging.IMessage;
 	import com.burninghead.birf.messaging.messages.BaseMessage;
-	import com.burninghead.extensions.messaging.BirfMessageEvent;
-	import com.burninghead.extensions.messaging.handlers.EventMessageHandler;
-	import com.burninghead.extensions.messaging.handlers.SignalMessageHandler;
-	import com.burninghead.extensions.messaging.handlers.TurboSignalMessageHandler;
-	import com.burninghead.extensions.performance.PerfTestCase;
+	import com.burninghead.utils.messaging.BirfMessageEvent;
+	import com.burninghead.utils.messaging.handlers.EventMessageHandler;
+	import com.burninghead.utils.messaging.handlers.SignalMessageHandler;
+	import com.burninghead.utils.messaging.handlers.TurboSignalMessageHandler;
+	import com.burninghead.utils.performance.PerfTestCase;
 	import com.jacksondunstan.signals.Slot1;
 	/**
 	 * @author tomas.augustinovic

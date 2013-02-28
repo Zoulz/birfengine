@@ -39,16 +39,22 @@ package com.burninghead.tests.unit.view
 		public function isInitializedTest():void
 		{
 			//	Listen for initialized signal.
-			handleSignal(this, _view.initialized, onViewInitialized);
+			_view.initialized.addOnce(onViewInitialized);
 			
 			//	Set the stage container reference to allow view to initialize.
 			_view.stageObject = TestRunner.stageContainer;
 		}
 		
-		private function onViewInitialized(event:SignalAsyncEvent, data:Object):void
+		private function onViewInitialized():void
 		{
 			//	Assert if initialized flag has been set.
 			assertThat(_view.isInitialized, equalTo(true));
+			
+			//	Remove stage object.
+			_view.stageObject = null;
+			
+			//	Assert that initialized flag has been set to false.
+			assertThat(_view.isInitialized, equalTo(false));
 		}
 		
 		[Test]

@@ -4,7 +4,7 @@ package com.burninghead.swarmdemo.view.comps
 	import com.burninghead.extensions.view.bitmaprenderer.IBitmapRenderer;
 	import com.burninghead.extensions.view.bitmaprenderer.renderables.Sprite;
 	import com.burninghead.swarmdemo.assets.RobinBitmapSheet;
-	import com.burninghead.utils.MathUtil;
+	import com.burninghead.utils.MathUtils;
 	/**
 	 * @author tomas.augustinovic
 	 */
@@ -28,8 +28,8 @@ package com.burninghead.swarmdemo.view.comps
 			for (var i:uint = 0; i < num; i++)
 			{
 				var robin:Sprite = new Sprite(_sheet);
-				robin.x = MathUtil.randomNumber(0, 400, true);
-				robin.y = MathUtil.randomNumber(0, 300, true);
+				robin.x = MathUtils.randomNumber(0, 400, true);
+				robin.y = MathUtils.randomNumber(0, 300, true);
 				_renderer.addChild(robin);
 			}
 		}

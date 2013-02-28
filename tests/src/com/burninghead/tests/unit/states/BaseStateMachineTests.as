@@ -3,12 +3,11 @@ package com.burninghead.tests.unit.states
 	import com.burninghead.birf.states.BaseState;
 	import com.burninghead.birf.states.BaseStateMachine;
 	import com.burninghead.birf.states.BaseStateTransition;
+	import com.burninghead.birf.states.IState;
 	import com.burninghead.tests.unit.mocks.MockBaseState;
 
 	import org.flexunit.assertThat;
 	import org.hamcrest.object.equalTo;
-	import org.osflash.signals.utils.SignalAsyncEvent;
-	import org.osflash.signals.utils.handleSignal;
 
 	/**
 	 * @author tomas.augustinovic
@@ -72,12 +71,12 @@ package com.burninghead.tests.unit.states
 			_sm.registerState("firstState", _state);
 			_sm.registerTransition("testTransition", _transition);
 			
-			handleSignal(this, _sm.stateChanged, changeStateTest_stateChanged);
+			_sm.stateChanged.addOnce(changeStateTest_stateChanged);
 			
 			_sm.changeState("firstState");
 		}
 		
-		private function changeStateTest_stateChanged(event:SignalAsyncEvent, data:Object):void
+		private function changeStateTest_stateChanged(oldState:IState, newState:IState):void
 		{
 			assertThat(_sm.stateId, equalTo("firstState"));
 		}
@@ -89,19 +88,20 @@ package com.burninghead.tests.unit.states
 			_sm.registerState("secondState", _state);
 			_sm.registerTransition("testTransition", _transition);
 			
-			handleSignal(this, _sm.stateChanged, stateTransitionTest_stateChanged);
+			_sm.stateChanged.addOnce(stateTransitionTest_stateChanged);
 			
 			_sm.changeState("firstState");
 		}
 		
-		private function stateTransitionTest_stateChanged(event:SignalAsyncEvent, data:Object):void
+		private function stateTransitionTest_stateChanged(oldState:IState, newState:IState):void
 		{
 			assertThat(_sm.stateId, equalTo("firstState"));
 			
-			handleSignal(this, _sm.stateChanged, onStateChangedToNext);
+			_sm.stateChanged.removeAll();
+			_sm.stateChanged.addOnce(onStateChangedToNext);
 		}
 		
-		private function onStateChangedToNext(event:SignalAsyncEvent, data:Object):void
+		private function onStateChangedToNext(oldState:IState, newState:IState):void
 		{
 			assertThat(_sm.stateId, equalTo("secondState"));
 		}

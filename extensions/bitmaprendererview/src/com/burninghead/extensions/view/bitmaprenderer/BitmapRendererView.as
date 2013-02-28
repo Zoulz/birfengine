@@ -62,6 +62,14 @@ package com.burninghead.extensions.view.bitmaprenderer
 			initStateMachine();
 		}
 		
+		override public function dispose():void
+		{
+			super.dispose();
+			
+			_addedToStage.removeAll();
+			(stageObject as DisplayObjectContainer).removeChild(_container);
+		}
+		
 		protected function getRenderClearColor():uint
 		{
 			return 0x49af00;

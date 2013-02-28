@@ -1,6 +1,6 @@
 package com.burninghead.extensions.view.displaylist.comps.ui
 {
-	import com.burninghead.utils.DisplayObjectUtil;
+	import com.burninghead.utils.DisplayObjectUtils;
 	import com.burninghead.utils.IDisposable;
 	import com.burninghead.utils.audio.groups.IUISoundGroup;
 
@@ -46,7 +46,7 @@ package com.burninghead.extensions.view.displaylist.comps.ui
 				b.dispose();
 			}
 			
-			DisplayObjectUtil.removeAllChildren(this);
+			DisplayObjectUtils.removeAllChildren(this);
 			
 			_buttons = new Vector.<IButtonView>();
 		}

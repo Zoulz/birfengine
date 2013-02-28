@@ -1,9 +1,9 @@
-package com.burninghead.tests.unit.view.displaylist
+package com.burninghead.tests.unit.view
 {
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
-	import com.burninghead.extensions.view.displaylist.DisplayListView;
+	import com.burninghead.extensions.view.bitmaprenderer.BitmapRendererView;
 	import com.burninghead.tests.TestRunner;
 	import com.burninghead.utils.messaging.handlers.SignalMessageHandler;
 
@@ -14,9 +14,9 @@ package com.burninghead.tests.unit.view.displaylist
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class DisplayListViewTests
+	public class BitmapRendererViewTests
 	{
-		private var _view:DisplayListView;
+		private var _view:BitmapRendererView;
 		
 		[Before]
 		public function runBeforeEveryTest():void
@@ -24,7 +24,7 @@ package com.burninghead.tests.unit.view.displaylist
 			var msgHandler:IMessageHandler = new SignalMessageHandler();
 			var model:IModel = new BaseModel(msgHandler);
 			
-			_view = new DisplayListView(model, msgHandler);
+			_view = new BitmapRendererView(model, msgHandler);
 		}
 		
 		[After]
@@ -37,16 +37,22 @@ package com.burninghead.tests.unit.view.displaylist
 		public function isInitializedTest():void
 		{
 			//	Listen for initialized signal.
-			handleSignal(this, _view.initialized, onViewInitialized);
+			_view.initialized.addOnce(onViewInitialized);
 			
 			//	Set the stage container reference to allow view to initialize.
 			_view.stageObject = TestRunner.stageContainer;
 		}
 		
-		private function onViewInitialized(event:SignalAsyncEvent, data:Object):void
+		private function onViewInitialized():void
 		{
 			//	Assert if initialized flag has been set.
 			assertThat(_view.isInitialized, equalTo(true));
+			
+			//	Remove stage object.
+			_view.stageObject = null;
+			
+			//	Assert that initialized flag has been set to false.
+			assertThat(_view.isInitialized, equalTo(false));
 		}
 	}
 }

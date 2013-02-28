@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="birf" default="help">
+	<!-- Set the FLEX_HOME variable. -->
+	<property environment="env."/>
+	<fail unless="env.FLEX_HOME" message="FLEX_HOME needs to be defined as an environment variable or in the ANT build." />
+	
+	<!-- Check version of FlexSDK. -->
+	<property name="FLEX_HOME" value="${env.FLEX_HOME}" />
+	<xmlproperty file="${FLEX_HOME}/flex-sdk-description.xml" />
+	<echo>__[ FLEXSDK VERSION ]__</echo>
+	<echo>Current: ${flex-sdk-description.version}</echo>
+	<echo>Required: 4.6.0</echo>
+
+	<!-- Include external properties. -->
 	<property file="build.properties" />
 	
+	<!-- Define flex and flexunit tasks. -->
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	<taskdef resource="flexUnitTasks.tasks" classpath="${JAR_HOME}/lib/flexUnitTasks-4.1.0-9.jar" />
 
+	<!-- Include external build scripts. -->
 	<include file="build-core.xml" as="core" />
 	<include file="build-extensions.xml" as="ext" />
 
-	<target name="help">
-		<echo message="*****************************************************************" />
+	<target name="help" description="Display help message.">
+		<echo message="__[ HELP ]__" />
 		<echo message=" compile:               Compile seperate debug builds of core and" />
 		<echo message="                        extensions." />
 		<echo message=" compile-core:          Compile debug build of core." />
@@ -25,7 +39,7 @@
 		<echo message="*****************************************************************" />
 	</target>
 	
-	<target name="compile" depends="run-unit-tests">
+	<target name="compile" depends="run-unit-tests" description="Compile seperate debug builds of core and extensions.">
 		<antcall target="core.compile" />
 		<antcall target="ext.compile" />
 	</target>
@@ -33,6 +47,22 @@
 	<target name="compile-release" depends="run-unit-tests">
 		<antcall target="core.compile-release" />
 		<antcall target="ext.compile-release" />
+	</target>
+	
+	<target name="compile-core" depends="run-unit-tests" description="Compile debug build of core.">
+		<antcall target="core.compile" />
+	</target>
+	
+	<target name="compile-core-release" depends="run-unit-tests" description="Compile debug build of core.">
+		<antcall target="core.compile-release" />
+	</target>
+	
+	<target name="compile-core-baked" depends="run-unit-tests" description="Compile debug build of core.">
+		<antcall target="core.compile-baked" />
+	</target>
+	
+	<target name="compile-core-baked-release" depends="run-unit-tests" description="Compile debug build of core.">
+		<antcall target="core.compile-baked-release" />
 	</target>
 	
 	<target name="clean">
@@ -170,6 +200,7 @@
 			<doc-sources path-element="${EXT_DIR}/starlingview/src" />
 			<doc-sources path-element="${EXT_DIR}/languagemodel/src" />
 			<doc-sources path-element="${EXT_DIR}/settingsmodel/src" />
+			<doc-sources path-element="${EXT_DIR}/console/src" />
 			<external-library-path dir="${LIB_DIR}" append="true">
 				<include name="*.swc" />
 			</external-library-path>

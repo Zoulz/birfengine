@@ -4,7 +4,7 @@ package com.burninghead.birf.view
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.IModel;
 	import com.burninghead.birf.states.IState;
-	import com.burninghead.utils.ReflectionUtil;
+	import com.burninghead.utils.ReflectionUtils;
 	import com.burninghead.utils.logger.ILogger;
 	import com.burninghead.utils.logger.LogType;
 
@@ -16,6 +16,28 @@ package com.burninghead.birf.view
 
 	/**
 	 * Base implementation of View. Handles injection of mediators.
+	 * 
+	 * <pre>
+	 * -----------------------------------------------------------------------------------------------------------------------------------------
+	 * 
+	 * Copyright (c) Tomas Augustinovic 2012-2013
+	 *
+	 * Licence Agreement (The MIT License)
+	 *
+	 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
+	 * (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge,
+	 * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do
+	 * so, subject to the following conditions:
+	 *
+	 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+	 *
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	 * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+	 * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+	 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	 * 
+	 * -----------------------------------------------------------------------------------------------------------------------------------------
+	 * </pre>
 	 * 
 	 * @see IView
 	 * @see IMediator
@@ -69,6 +91,19 @@ package com.burninghead.birf.view
 		}
 		
 		/**
+		 * Clean up everything that the view has done. This is called when a new
+		 * stage object has been set. Cleans up the injector.
+		 */
+		public function dispose():void
+		{
+			_initialized.removeAll();
+			
+			_injector.teardown();
+			
+			_injector = new Injector();
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		public function getMediator(mediator:Class, name:String = ""):IMediator
@@ -97,7 +132,7 @@ package com.burninghead.birf.view
 		 */
 		public function registerMediator(mediator:Class, name:String = ""):void
 		{
-			if (ReflectionUtil.isType(mediator, IMediator))
+			if (ReflectionUtils.isType(mediator, IMediator))
 			{
 				_injector.map(mediator, name).asSingleton();
 			}
@@ -148,10 +183,19 @@ package com.burninghead.birf.view
 		 */
 		public function set stageObject(value:DisplayObject):void
 		{
-			if (_isInit == false)
+			//	If already initialized, dispose and clean up first.
+			if (_isInit)
 			{
-				_stageObject = value;
-				
+				_isInit = false;
+				dispose();
+			}
+			
+			//	Set reference.
+			_stageObject = value;
+			
+			//	Unless reference is null, initialize the view.
+			if (_stageObject != null)
+			{
 				//	Flag that we are initialized.
 				_isInit = true;
 				
@@ -163,10 +207,6 @@ package com.burninghead.birf.view
 				
 				//	Perform any initialization.
 				init();
-			}
-			else
-			{
-				_logger.log("Cannot change stage instance. View is already initialized.", LogType.ERROR);
 			}
 		}
 	}

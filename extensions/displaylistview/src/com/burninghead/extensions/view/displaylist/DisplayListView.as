@@ -44,6 +44,17 @@ package com.burninghead.extensions.view.displaylist
 			_initialized.dispatch();
 		}
 		
+		override public function dispose():void
+		{
+			super.dispose();
+			
+			if (_container.hasEventListener(Event.ADDED_TO_STAGE))
+			{
+				_container.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			}
+			(stageObject as DisplayObjectContainer).removeChild(_container);
+		}
+		
 		/**
 		 * Initialize the view state machine.
 		 */

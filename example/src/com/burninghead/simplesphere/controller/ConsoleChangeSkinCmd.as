@@ -4,7 +4,7 @@ package com.burninghead.simplesphere.controller
 	import com.burninghead.birf.controller.ICommand;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.simplesphere.view.SimpleSphereViewMsgType;
-	import com.burninghead.utils.ReflectionUtil;
+	import com.burninghead.utils.ReflectionUtils;
 	/**
 	 * @author tomas.augustinovic
 	 */
@@ -14,8 +14,8 @@ package com.burninghead.simplesphere.controller
 		
 		public function execute(params:*):void
 		{
-			var newSkin:* = ReflectionUtil.getInstanceByName(String(Object(params).params[0]));
-			var applyTo:Class = ReflectionUtil.getClass(String(Object(params).params[1]));
+			var newSkin:* = ReflectionUtils.getInstanceByName(String(Object(params).params[0]));
+			var applyTo:Class = ReflectionUtils.getClass(String(Object(params).params[1]));
 			
 			_messenger.sendMessage(SimpleSphereViewMsgType.CHANGE_SKIN, { skin: newSkin, applyTo: applyTo });
 		}
