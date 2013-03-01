@@ -1,6 +1,6 @@
 package com.burninghead.tests.unit
 {
-	import com.burninghead.birf.BaseGame;
+	import com.burninghead.birf.BaseCore;
 	import com.burninghead.tests.TestRunner;
 
 	import org.flexunit.assertThat;
@@ -11,13 +11,13 @@ package com.burninghead.tests.unit
 	 */
 	public class BaseGameTests
 	{
-		private var _game:BaseGame;
+		private var _game:BaseCore;
 
 		[Before]
 		public function runBeforeEachTest():void
 		{
 			//	Create instance of BaseGame.
-			_game = new BaseGame();
+			_game = new BaseCore();
 			
 			//	Add instance to stage container.
 			TestRunner.stageContainer.addChild(_game);

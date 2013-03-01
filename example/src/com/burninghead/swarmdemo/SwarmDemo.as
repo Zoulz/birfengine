@@ -1,14 +1,14 @@
 package com.burninghead.swarmdemo
 {
 	import com.burninghead.swarmdemo.view.mediators.SwarmMediator;
-	import com.burninghead.birf.BaseGame;
+	import com.burninghead.birf.BaseCore;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.swarmdemo.view.SwarmDemoView;
 	/**
 	 * @author tomas.augustinovic
 	 */
 	[SWF(backgroundColor="#FFFFFF", frameRate="60", width="400", height="300")]
-	public class SwarmDemo extends BaseGame
+	public class SwarmDemo extends BaseCore
 	{
 		/**
 		 * Injects the correct project specific view.
@@ -22,14 +22,14 @@ package com.burninghead.swarmdemo
 		 * Overriden to register the commands needed for this
 		 * project.
 		 */
-		override protected function registerCommands():void
+		override public function registerCommands():void
 		{
 		}
 		
 		/**
 		 * Register the mediators needed for this project.
 		 */
-		override protected function registerMediators():void
+		override public function registerMediators():void
 		{
 			view.registerMediator(SwarmMediator);
 		}
@@ -37,7 +37,7 @@ package com.burninghead.swarmdemo
 		/**
 		 * Register model parts needed for this project.
 		 */
-		override protected function registerModelProxies():void
+		override public function registerProxyModels():void
 		{
 		}
 	}

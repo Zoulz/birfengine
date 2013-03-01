@@ -1,6 +1,6 @@
 package com.burninghead.utils.audio.groups
 {
-	import com.burninghead.birf.audio.ISoundGroup;
+	import com.burninghead.utils.audio.ISoundGroup;
 	/**
 	 * @author tomas.augustinovic
 	 */

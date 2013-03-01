@@ -1,9 +1,7 @@
 package com.burninghead.utils.audio
 {
-	import com.burninghead.birf.audio.BaseSoundGroup;
-	import com.burninghead.birf.audio.ISoundGroup;
 	import com.burninghead.utils.ReflectionUtils;
-	import com.burninghead.utils.net.assets.types.GSSwfAsset;
+	import com.burninghead.utils.assets.types.GSSwfAsset;
 
 	import flash.media.Sound;
 

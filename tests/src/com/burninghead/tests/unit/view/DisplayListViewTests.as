@@ -3,7 +3,7 @@ package com.burninghead.tests.unit.view
 	import com.burninghead.birf.messaging.IMessageHandler;
 	import com.burninghead.birf.model.BaseModel;
 	import com.burninghead.birf.model.IModel;
-	import com.burninghead.extensions.view.displaylist.DisplayListView;
+	import com.burninghead.extensions.displaylist.DisplayListView;
 	import com.burninghead.tests.TestRunner;
 	import com.burninghead.utils.messaging.handlers.SignalMessageHandler;
 

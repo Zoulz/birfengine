@@ -1,6 +1,6 @@
 package com.burninghead.simplesphere
 {
-	import com.burninghead.birf.BaseGame;
+	import com.burninghead.birf.BaseCore;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.extensions.console.ConsoleFilterCategoryCmd;
 	import com.burninghead.extensions.console.ConsoleLoggerOutput;
@@ -18,7 +18,7 @@ package com.burninghead.simplesphere
 	 * @author Zoulz
 	 */
 	[SWF(backgroundColor="#FFFFFF", frameRate="60", width="640", height="300")]
-	public class SimpleSphere extends BaseGame
+	public class SimpleSphere extends BaseCore
 	{
 		/**
 		 * Injects the correct project specific view.
@@ -32,7 +32,7 @@ package com.burninghead.simplesphere
 		 * Overriden to register the commands needed for this
 		 * project.
 		 */
-		override protected function registerCommands():void
+		override public function registerCommands():void
 		{
 			controller.registerCommand(SphereChangeColorCmd);
 			
@@ -43,7 +43,7 @@ package com.burninghead.simplesphere
 		/**
 		 * Register the mediators needed for this project.
 		 */
-		override protected function registerMediators():void
+		override public function registerMediators():void
 		{
 			view.registerMediator(SphereMediator);
 			view.registerMediator(ConsoleMediator);
@@ -52,7 +52,7 @@ package com.burninghead.simplesphere
 		/**
 		 * Register model parts needed for this project.
 		 */
-		override protected function registerModelProxies():void
+		override public function registerProxyModels():void
 		{
 			model.registerProxy(ISphereModel, SphereModel);
 		}

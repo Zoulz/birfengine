@@ -1,6 +1,6 @@
 # birfEngine Extensions
 
-This folder contains a number of useful "out-of-the-box" extensions and utilities for BiRF.
+This folder contains a number of useful "out-of-the-box" extensions and utilities for birf.
 
 ## Bitmap Renderer View
 
@@ -8,7 +8,7 @@ A view that renders everything into one bitmap for applications that need speed,
 
 ## Displaylist View
 
-View implements standard flash displaylist interaction.
+View that supports standard flash displaylist manipulation.
 
 ## Starling View
 

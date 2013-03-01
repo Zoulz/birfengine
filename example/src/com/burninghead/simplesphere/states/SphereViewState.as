@@ -7,10 +7,10 @@ package com.burninghead.simplesphere.states
 	import com.burninghead.extensions.console.ConsoleFilterCategoryCmd;
 	import com.burninghead.extensions.console.ConsoleMediator;
 	import com.burninghead.extensions.console.ConsoleMediatorMsgType;
-	import com.burninghead.extensions.view.displaylist.comps.console.AzureConsoleSkin;
-	import com.burninghead.extensions.view.displaylist.comps.console.DisplayListConsoleView;
-	import com.burninghead.extensions.view.displaylist.states.DisplayListViewState;
-	import com.burninghead.extensions.view.displaylist.states.IDisplayListViewState;
+	import com.burninghead.extensions.displaylist.comps.console.AzureConsoleSkin;
+	import com.burninghead.extensions.displaylist.comps.console.DisplayListConsoleView;
+	import com.burninghead.extensions.displaylist.states.DisplayListViewState;
+	import com.burninghead.extensions.displaylist.states.IDisplayListViewState;
 	import com.burninghead.simplesphere.controller.ConsoleChangeSkinCmd;
 	import com.burninghead.simplesphere.view.comps.SphereView;
 	import com.burninghead.simplesphere.view.mediators.SphereMediator;

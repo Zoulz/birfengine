@@ -1,4 +1,4 @@
-# BiRF Engine for Actionscript 3
+# birfEngine for Actionscript 3
 
 Authors: Tomas Augustinovic
 

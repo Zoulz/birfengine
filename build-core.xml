@@ -1,46 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="birf-core">
-	<property name="MAX_MEMORY" value="512m" />
-	<property name="STRICT" value="true" />
-	<property name="SHOW_DEPRECATION_WARNINGS" value="false" />
-	<property name="SWF_VERSION" value="10" />
-	<property name="TARGET_PLAYER_VERSION" value="10.0.0" />
-	<property name="LIB_DEPENDENCIES" value="as3-signals-v0.9-BETA.swc,Swiftsuspenders-v2.0.0rc2stray2.swc" />
+	<property name="core.MAX_MEMORY" value="512m" />
+	<property name="core.STRICT" value="true" />
+	<property name="core.SHOW_DEPRECATION_WARNINGS" value="false" />
+	<property name="core.SWF_VERSION" value="10" />
+	<property name="core.TARGET_PLAYER_VERSION" value="10.0.0" />
+	<property name="core.LIB_DEPENDENCIES" value="as3-signals-v0.9-BETA.swc,Swiftsuspenders-v2.0.0rc2stray2.swc" />
 	
 	<target name="compile-release" description="Compile release build of BiRF core.">
 		<echo message="__[ COMPILING CORE RELEASE SWC ]__" />
+		<echo message="__[ Target player: ${core.TARGET_PLAYER_VERSION} ]__" />
+		<echo message="__[ Swf version: ${core.SWF_VERSION} ]__" />
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}.swc"
 				optimize="true"
 				debug="false"
 				compiler.as3="true"
 				incremental="true"
-				maxmemory="${MAX_MEMORY}"
-				strict="${STRICT}"
-				compiler.show-deprecation-warnings="${SHOW_DEPRECATION_WARNINGS}"
-				swf-version="${SWF_VERSION}"
-				target-player="${TARGET_PLAYER_VERSION}">
+				maxmemory="${core.MAX_MEMORY}"
+				strict="${core.STRICT}"
+				compiler.show-deprecation-warnings="${core.SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${core.SWF_VERSION}"
+				target-player="${core.TARGET_PLAYER_VERSION}">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="false" />
 			<!-- Source code to compile. -->
 			<include-sources dir="${SRC_DIR}" includes="*" />
 			<!-- Libs to use during compilation (not included in final SWC). -->
-			<external-library-path dir="${RELEASE_LIB_DIR}" append="true" includes="${LIB_DEPENDENCIES}" />
+			<external-library-path dir="${RELEASE_LIB_DIR}" append="true" includes="${core.LIB_DEPENDENCIES}" />
 		</compc>
 	</target>
 	
 	<target name="compile" description="Compile debug build of BiRF core.">
 		<echo message="__[ COMPILING CORE DEBUG SWC ]__" />
+		<echo message="__[ Target player: ${core.TARGET_PLAYER_VERSION} ]__" />
+		<echo message="__[ Swf version: ${core.SWF_VERSION} ]__" />
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-debug.swc"
 				optimize="false"
 				debug="true"
 				compiler.as3="true"
 				incremental="true"
-				maxmemory="${MAX_MEMORY}"
-				strict="${STRICT}"
-				compiler.show-deprecation-warnings="${SHOW_DEPRECATION_WARNINGS}"
-				swf-version="${SWF_VERSION}"
-				target-player="${TARGET_PLAYER_VERSION}">
+				maxmemory="${core.MAX_MEMORY}"
+				strict="${core.STRICT}"
+				compiler.show-deprecation-warnings="${core.SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${core.SWF_VERSION}"
+				target-player="${core.TARGET_PLAYER_VERSION}">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="true" />
@@ -48,22 +52,24 @@
 			<source-path path-element="${SRC_DIR}" />
 			<include-sources dir="${SRC_DIR}" includes="*" />
 			<!-- Libs to use during compilation (not included in final SWC). -->
-			<external-library-path dir="${LIB_DIR}" append="true" includes="${LIB_DEPENDENCIES}" />
+			<external-library-path dir="${LIB_DIR}" append="true" includes="${core.LIB_DEPENDENCIES}" />
 		</compc>
 	</target>
 	
 	<target name="compile-baked" description="Compile baked debug build of BiRF core.">
 		<echo message="__[ COMPILING BAKED CORE DEBUG SWC ]__" />
+		<echo message="__[ Target player: ${core.TARGET_PLAYER_VERSION} ]__" />
+		<echo message="__[ Swf version: ${core.SWF_VERSION} ]__" />
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-baked-debug.swc"
 				optimize="false"
 				debug="true"
 				compiler.as3="true"
 				incremental="true"
-				maxmemory="${MAX_MEMORY}"
-				strict="${STRICT}"
-				compiler.show-deprecation-warnings="${SHOW_DEPRECATION_WARNINGS}"
-				swf-version="${SWF_VERSION}"
-				target-player="${TARGET_PLAYER_VERSION}">
+				maxmemory="${core.MAX_MEMORY}"
+				strict="${core.STRICT}"
+				compiler.show-deprecation-warnings="${core.SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${core.SWF_VERSION}"
+				target-player="${core.TARGET_PLAYER_VERSION}">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="true" />
@@ -71,22 +77,24 @@
 			<source-path path-element="${SRC_DIR}" />
 			<include-sources dir="${SRC_DIR}" includes="*" />
 			<!-- Libs to include in final SWC. -->
-			<include-libraries dir="${LIB_DIR}" includes="${LIB_DEPENDENCIES}" />
+			<include-libraries dir="${LIB_DIR}" includes="${core.LIB_DEPENDENCIES}" />
 		</compc>
 	</target>
 	
 	<target name="compile-baked-release" description="Compile baked release build of BiRF core.">
 		<echo message="__[ COMPILING BAKED CORE RELEASE SWC ]__" />
+		<echo message="__[ Target player: ${core.TARGET_PLAYER_VERSION} ]__" />
+		<echo message="__[ Swf version: ${core.SWF_VERSION} ]__" />
 		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-baked.swc"
 				optimize="true"
 				debug="false"
 				compiler.as3="true"
 				incremental="true"
-				maxmemory="${MAX_MEMORY}"
-				strict="${STRICT}"
-				compiler.show-deprecation-warnings="${SHOW_DEPRECATION_WARNINGS}"
-				swf-version="${SWF_VERSION}"
-				target-player="${TARGET_PLAYER_VERSION}">
+				maxmemory="${core.MAX_MEMORY}"
+				strict="${core.STRICT}"
+				compiler.show-deprecation-warnings="${core.SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${core.SWF_VERSION}"
+				target-player="${core.TARGET_PLAYER_VERSION}">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="false" />
@@ -94,7 +102,7 @@
 			<source-path path-element="${SRC_DIR}" />
 			<include-sources dir="${SRC_DIR}" includes="*" />
 			<!-- Libs to include in final SWC. -->
-			<include-libraries dir="${RELEASE_LIB_DIR}" includes="${LIB_DEPENDENCIES}" />
+			<include-libraries dir="${RELEASE_LIB_DIR}" includes="${core.LIB_DEPENDENCIES}" />
 		</compc>
 	</target>
 </project>

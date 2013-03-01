@@ -4,14 +4,12 @@
 	<property environment="env."/>
 	<fail unless="env.FLEX_HOME" message="FLEX_HOME needs to be defined as an environment variable or in the ANT build." />
 	
-	<!-- Check version of FlexSDK. -->
+	<!-- Get version of FlexSDK. -->
 	<property name="FLEX_HOME" value="${env.FLEX_HOME}" />
 	<xmlproperty file="${FLEX_HOME}/flex-sdk-description.xml" />
-	<echo>__[ FLEXSDK VERSION ]__</echo>
-	<echo>Current: ${flex-sdk-description.version}</echo>
-	<echo>Required: 4.6.0</echo>
 
 	<!-- Include external properties. -->
+	<property file="version.properties" />
 	<property file="build.properties" />
 	
 	<!-- Define flex and flexunit tasks. -->
@@ -39,29 +37,47 @@
 		<echo message="*****************************************************************" />
 	</target>
 	
-	<target name="compile" depends="run-unit-tests" description="Compile seperate debug builds of core and extensions.">
+	<target name="version">
+		<echo>__[ birfEngine ${BUILD_VERSION} ${BUILD_NAME} ]__</echo>
+		<echo></echo>
+		<echo>__[ FLEXSDK VERSION ]__</echo>
+		<echo>Current: ${flex-sdk-description.version}</echo>
+		<echo>Required: 4.6.0</echo>
+	</target>
+	
+	<target name="compile" depends="version,run-unit-tests" description="Compile seperate debug builds of core and extensions.">
 		<antcall target="core.compile" />
 		<antcall target="ext.compile" />
 	</target>
 	
-	<target name="compile-release" depends="run-unit-tests">
+	<target name="compile-release" depends="version,run-unit-tests" description="Compile seperate release builds of core and extensions.">
 		<antcall target="core.compile-release" />
 		<antcall target="ext.compile-release" />
 	</target>
 	
-	<target name="compile-core" depends="run-unit-tests" description="Compile debug build of core.">
+	<target name="compile-baked" depends="version,run-unit-tests" description="Compile seperate debug builds of core and extensions.">
+		<antcall target="core.compile-baked" />
+		<antcall target="ext.compile-baked" />
+	</target>
+	
+	<target name="compile-baked-release" depends="version,run-unit-tests" description="Compile seperate release builds of core and extensions.">
+		<antcall target="core.compile-baked-release" />
+		<antcall target="ext.compile-baked-release" />
+	</target>
+	
+	<target name="compile-core" depends="version,run-unit-tests" description="Compile debug build of core.">
 		<antcall target="core.compile" />
 	</target>
 	
-	<target name="compile-core-release" depends="run-unit-tests" description="Compile debug build of core.">
+	<target name="compile-core-release" depends="version,run-unit-tests" description="Compile debug build of core.">
 		<antcall target="core.compile-release" />
 	</target>
 	
-	<target name="compile-core-baked" depends="run-unit-tests" description="Compile debug build of core.">
+	<target name="compile-core-baked" depends="version,run-unit-tests" description="Compile debug build of core.">
 		<antcall target="core.compile-baked" />
 	</target>
 	
-	<target name="compile-core-baked-release" depends="run-unit-tests" description="Compile debug build of core.">
+	<target name="compile-core-baked-release" depends="version,run-unit-tests" description="Compile debug build of core.">
 		<antcall target="core.compile-baked-release" />
 	</target>
 	
@@ -82,54 +98,6 @@
 		<delete dir="${DOCS_DIR}" includeemptydirs="true" deleteonexit="true" failonerror="true" />
 		<sleep seconds="2" />
 		<mkdir dir="${DOCS_DIR}" />
-	</target>
-
-	<target name="compile-baked" depends="run-unit-tests">
-		<echo message="__[ COMPILING BAKED DEBUG SWC ]__" />
-		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-baked-debug.swc"
-				optimize="false"
-				debug="true"
-				compiler.as3="true"
-				incremental="true"
-				maxmemory="512m"
-				strict="true"
-				compiler.show-deprecation-warnings="false"
-				swf-version="${EXT_SWF_VERSION}"
-				target-player="${TARGET_PLAYER_VERSION}">
-			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${SRC_DIR}" />
-			<include-sources dir="${SRC_DIR}" includes="*" />
-			<include-sources dir="${EXT_DIR}/src" includes="*" />
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
-			</external-library-path>
-			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
-			<compiler.define name="CONFIG::DEBUG" value="true" />
-		</compc>
-	</target>
-
-	<target name="compile-baked-release" depends="run-unit-tests">
-		<echo message="__[ COMPILING BAKED RELEASE SWC ]__" />
-		<compc output="${OUT_DIR}/birf-v${BUILD_VERSION}-baked.swc"
-				optimize="true"
-				debug="false"
-				compiler.as3="true"
-				incremental="true"
-				maxmemory="512m"
-				strict="true"
-				compiler.show-deprecation-warnings="false"
-				swf-version="${EXT_SWF_VERSION}"
-				target-player="${TARGET_PLAYER_VERSION}">
-			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
-			<source-path path-element="${SRC_DIR}" />
-			<include-sources dir="${SRC_DIR}" includes="*" />
-			<include-sources dir="${EXT_DIR}/src" includes="*" />
-			<external-library-path dir="${LIB_DIR}" append="true">
-				<include name="*.swc" />
-			</external-library-path>
-			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
-			<compiler.define name="CONFIG::DEBUG" value="true" />
-		</compc>
 	</target>
 
 	<target name="run-unit-tests">
@@ -163,7 +131,6 @@
 
 		<echo message="__[ RUNNING TESTRUNNER SWF ]__" />
 		<flexunit swf="${OUT_DIR}/TestRunner.swf"
-			command="${FLASH_PLAYER_EXE}"
             toDir="${OUT_DIR}"
             haltonfailure="true"
             verbose="false"
@@ -185,14 +152,14 @@
 		</delete>
 	</target>
 	
-	<target name="generate-docs" depends="clean-docs">
+	<target name="generate-docs" depends="version,clean-docs">
 		<echo message="__[ GENERATING DOCUMENTATION ]__" />
 		<asdoc output="${DOCS_DIR}"
 				lenient="true"
 				failonerror="true"
-				window-title="BiRF Engine v${BUILD_VERSION} Documentation"
-				main-title="BiRF Engine v${BUILD_VERSION} Documentation"
-				footer="Copyright (c) Tomas Augustinovic 2012-2013 | BiRF Engine | http://www.github.com/Zoulz/birfengine">
+				window-title="birfEngine v${BUILD_VERSION} Documentation"
+				main-title="birfEngine v${BUILD_VERSION} Documentation"
+				footer="Copyright (c) Tomas Augustinovic 2012-2013 | birfEngine | http://www.github.com/Zoulz/birfengine">
 			<doc-sources path-element="${SRC_DIR}" />
 			<doc-sources path-element="${EXT_DIR}/src" />
 			<doc-sources path-element="${EXT_DIR}/displaylistview/src" />

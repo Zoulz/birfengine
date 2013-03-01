@@ -33,6 +33,10 @@ package com.burninghead.birf.states
 	{
 		private var _injector:Injector;
 		
+		/**
+		 * Save reference to the supplied injector.
+		 * @param injector Dependency injector.
+		 */
 		public function InjectedStateMachine(injector:Injector)
 		{
 			super();
@@ -40,6 +44,11 @@ package com.burninghead.birf.states
 			_injector = injector;
 		}
 		
+		/**
+		 * Inject the state with dependencies when it is registered.
+		 * @param id Identifier of state.
+		 * @param state State instance.
+		 */
 		override public function registerState(id:String, state:IState):void
 		{
 			super.registerState(id, state);

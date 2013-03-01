@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="birf-ext">
-	<property name="MAX_MEMORY" value="512m" />
-	<property name="STRICT" value="true" />
-	<property name="SHOW_DEPRECATION_WARNINGS" value="false" />
-	<property name="SWF_VERSION" value="14" />
-	<property name="TARGET_PLAYER_VERSION" value="11.1.0" />
+	<property name="ext.MAX_MEMORY" value="512m" />
+	<property name="ext.STRICT" value="true" />
+	<property name="ext.SHOW_DEPRECATION_WARNINGS" value="false" />
+	<property name="ext.SWF_VERSION" value="16" />
+	<property name="ext.TARGET_PLAYER_VERSION" value="11.3.0" />
+	<property name="ext.utils.LIB_DEPENDENCIES" value="as3-signals-v0.9-BETA.swc,Swiftsuspenders-v2.0.0rc2stray2.swc,greensock.swc,TurboSignals.swc" />
 	
-	<target name="compile">
-		<antcall target="birf-ext.compile-utils" />
+	<target name="compile" depends="compile-utils">
 	</target>
 	
-	<target name="compile-release">
-		<antcall target="birf-ext.compile-utils-release" />
+	<target name="compile-release" depends="compile-utils-release">
+	</target>
+	
+	<target name="compile-baked" depends="compile-utils-baked">
+	</target>
+	
+	<target name="compile-baked-release" depends="compile-utils-baked-release">
 	</target>
 	
 	<target name="compile-utils">
 		<echo message="__[ COMPILING UTILS DEBUG SWC ]__" />
+		<echo message="__[ Target player: ${ext.TARGET_PLAYER_VERSION} ]__" />
+		<echo message="__[ Swf version: ${ext.SWF_VERSION} ]__" />
 		<compc output="${OUT_DIR}/birf-utils-v${BUILD_VERSION}-debug.swc"
 				optimize="false"
 				debug="true"
 				compiler.as3="true"
 				incremental="true"
-				strict="${STRICT}"
-				maxmemory="${MAX_MEMORY}"
-				compiler.show-deprecation-warnings="${SHOW_DEPRECATION_WARNINGS}"
-				swf-version="${SWF_VERSION}"
-				target-player="${TARGET_PLAYER_VERSION}">
+				strict="${ext.STRICT}"
+				maxmemory="${ext.MAX_MEMORY}"
+				compiler.show-deprecation-warnings="${ext.SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${ext.SWF_VERSION}"
+				target-player="${ext.TARGET_PLAYER_VERSION}">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="false" />
@@ -42,18 +49,49 @@
 		</compc>
 	</target>
 	
+	<target name="compile-utils-baked">
+		<echo message="__[ COMPILING BAKED UTILS DEBUG SWC ]__" />
+		<echo message="__[ Target player: ${ext.TARGET_PLAYER_VERSION} ]__" />
+		<echo message="__[ Swf version: ${ext.SWF_VERSION} ]__" />
+		<compc output="${OUT_DIR}/birf-utils-v${BUILD_VERSION}-baked-debug.swc"
+				optimize="false"
+				debug="true"
+				compiler.as3="true"
+				incremental="true"
+				strict="${ext.STRICT}"
+				maxmemory="${ext.MAX_MEMORY}"
+				compiler.show-deprecation-warnings="${ext.SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${ext.SWF_VERSION}"
+				target-player="${ext.TARGET_PLAYER_VERSION}">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="false" />
+			<!-- Source code to compile. -->
+			<source-path path-element="${EXT_DIR}/src" />
+			<include-sources dir="${EXT_DIR}/src" includes="*" />
+			<!-- Libs to use during compilation (not included in final SWC). -->
+			<external-library-path dir="${OUT_DIR}" append="true">
+				<include name="birf-v${BUILD_VERSION}-debug.swc" />
+			</external-library-path>
+			<!-- Libs included in final SWC. -->
+			<include-libraries dir="${LIB_DIR}" includes="${ext.utils.LIB_DEPENDENCIES}" />
+		</compc>
+	</target>
+	
 	<target name="compile-utils-release">
 		<echo message="__[ COMPILING UTILS RELEASE SWC ]__" />
-		<compc output="${OUT_DIR}/birf-utils-v${BUILD_VERSION}-debug.swc"
+		<echo message="__[ Target player: ${ext.TARGET_PLAYER_VERSION} ]__" />
+		<echo message="__[ Swf version: ${ext.SWF_VERSION} ]__" />
+		<compc output="${OUT_DIR}/birf-utils-v${BUILD_VERSION}.swc"
 				optimize="true"
 				debug="false"
 				compiler.as3="true"
 				incremental="true"
-				strict="${STRICT}"
-				maxmemory="${MAX_MEMORY}"
-				compiler.show-deprecation-warnings="${SHOW_DEPRECATION_WARNINGS}"
-				swf-version="${SWF_VERSION}"
-				target-player="${TARGET_PLAYER_VERSION}">
+				strict="${ext.STRICT}"
+				maxmemory="${ext.MAX_MEMORY}"
+				compiler.show-deprecation-warnings="${ext.SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${ext.SWF_VERSION}"
+				target-player="${ext.TARGET_PLAYER_VERSION}">
 			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
 			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
 			<compiler.define name="CONFIG::DEBUG" value="false" />
@@ -67,6 +105,35 @@
 			<external-library-path dir="${RELEASE_LIB_DIR}" append="true">
 				<include name="*.swc" />
 			</external-library-path>
+		</compc>
+	</target>
+	
+	<target name="compile-utils-baked-release">
+		<echo message="__[ COMPILING BAKED UTILS RELEASE SWC ]__" />
+		<echo message="__[ Target player: ${ext.TARGET_PLAYER_VERSION} ]__" />
+		<echo message="__[ Swf version: ${ext.SWF_VERSION} ]__" />
+		<compc output="${OUT_DIR}/birf-utils-v${BUILD_VERSION}-baked.swc"
+				optimize="true"
+				debug="false"
+				compiler.as3="true"
+				incremental="true"
+				strict="${ext.STRICT}"
+				maxmemory="${ext.MAX_MEMORY}"
+				compiler.show-deprecation-warnings="${ext.SHOW_DEPRECATION_WARNINGS}"
+				swf-version="${ext.SWF_VERSION}"
+				target-player="${ext.TARGET_PLAYER_VERSION}">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+			<compiler.define name="CONFIG::VERSION" value="'${BUILD_VERSION}'" />
+			<compiler.define name="CONFIG::DEBUG" value="false" />
+			<!-- Source code to compile. -->
+			<source-path path-element="${EXT_DIR}/src" />
+			<include-sources dir="${EXT_DIR}/src" includes="*" />
+			<!-- Libs to use during compilation (not included in final SWC). -->
+			<external-library-path dir="${OUT_DIR}" append="true">
+				<include name="birf-v${BUILD_VERSION}.swc" />
+			</external-library-path>
+			<!-- Libs included in final SWC. -->
+			<include-libraries dir="${RELEASE_LIB_DIR}" includes="${ext.utils.LIB_DEPENDENCIES}" />
 		</compc>
 	</target>
 </project>

@@ -7,7 +7,7 @@ package com.burninghead.simplesphere.view
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.birf.view.skinning.BaseSkinManager;
 	import com.burninghead.birf.view.skinning.ISkinManager;
-	import com.burninghead.extensions.view.displaylist.DisplayListView;
+	import com.burninghead.extensions.displaylist.DisplayListView;
 	import com.burninghead.simplesphere.states.SphereViewState;
 
 	/**

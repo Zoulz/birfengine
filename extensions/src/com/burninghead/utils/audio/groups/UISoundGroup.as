@@ -1,8 +1,8 @@
 package com.burninghead.utils.audio.groups
 {
-	import com.burninghead.birf.audio.ISoundGroup;
+	import com.burninghead.utils.assets.types.GSSwfAsset;
 	import com.burninghead.utils.audio.AssetSoundGroup;
-	import com.burninghead.utils.net.assets.types.GSSwfAsset;
+	import com.burninghead.utils.audio.ISoundGroup;
 	/**
 	 * @author tomas.augustinovic
 	 */

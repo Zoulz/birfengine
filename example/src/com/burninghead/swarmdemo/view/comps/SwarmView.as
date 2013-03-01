@@ -1,8 +1,8 @@
 package com.burninghead.swarmdemo.view.comps
 {
-	import com.burninghead.extensions.view.bitmaprenderer.BitmapSheet;
-	import com.burninghead.extensions.view.bitmaprenderer.IBitmapRenderer;
-	import com.burninghead.extensions.view.bitmaprenderer.renderables.Sprite;
+	import com.burninghead.extensions.bitmaprenderer.BitmapSheet;
+	import com.burninghead.extensions.bitmaprenderer.IBitmapRenderer;
+	import com.burninghead.extensions.bitmaprenderer.renderables.Sprite;
 	import com.burninghead.swarmdemo.assets.RobinBitmapSheet;
 	import com.burninghead.utils.MathUtils;
 	/**

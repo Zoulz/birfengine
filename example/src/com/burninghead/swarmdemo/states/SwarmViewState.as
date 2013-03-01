@@ -1,14 +1,14 @@
 package com.burninghead.swarmdemo.states
 {
-	import com.burninghead.swarmdemo.view.mediators.SwarmMediatorMsgType;
-	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.states.BaseState;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.IView;
-	import com.burninghead.extensions.view.bitmaprenderer.IBitmapRenderer;
+	import com.burninghead.extensions.bitmaprenderer.IBitmapRenderer;
 	import com.burninghead.swarmdemo.view.comps.SwarmView;
 	import com.burninghead.swarmdemo.view.mediators.SwarmMediator;
+	import com.burninghead.swarmdemo.view.mediators.SwarmMediatorMsgType;
 	/**
 	 * @author tomas.augustinovic
 	 */
