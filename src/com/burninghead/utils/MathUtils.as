@@ -84,6 +84,16 @@ package com.burninghead.utils
 		}
 		
 		/**
+		 * Return the hexadecimal value of a integer color value.
+		 * @param color The integer value to convert.
+		 * @return Hexadecimal color value as a string.
+		 */
+		public static function hexColor(color:int):String
+		{
+			return "#" + color.toString(16);
+		}
+		
+		/**
 		 * Round a number to specified precision of decimals.
 		 * 
 		 * @param num Number to round.
