@@ -6,6 +6,9 @@ package com.burninghead.utils
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	/**
+	 * Creates a bitmap image of the supplied display object and performs a alpha fade in/out with that copy, while
+	 * hiding the original display object.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public class BitmapFadeTransition

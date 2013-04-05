@@ -43,9 +43,9 @@ package com.burninghead.extensions.settings
 					{
 						_sharedObject.data.fullScreen = pl.fullscreen;
 					}
-					else if (pl.langCode != null)
+					else if (pl.languageCode != null)
 					{
-						_sharedObject.data.lang = pl.langCode;
+						_sharedObject.data.lang = pl.languageCode;
 					}
 
 					update();

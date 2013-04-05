@@ -47,7 +47,6 @@ package com.burninghead.birf.view
 	public class BaseView implements IView
 	{
 		protected var _initialized:Signal;
-		protected var _isInit:Boolean;
 		protected var _injector:Injector;
 		
 		private var _model:IModel;
@@ -70,7 +69,6 @@ package com.burninghead.birf.view
 			_stageObject = null;
 			_initialized = new Signal();
 			_injector = new Injector();
-			_isInit = false;
 		}
 		
 		/**
@@ -79,6 +77,7 @@ package com.burninghead.birf.view
 		 */
 		protected function onMessageReceived(msg:IMessage):void
 		{
+			//	No-op
 		}
 
 		/**
@@ -165,7 +164,7 @@ package com.burninghead.birf.view
 		 */
 		public function get isInitialized():Boolean
 		{
-			return _isInit;
+			return (_stageObject != null);
 		}
 
 		/**
@@ -184,9 +183,8 @@ package com.burninghead.birf.view
 		public function set stageObject(value:DisplayObject):void
 		{
 			//	If already initialized, dispose and clean up first.
-			if (_isInit)
+			if (isInitialized)
 			{
-				_isInit = false;
 				dispose();
 			}
 			
@@ -196,9 +194,6 @@ package com.burninghead.birf.view
 			//	Unless reference is null, initialize the view.
 			if (_stageObject != null)
 			{
-				//	Flag that we are initialized.
-				_isInit = true;
-				
 				//	Create dependency injector and add the standard dependencies.
 				_injector.map(IView).toValue(this);
 				_injector.map(IModel).toValue(_model);

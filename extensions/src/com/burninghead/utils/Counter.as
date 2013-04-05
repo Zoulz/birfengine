@@ -6,7 +6,7 @@ package com.burninghead.utils
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
 	/**
-	 * @author BigZoulz
+	 * @author tomas.augustinovic
 	 */
 	public class Counter implements IDisposable
 	{

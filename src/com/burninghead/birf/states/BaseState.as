@@ -48,14 +48,17 @@ package com.burninghead.birf.states
 		
 		public function enter():void
 		{
+			//	No-op
 		}
 
 		public function exit():void
 		{
+			//	No-op
 		}
 
 		public function update():void
 		{
+			//	No-op
 		}
 
 		public function get transition():ISignal

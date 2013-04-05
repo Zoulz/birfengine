@@ -11,7 +11,6 @@ package com.burninghead.extensions.console
 		function deactivate():void;
 		function clearOutput():void;
 		function print(message:String, color:String = "#FFFFFF"):void;
-
 		function get inputString():String;
 		function get isActive():Boolean;
 		function get keyPressed():ISignal;

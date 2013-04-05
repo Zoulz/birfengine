@@ -1,7 +1,7 @@
 package com.burninghead.utils
 {
 	/**
-	 * Interface adds the ability to create a clone of the object.
+	 * Interface adds the ability to create a shallow clone of the object.
 	 * 
 	 * <pre>
 	 * -----------------------------------------------------------------------------------------------------------------------------------------

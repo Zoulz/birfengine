@@ -3,6 +3,8 @@ package com.burninghead.utils
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	/**
+	 * Executes a function after a specified amount of time has passed.
+	 * 
 	 * @author Zoulz
 	 */
 	public class DelayedFunction

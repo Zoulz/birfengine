@@ -172,22 +172,24 @@ package com.burninghead.utils.rpc
 			//	Loop through all the responses.
 			for each (var resp:IRPCResponse in _responses)
 			{
-				var reqObj:Object = findRequestById(resp.id);
+				var reqObj:Object;
 				var retObj:Object;
 				
-				if (resp.result != null)
+				if (resp.id == 0)
 				{
-					//	We got a proper result.
-					retObj = resp.result;
+					//	Error.
+					retObj = resp.error;
+					
+					for each (reqObj in _requests)
+					{
+						reqObj.callback(retObj);
+					}
 				}
 				else
 				{
-					//	Error occured.
-					retObj = resp.error;
-				}
-				
-				if (reqObj)
-				{
+					reqObj = findRequestById(resp.id);
+					retObj = resp.result;
+					
 					reqObj.callback(retObj);
 				}
 			}

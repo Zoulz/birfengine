@@ -1,14 +1,14 @@
-package com.burninghead.extensions.displaylist.comps.ui
+package com.burninghead.utils.ui
 {
-	import com.burninghead.birf.view.IViewComponent;
+	import com.burninghead.birf.view.skinning.ISkinnable;
 	import com.burninghead.utils.audio.groups.IUISoundGroup;
 
 	import org.osflash.signals.ISignal;
 
 	/**
-	 * @author BigZoulz
+	 * @author tomas.augustinovic
 	 */
-	public interface IButtonView extends IViewComponent
+	public interface ISkinnableButton extends ISkinnable
 	{
 		function set caption(value:String):void;
 		function get caption():String;

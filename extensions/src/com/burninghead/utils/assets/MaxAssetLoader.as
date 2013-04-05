@@ -1,9 +1,9 @@
 package com.burninghead.utils.assets
 {
 	import com.burninghead.utils.ObjectUtils;
-	import com.burninghead.utils.assets.parsers.GSGenericAssetParser;
-	import com.burninghead.utils.assets.parsers.GSMp3AssetParser;
-	import com.burninghead.utils.assets.parsers.GSSwfAssetParser;
+	import com.burninghead.utils.assets.parsers.MaxGenericAssetParser;
+	import com.burninghead.utils.assets.parsers.MaxMp3AssetParser;
+	import com.burninghead.utils.assets.parsers.MaxSwfAssetParser;
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.BinaryDataLoader;
 	import com.greensock.loading.CSSLoader;
@@ -23,7 +23,7 @@ package com.burninghead.utils.assets
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class GSAssetLoader implements IAssetLoader
+	public class MaxAssetLoader implements IAssetLoader
 	{
 		private var _totalComplete:Signal;
 		private var _totalProgress:Signal;
@@ -36,7 +36,7 @@ package com.burninghead.utils.assets
 		private var _assets:Vector.<IAsset>;
 		private var _parsers:Vector.<IAssetParser>;
 		
-		public function GSAssetLoader()
+		public function MaxAssetLoader()
 		{
 			_assets = new Vector.<IAsset>();
 			_parsers = new Vector.<IAssetParser>();
@@ -67,9 +67,9 @@ package com.burninghead.utils.assets
 		
 		protected function registerAssetParsers():void
 		{
-			registerAssetParser(new GSGenericAssetParser());
-			registerAssetParser(new GSSwfAssetParser());
-			registerAssetParser(new GSMp3AssetParser());
+			registerAssetParser(new MaxGenericAssetParser());
+			registerAssetParser(new MaxSwfAssetParser());
+			registerAssetParser(new MaxMp3AssetParser());
 		}
 		
 		public function registerAssetParser(parser:IAssetParser):void

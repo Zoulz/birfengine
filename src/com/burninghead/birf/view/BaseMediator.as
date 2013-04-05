@@ -57,6 +57,7 @@ package com.burninghead.birf.view
 		 */
 		protected function init():void
 		{
+			//	No-op
 		}
 		
 		/**
@@ -65,6 +66,7 @@ package com.burninghead.birf.view
 		 */
 		protected function onMessageReceived(msg:IMessage):void
 		{
+			//	No-op
 		}
 		
 		/**
@@ -80,6 +82,7 @@ package com.burninghead.birf.view
 		 */
 		public function dispose():void
 		{
+			//	No-op
 		}
 	}
 }

@@ -1,7 +1,5 @@
 package com.burninghead.simplesphere.states
 {
-	import com.burninghead.birf.messaging.IMessageHandler;
-	import com.burninghead.birf.messaging.messages.BaseMessage;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.skinning.ISkinManager;
 	import com.burninghead.extensions.console.ConsoleFilterCategoryCmd;
@@ -24,7 +22,6 @@ package com.burninghead.simplesphere.states
 		private var _consoleMediator:ConsoleMediator;
 		private var _sphereMediator:SphereMediator;
 		
-		[Inject] public var messageHandler:IMessageHandler;
 		[Inject] public var skinManager:ISkinManager;
 		
 		/**
@@ -39,8 +36,8 @@ package com.burninghead.simplesphere.states
 			_consoleMediator = view.getMediator(ConsoleMediator) as ConsoleMediator;
 			
 			//	Map commands for the console.
-			messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.MAP_COMMAND, this, { id: "filter", classDef: ConsoleFilterCategoryCmd }));
-			messageHandler.send(new BaseMessage(ConsoleMediatorMsgType.MAP_COMMAND, this, { id: "changeskin", classDef: ConsoleChangeSkinCmd }));
+			_messenger.sendMessage(ConsoleMediatorMsgType.MAP_COMMAND, { id: "filter", classDef: ConsoleFilterCategoryCmd });
+			_messenger.sendMessage(ConsoleMediatorMsgType.MAP_COMMAND, { id: "changeskin", classDef: ConsoleChangeSkinCmd });
 			
 			//	Register views with their respective mediators.
 			_sphereMediator.registerView(_sphereView);

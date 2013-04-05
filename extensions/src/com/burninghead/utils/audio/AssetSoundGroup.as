@@ -1,7 +1,7 @@
 package com.burninghead.utils.audio
 {
 	import com.burninghead.utils.ReflectionUtils;
-	import com.burninghead.utils.assets.types.GSSwfAsset;
+	import com.burninghead.utils.assets.types.MaxSwfAsset;
 
 	import flash.media.Sound;
 
@@ -10,13 +10,13 @@ package com.burninghead.utils.audio
 	 */
 	public class AssetSoundGroup extends BaseSoundGroup implements ISoundGroup
 	{
-		private var _asset:GSSwfAsset;
+		private var _asset:MaxSwfAsset;
 		
 		/**
 		 * Constructor.
 		 * @param asset Swf asset to use when creating the sounds.
 		 */
-		public function AssetSoundGroup(asset:GSSwfAsset = null)
+		public function AssetSoundGroup(asset:MaxSwfAsset = null)
 		{
 			_asset = asset;
 			

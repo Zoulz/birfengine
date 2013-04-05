@@ -1,6 +1,6 @@
 package com.burninghead.utils.audio.groups
 {
-	import com.burninghead.utils.assets.types.GSSwfAsset;
+	import com.burninghead.utils.assets.types.MaxSwfAsset;
 	import com.burninghead.utils.audio.AssetSoundGroup;
 	import com.burninghead.utils.audio.ISoundGroup;
 	/**
@@ -10,7 +10,7 @@ package com.burninghead.utils.audio.groups
 	{
 		private var _sndPackage:String;
 		
-		public function UISoundGroup(soundPackage:String, asset:GSSwfAsset = null)
+		public function UISoundGroup(soundPackage:String, asset:MaxSwfAsset = null)
 		{
 			super(asset);
 			

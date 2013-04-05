@@ -1,30 +1,22 @@
 package com.burninghead.utils.assets.types
 {
 	import com.burninghead.utils.assets.IAsset;
-	import com.greensock.loading.SWFLoader;
-
-	import flash.display.DisplayObject;
-
+	import com.greensock.loading.core.LoaderItem;
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class GSSwfAsset implements IAsset
+	public class MaxGenericAsset implements IAsset
 	{
-		private var _loader:SWFLoader;
+		protected var _loader:LoaderItem;
 		private var _name:String;
 		
-		public function GSSwfAsset(loader:SWFLoader)
+		public function MaxGenericAsset(loader:LoaderItem)
 		{
 			_name = loader.name;
 			_loader = loader;
 		}
 		
-		public function getClass(name:String):Class
-		{
-			return _loader.getClass(name);
-		}
-		
-		public function getDisplayObject():DisplayObject
+		public function get data():*
 		{
 			return _loader.content;
 		}
@@ -43,15 +35,10 @@ package com.burninghead.utils.assets.types
 		{
 			_name = value;
 		}
-		
+
 		public function get size():uint
 		{
 			return _loader.bytesTotal;
-		}
-
-		public function get data():*
-		{
-			return _loader.content;
 		}
 	}
 }

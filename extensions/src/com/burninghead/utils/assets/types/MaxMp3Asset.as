@@ -7,12 +7,12 @@ package com.burninghead.utils.assets.types
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class GSMp3Asset implements IAsset
+	public class MaxMp3Asset implements IAsset
 	{
 		private var _loader:MP3Loader;
 		private var _name:String;
 		
-		public function GSMp3Asset(loader:MP3Loader)
+		public function MaxMp3Asset(loader:MP3Loader)
 		{
 			_loader = loader;
 			_name = loader.name;

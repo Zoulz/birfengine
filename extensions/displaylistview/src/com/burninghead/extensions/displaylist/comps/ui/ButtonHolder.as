@@ -3,6 +3,7 @@ package com.burninghead.extensions.displaylist.comps.ui
 	import com.burninghead.utils.DisplayObjectUtils;
 	import com.burninghead.utils.IDisposable;
 	import com.burninghead.utils.audio.groups.IUISoundGroup;
+	import com.burninghead.utils.ui.ISkinnableButton;
 
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -12,12 +13,12 @@ package com.burninghead.extensions.displaylist.comps.ui
 	 */
 	public class ButtonHolder extends Sprite implements IDisposable
 	{
-		private var _buttons:Vector.<IButtonView>;
+		private var _buttons:Vector.<ISkinnableButton>;
 		private var _uiSoundGroup:IUISoundGroup;
 		
 		public function ButtonHolder(uiSoundGroup:IUISoundGroup = null):void
 		{
-			_buttons = new Vector.<IButtonView>();
+			_buttons = new Vector.<ISkinnableButton>();
 			_uiSoundGroup = uiSoundGroup;
 		}
 		
@@ -33,7 +34,7 @@ package com.burninghead.extensions.displaylist.comps.ui
 				skin.y = pos.y + (i * skin.height + spacing);
 				addChild(skin);
 
-				var btn:IButtonView = new DisplayListButton(skin, _uiSoundGroup);
+				var btn:ISkinnableButton = new DisplayListButton(skin, _uiSoundGroup);
 				btn.caption = captions[i];
 				_buttons.push(btn);
 			}
@@ -41,17 +42,17 @@ package com.burninghead.extensions.displaylist.comps.ui
 		
 		public function clearButtons():void
 		{
-			for each (var b:IButtonView in _buttons)
+			for each (var b:ISkinnableButton in _buttons)
 			{
-				b.dispose();
+				//b.dispose();
 			}
 			
 			DisplayObjectUtils.removeAllChildren(this);
 			
-			_buttons = new Vector.<IButtonView>();
+			_buttons = new Vector.<ISkinnableButton>();
 		}
 
-		public function get buttons():Vector.<IButtonView>
+		public function get buttons():Vector.<ISkinnableButton>
 		{
 			return _buttons;
 		}
@@ -68,9 +69,9 @@ package com.burninghead.extensions.displaylist.comps.ui
 
 		public function dispose():void
 		{
-			for each (var b:IButtonView in _buttons)
+			for each (var b:ISkinnableButton in _buttons)
 			{
-				b.dispose();
+				//b.dispose();
 			}
 		}
 	}

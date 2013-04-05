@@ -1,5 +1,8 @@
 package com.burninghead.extensions.displaylist.states
 {
+	import com.burninghead.birf.messaging.IMessage;
+	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.messaging.Messenger;
 	import com.burninghead.birf.states.BaseState;
 	import com.burninghead.birf.states.IState;
 	import com.burninghead.birf.view.IView;
@@ -17,8 +20,10 @@ package com.burninghead.extensions.displaylist.states
 	public class DisplayListViewState extends BaseState implements IState, IDisplayListViewState
 	{
 		[Inject] public var view:IView;
+		[Inject] public var msgHandler:IMessageHandler;
 		
 		private var _container:Sprite;
+		protected var _messenger:Messenger;
 		
 		/**
 		 * Create a sprite container for this view state. Listen for when it is added
@@ -37,7 +42,20 @@ package com.burninghead.extensions.displaylist.states
 		 */
 		[PostConstruct] public function postConstruct():void
 		{
+			//	Setup message handling.
+			_messenger = new Messenger(msgHandler, this);
+			msgHandler.addListener(onMessageReceived);
+			
 			init();
+		}
+		
+		/**
+		 * Handle any incoming messages.
+		 * @param msg Incoming message.
+		 */
+		protected function onMessageReceived(msg:IMessage):void
+		{
+			//	No-op
 		}
 		
 		/**
@@ -56,6 +74,7 @@ package com.burninghead.extensions.displaylist.states
 		 */
 		protected function init():void
 		{
+			//	No-op
 		}
 		
 		/**
@@ -63,6 +82,7 @@ package com.burninghead.extensions.displaylist.states
 		 */
 		protected function containerAdded():void
 		{
+			//	No-op
 		}
 		
 		/**

@@ -10,7 +10,7 @@ package com.burninghead.extensions.starling
 	import com.burninghead.birf.states.InjectedStateMachine;
 	import com.burninghead.birf.view.BaseView;
 	import com.burninghead.birf.view.IView;
-	import com.burninghead.utils.assets.GSAssetLoader;
+	import com.burninghead.utils.assets.MaxAssetLoader;
 	import com.burninghead.utils.assets.IAssetLoader;
 	import com.burninghead.utils.audio.BaseSoundManager;
 	import com.burninghead.utils.audio.ISoundManager;
@@ -59,7 +59,7 @@ package com.burninghead.extensions.starling
 		protected function injectAdditionalDependencies():void
 		{
 			_injector.map(Starling).toValue(_starling);
-			_injector.map(IAssetLoader).toSingleton(GSAssetLoader);
+			_injector.map(IAssetLoader).toSingleton(MaxAssetLoader);
 			_injector.map(ISoundManager).toSingleton(BaseSoundManager);
 		}
 		

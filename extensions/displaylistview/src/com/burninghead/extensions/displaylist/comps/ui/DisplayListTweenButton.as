@@ -1,7 +1,7 @@
 package com.burninghead.extensions.displaylist.comps.ui
 {
-	import com.burninghead.birf.view.skinning.ISkinnable;
 	import com.burninghead.utils.audio.groups.IUISoundGroup;
+	import com.burninghead.utils.ui.ISkinnableButton;
 	import com.greensock.OverwriteManager;
 	import com.greensock.core.TweenCore;
 
@@ -9,7 +9,7 @@ package com.burninghead.extensions.displaylist.comps.ui
 	/**
 	 * @author BigZoulz
 	 */
-	public class DisplayListTweenButton extends DisplayListButton implements IButtonView, ISkinnable
+	public class DisplayListTweenButton extends DisplayListButton implements ISkinnableButton
 	{
 		private var _upAnim:TweenCore;
 		private var _downAnim:TweenCore;

@@ -157,8 +157,8 @@
 		<asdoc output="${DOCS_DIR}"
 				lenient="true"
 				failonerror="true"
-				window-title="birfEngine v${BUILD_VERSION} Documentation"
-				main-title="birfEngine v${BUILD_VERSION} Documentation"
+				window-title="birfEngine v${BUILD_VERSION} ${BUILD_NAME} Documentation"
+				main-title="birfEngine v${BUILD_VERSION} ${BUILD_NAME} Documentation"
 				footer="Copyright (c) Tomas Augustinovic 2012-2013 | birfEngine | http://www.github.com/Zoulz/birfengine">
 			<doc-sources path-element="${SRC_DIR}" />
 			<doc-sources path-element="${EXT_DIR}/src" />

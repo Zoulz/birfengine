@@ -2,7 +2,9 @@ package com.burninghead.utils
 {
 	import flash.utils.getTimer;
 	/**
-	 * @author Zoulz
+	 * Executes the supplied function measuring the time it took.
+	 * 
+	 * @author tomas.augustinovic
 	 */
 	public class TimedFunction
 	{

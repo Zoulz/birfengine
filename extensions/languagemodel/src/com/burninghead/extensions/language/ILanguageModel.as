@@ -1,7 +1,7 @@
 package com.burninghead.extensions.language
 {
 	/**
-	 * @author BigZoulz
+	 * @author tomas.augustinovic
 	 */
 	public interface ILanguageModel
 	{

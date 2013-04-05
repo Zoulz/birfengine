@@ -7,10 +7,11 @@ package com.burninghead.extensions.settings
 	 */
 	public interface ISettings
 	{
-		function get soundEffects():Boolean;
+		/*function get soundEffects():Boolean;
 		function get soundMusic():Boolean;
 		function get fullScreen():Boolean;
 		function get language():String;
-		function get playerName():String;
+		function get playerName():String;*/
+		
 	}
 }

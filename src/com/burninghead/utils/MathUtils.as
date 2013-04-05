@@ -35,8 +35,6 @@ package com.burninghead.utils
 		public static const EPSILON_SQR:Number = EPSILON * EPSILON;
 		public static const RADIANS_TO_DEGREE:Number = 180 / Math.PI;
 		
-		private static var _seed:int;
-		
 		/**
 		 * Returns a random number between min and max.
 		 * 
@@ -46,26 +44,9 @@ package com.burninghead.utils
 		 */
 		public static function randomNumber(min:Number, max:Number, rounded:Boolean = false):Number
 		{
-			
 			var rnd:Number = (min + Math.random() * (max - min));
 			
 			return rounded ? Math.round(rnd) : rnd;
-		}
-		
-		public static function setPseudoRandomSeed(seed:int = 1):void
-		{
-			_seed = seed;
-		}
-		
-		public static function nextPseudoRandomInt(max:int = int.MAX_VALUE):int
-		{
-			return max > 0 ? nextPseudoRandomNumber() * max : nextPseudoRandomNumber();
-		}
-		
-		public static function nextPseudoRandomNumber():Number
-		{
-			_seed = (_seed * 9301 + 49297) % 233280;
-			return _seed / 233280.0;
 		}
 		
 		/**
@@ -74,7 +55,7 @@ package com.burninghead.utils
 		 * @param num Number to constrain.
 		 * @param min Minimum constraint.
 		 * @param max Maximum constraint.
-		 * @return Number
+		 * @return The resulting number.
 		 */
 		public static function constrain(num:Number, min:Number = 0, max:Number = 1):Number
 		{
@@ -88,7 +69,6 @@ package com.burninghead.utils
 		 * Returns true if the supplied number is even.
 		 * 
 		 * @param num Number to check.
-		 * @return Boolean
 		 */
 		public static function isEven(num:Number):Boolean
 		{
@@ -96,9 +76,7 @@ package com.burninghead.utils
 		}
 		
 		/**
-		 * Return a random color 
-		 * 
-		 * @return uint
+		 * Return a random color.
 		 */
 		public static function randomColor():uint
 		{
@@ -110,7 +88,7 @@ package com.burninghead.utils
 		 * 
 		 * @param num Number to round.
 		 * @param precision Number of decimals.
-		 * @return Number
+		 * @return The resulting number.
 		 */
 		public static function roundToPrecision(num:Number, precision:int = 0):Number
 		{
@@ -122,8 +100,8 @@ package com.burninghead.utils
 		 * Linear interpolation between two points.
 		 * @param p1 Point one.
 		 * @param p2 Point two.
-		 * @param delta Delta point to get (0-1)
-		 * @return Point
+		 * @param delta Delta point to get (0-1).
+		 * @return Resulting point.
 		 */
 		public static function lerpPoint(p1:Point, p2:Point, delta:Number):Point
 		{

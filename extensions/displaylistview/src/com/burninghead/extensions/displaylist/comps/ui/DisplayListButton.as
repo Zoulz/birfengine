@@ -1,7 +1,7 @@
 package com.burninghead.extensions.displaylist.comps.ui
 {
-	import com.burninghead.birf.view.skinning.ISkinnable;
 	import com.burninghead.utils.audio.groups.IUISoundGroup;
+	import com.burninghead.utils.ui.ISkinnableButton;
 
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
@@ -14,7 +14,7 @@ package com.burninghead.extensions.displaylist.comps.ui
 	/**
 	 * @author tomas.augustinovic
 	 */
-	public class DisplayListButton implements IButtonView, ISkinnable
+	public class DisplayListButton implements ISkinnableButton
 	{
 		public static const UP_STATE:String = "up";
 		public static const DOWN_STATE:String = "down";

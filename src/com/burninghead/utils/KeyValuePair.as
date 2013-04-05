@@ -1,7 +1,7 @@
 package com.burninghead.utils
 {
 	/**
-	 * Standard key/value pair. Holds a key and a value.
+	 * Standard key/value pair. Holds a untyped key and a value.
 	 * 
 	 * <pre>
 	 * -----------------------------------------------------------------------------------------------------------------------------------------

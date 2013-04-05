@@ -26,14 +26,11 @@ package com.burninghead.tests.unit.utils
 			assertThat(r, greaterThanOrEqualTo(1));
 			assertThat(r, lessThanOrEqualTo(10));
 			
-			MathUtils.setPseudoRandomSeed(123456789);
-			r = MathUtils.nextPseudoRandomInt(10);
-			
 			assertThat(r, lessThanOrEqualTo(10));
 			assertThat(r, greaterThanOrEqualTo(0));
 		}
 		
-		[Test]
+		[Test(description='Constrain values and check for expected results.')]
 		public function constrainTest():void
 		{
 			assertThat(MathUtils.constrain(5, 0, 10), equalTo(5));
@@ -41,14 +38,14 @@ package com.burninghead.tests.unit.utils
 			assertThat(MathUtils.constrain(-12, 0, 10), equalTo(0));
 		}
 		
-		[Test]
+		[Test(description='Check even and uneven values.')]
 		public function isEvenTest():void
 		{
 			assertThat(MathUtils.isEven(2), equalTo(true));
 			assertThat(MathUtils.isEven(5), equalTo(false));
 		}
 		
-		[Test]
+		[Test(description='Rounds values and check for expected results.')]
 		public function roundToPrecisionTest():void
 		{
 			assertThat(MathUtils.roundToPrecision(2.5234, 0), equalTo(3));
@@ -58,7 +55,7 @@ package com.burninghead.tests.unit.utils
 			assertThat(MathUtils.roundToPrecision(5.2, 4), equalTo(5.2));
 		}
 		
-		[Test]
+		[Test(description='Interpolate between two points and check if expected result.')]
 		public function lerpPointTest():void
 		{
 			var p:Point = MathUtils.lerpPoint(new Point(0, 6), new Point(0, 12), 0.5)

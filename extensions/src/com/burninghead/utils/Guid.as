@@ -2,6 +2,8 @@ package com.burninghead.utils
 {
 	import flash.system.Capabilities;
 	/**
+	 * Generates a global unique identifier.
+	 * 
 	 * @author tomas.augustinovic
 	 */
 	public class Guid

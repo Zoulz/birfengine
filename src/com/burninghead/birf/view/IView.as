@@ -6,7 +6,7 @@ package com.burninghead.birf.view
 	import flash.display.DisplayObject;
 
 	/**
-	 * Describes a BiRF view. Allows the registration and retrieval of mediators. Initialized by the holder passing it's stage display
+	 * Describes a birf view. Allows the registration and retrieval of mediators. Initialized by the holder passing it's stage display
 	 * object reference.
 	 * 
 	 * <pre>

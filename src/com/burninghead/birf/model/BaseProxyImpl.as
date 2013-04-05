@@ -60,6 +60,7 @@ package com.burninghead.birf.model
 		 */
 		protected function init():void
 		{
+			//	No-op
 		}
 		
 		/**
@@ -67,6 +68,7 @@ package com.burninghead.birf.model
 		 */
 		public function dispose():void
 		{
+			//	No-op
 		}
 		
 		/**
@@ -75,6 +77,7 @@ package com.burninghead.birf.model
 		 */
 		protected function onMessageReceived(msg:IMessage):void
 		{
+			//	No-op
 		}
 	}
 }

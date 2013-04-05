@@ -9,7 +9,7 @@ package com.burninghead.extensions.displaylist
 	import com.burninghead.birf.view.IStateMachineDrivenView;
 	import com.burninghead.birf.view.IView;
 	import com.burninghead.extensions.displaylist.states.IDisplayListViewState;
-	import com.burninghead.utils.assets.GSAssetLoader;
+	import com.burninghead.utils.assets.MaxAssetLoader;
 	import com.burninghead.utils.assets.IAssetLoader;
 	import com.burninghead.utils.audio.BaseSoundManager;
 	import com.burninghead.utils.audio.ISoundManager;
@@ -90,7 +90,7 @@ package com.burninghead.extensions.displaylist
 		 */
 		protected function injectAdditionalDependencies():void
 		{
-			_injector.map(IAssetLoader).toSingleton(GSAssetLoader);
+			_injector.map(IAssetLoader).toSingleton(MaxAssetLoader);
 			_injector.map(ISoundManager).toSingleton(BaseSoundManager);
 		}
 		

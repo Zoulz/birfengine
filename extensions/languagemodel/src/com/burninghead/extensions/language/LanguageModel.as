@@ -7,7 +7,7 @@ package com.burninghead.extensions.language
 	import flash.utils.Dictionary;
 
 	/**
-	 * @author BigZoulz
+	 * @author tomas.augustinovic
 	 */
 	public class LanguageModel extends BaseProxyImpl implements ILanguageModel
 	{
@@ -37,23 +37,29 @@ package com.burninghead.extensions.language
 		
 		override public function dispose():void
 		{
+			//	No-op
 		}
 		
 		override protected function onMessageReceived(msg:IMessage):void
 		{
-			if (msg.type == LanguageModelMsgType.SET_STRINGS)
-			{
-				for each (var stringObj:Object in Object(msg.payload).strings)
-				{
-					addString(stringObj.id, stringObj.lang, stringObj.translation);
-				}
-				_messenger.sendMessage(BaseModelMsgType.UPDATE);
-			}
+			var payload:LanguagePayload = msg.payload;
 			
-			if (msg.type == LanguageModelMsgType.SET_LANGUAGE)
+			if (payload != null)
 			{
-				_currentLanguage = Object(msg.payload).lang;
-				_messenger.sendMessage(BaseModelMsgType.UPDATE);
+				if (msg.type == LanguageModelMsgType.SET_STRINGS)
+				{
+					for each (var payloadItem:LanguagePayloadItem in payload.items)
+					{
+						addString(payloadItem.id, payloadItem.languageCode, payloadItem.translation);
+					}
+					_messenger.sendMessage(BaseModelMsgType.UPDATE);
+				}
+				
+				if (msg.type == LanguageModelMsgType.SET_LANGUAGE)
+				{
+					_currentLanguage = payload.languageCode;
+					_messenger.sendMessage(BaseModelMsgType.UPDATE);
+				}
 			}
 		}
 
