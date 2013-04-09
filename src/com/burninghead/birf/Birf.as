@@ -33,5 +33,18 @@ package com.burninghead.birf
 		 * Constant supplies the current version of BiRF.
 		 */
 		public static const VERSION:String = CONFIG::VERSION;
+		
+		/**
+		 * Return flag indicating if SWF is running in debug mode.
+		 */
+		public static function get isDebug():Boolean
+		{
+			CONFIG::debug
+			{
+				return true;
+			}
+			
+			return false;
+		}
 	}
 }

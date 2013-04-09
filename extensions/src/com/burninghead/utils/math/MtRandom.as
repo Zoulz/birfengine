@@ -1,4 +1,4 @@
-package com.burninghead.utils.random
+package com.burninghead.utils.crypto
 {
 	import flash.utils.getTimer;
 	/**

@@ -1,5 +1,9 @@
-package com.burninghead.birf
-{
+package com.burninghead.birf {
+	import com.burninghead.birf.controller.IController;
+	import com.burninghead.birf.messaging.IMessageHandler;
+	import com.burninghead.birf.model.IModel;
+	import com.burninghead.birf.view.IView;
+	import com.burninghead.utils.logger.ILogger;
 	/**
 	 * Describes a birfEngine core. Provides methods to register the various parts required to run the core.
 	 * 
@@ -32,5 +36,11 @@ package com.burninghead.birf
 		function registerCommands():void;
 		function registerMediators():void;
 		function registerProxyModels():void;
+		
+		function get logger():ILogger;
+		function get messageHandler():IMessageHandler;
+		function get model():IModel;
+		function get view():IView;
+		function get controller():IController;
 	}
 }

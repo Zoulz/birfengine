@@ -1,4 +1,4 @@
-package com.burninghead.utils
+package com.burninghead.utils.crypto
 {
 	import flash.system.Capabilities;
 	/**

@@ -1,4 +1,4 @@
-package com.burninghead.utils
+package com.burninghead.utils.counting
 {
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Linear;
@@ -13,12 +13,14 @@ package com.burninghead.utils
 		private var _value:Number;
 		private var _complete:Signal;
 		private var _update:Signal;
+		private var _func:ICountFunction;
 		
-		public function Counter(initialValue:Number)
+		public function Counter(initialValue:Number, func:ICountFunction = null)
 		{
 			_complete = new Signal();
 			_update = new Signal();
 			_value = initialValue;
+			_func = func;
 		}
 		
 		public function countTo(newValue:Number, seconds:Number = 1, easing:Object = null):void

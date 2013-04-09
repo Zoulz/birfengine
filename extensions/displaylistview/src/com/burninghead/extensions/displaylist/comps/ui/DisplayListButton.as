@@ -41,11 +41,16 @@ package com.burninghead.extensions.displaylist.comps.ui
 		
 		public function dispose():void
 		{
+			removeMouseListeners();
+			_click.removeAll();
+		}
+		
+		private function removeMouseListeners():void
+		{
 			_skin.removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			_skin.removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			_skin.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			_skin.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			_click.removeAll();
 		}
 		
 		public function set enabled(value:Boolean):void
@@ -136,6 +141,8 @@ package com.burninghead.extensions.displaylist.comps.ui
 
 		public function set skin(value:*):void
 		{
+			removeMouseListeners();
+			
 			_skin = skin;
 			_skin.mouseChildren = false;
 			_skin.buttonMode = true;
