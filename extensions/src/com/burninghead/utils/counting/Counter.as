@@ -11,21 +11,33 @@ package com.burninghead.utils.counting
 	public class Counter implements IDisposable
 	{
 		private var _value:Number;
-		private var _complete:Signal;
-		private var _update:Signal;
 		private var _func:ICountFunction;
 		
 		public function Counter(initialValue:Number, func:ICountFunction = null)
 		{
-			_complete = new Signal();
-			_update = new Signal();
 			_value = initialValue;
-			_func = func;
+
+			if (func)
+			{
+				_func = func;
+			}
+			else
+			{
+				_func = new TweenCountFunction();
+			}
+			
+			_func.step.add(onCountStep);
+			_func.complete.add(OnCountComplete);
 		}
 		
-		public function countTo(newValue:Number, seconds:Number = 1, easing:Object = null):void
+		public function countTo(newValue:Number, seconds:Number = 1):void
 		{
-			TweenLite.to(this, seconds, { ease: easing == null ? Linear.easeNone : easing, value: newValue, overwrite: 1, onComplete: _complete.dispatch, onUpdate: _update.dispatch });
+			_func.count(newValue, seconds);
+		}
+		
+		public function abort():void
+		{
+			_func.abort();
 		}
 		
 		public function get value():Number
@@ -38,21 +50,9 @@ package com.burninghead.utils.counting
 			_value = num;
 		}
 
-		public function get complete():ISignal
-		{
-			return _complete;
-		}
-
-		public function get update():ISignal
-		{
-			return _update;
-		}
-
 		public function dispose():void
 		{
-			TweenLite.killTweensOf(this);
-			_complete.removeAll();
-			_update.removeAll();
+			_func.abort();
 		}
 	}
 }
