@@ -110,6 +110,11 @@ package com.burninghead.birf.states
 		{
 			_transitions[id] = null;
 		}
+
+		public function registerXml(xml:XML):void
+		{
+
+		}
 		
 		protected function onStateTransition(state:IState, transitionId:String):void
 		{

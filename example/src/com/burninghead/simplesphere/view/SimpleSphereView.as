@@ -15,6 +15,9 @@ package com.burninghead.simplesphere.view
 	 */
 	public class SimpleSphereView extends DisplayListView implements IView
 	{
+		protected static const SPHERE_STATE:String = "sphere";
+		protected static const SQUARE_STATE:String = "square";
+
 		/**
 		 * Constructor.
 		 */
@@ -30,6 +33,14 @@ package com.burninghead.simplesphere.view
 		override public function initStateMachine():void
 		{
 			var stateMachine:IStateMachine = _injector.getInstance(IStateMachine);
+
+			stateMachine.registerXml(
+				<states>
+					<state id="{SPHERE_STATE}" type="com.burninghead.simplesphere.states.SphereViewState" />
+					<state id="{SQUARE_STATE}" type="com.burninghead.simplesphere.states.SphereViewState" />
+					<transition id="sphere_to_square" from="{SPHERE_STATE}" to="{SQUARE_STATE}" />
+					<transition id="square_to_sphere" from="{SQUARE_STATE}" to="{SPHERE_STATE}" />
+				</states>);
 			
 			//	Register all our states.
 			stateMachine.registerState("sphere", new SphereViewState());

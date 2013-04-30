@@ -53,8 +53,8 @@ package com.burninghead.birf.states
 		function unregisterState(id:String):void;
 		/**
 		 * Register a state to state transition.
-		 * @param id Id of the transition
-		 * @param transition Transition definition object
+		 * @param id Id of the transition.
+		 * @param transition Transition definition object.
 		 */
 		function registerTransition(id:String, transition:IStateTransition):void;
 		/**
@@ -62,6 +62,11 @@ package com.burninghead.birf.states
 		 * @param id Id of the transition to remove
 		 */
 		function unregisterTransition(id:String):void;
+		/**
+		 * Register states and transitions by parsing a xml definition.
+		 * @param xml data containing registeration info.
+		 */
+		function registerXml(xml:XML):void;
 		/**
 		 * Signal that is dispatched when a state change occurs.
 		 * @return ISignal
