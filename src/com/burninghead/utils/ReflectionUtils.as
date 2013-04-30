@@ -142,19 +142,16 @@ package com.burninghead.utils
 		 */
 		public static function getClass(className:String, appDomain:ApplicationDomain = null):Class
 		{
-			try
+			if (appDomain == null)
 			{
-				if (appDomain == null)
-				{
-					return ApplicationDomain.currentDomain.getDefinition(className) as Class;
-				}
-				
+				appDomain = ApplicationDomain.currentDomain;
+			}
+
+			if (appDomain.hasDefinition(className))
+			{
 				return appDomain.getDefinition(className) as Class;
 			}
-			catch (error:Error)
-			{
-			}
-			
+
 			return null;
 		}
 		

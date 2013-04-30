@@ -1,9 +1,12 @@
 package com.burninghead.birf.states
 {
-	import com.burninghead.utils.logger.ILogger;
+import com.burninghead.utils.ReflectionUtils;
+import com.burninghead.utils.logger.ILogger;
 	import com.burninghead.utils.logger.LogType;
 
-	import org.osflash.signals.ISignal;
+import flash.system.ApplicationDomain;
+
+import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
 
 	import flash.utils.Dictionary;
@@ -113,7 +116,19 @@ package com.burninghead.birf.states
 
 		public function registerXml(xml:XML):void
 		{
-
+			for each (var node:XML in xml.children())
+			{
+				if (node.localName().toString() == "state")
+				{
+					var state:IState = ReflectionUtils.getInstanceByName(node.@type.toString());
+					registerState(node.@id.toString(), state);
+				}
+				else if (node.localName().toString() == "transition")
+				{
+					var trans:BaseStateTransition = new BaseStateTransition(node.@from.toString(), node.@to.toString());
+					registerTransition(node.@id.toString(), trans);
+				}
+			}
 		}
 		
 		protected function onStateTransition(state:IState, transitionId:String):void
